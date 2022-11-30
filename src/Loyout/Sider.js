@@ -72,7 +72,6 @@ export default function LayoutSider() {
     }, [])
     const navigate = useNavigate()
     const onClick = (e) => {
-        console.log(e)
         navigate(routerObj[e.key])
     };
 
