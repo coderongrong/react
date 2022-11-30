@@ -4,56 +4,19 @@ import { useState, useEffect } from 'react';
 import { getqueryList } from '@/api/tree'
 import { divide } from 'lodash';
 
-const columns = [
-    {
-        title: '名称',
-        dataIndex: 'name',
-    },
-    {
-        title: '编号',
-        dataIndex: 'number',
-    },
-    {
-        title: '关联数值',
-        dataIndex: 'relationName',
-    },
-    {
-        title: '费用类型',
-        dataIndex: 'specifyScale',
-    },
-    {
-        title: '创建人',
-        dataIndex: 'createBy',
-    },
-    {
-        title: '创建时间',
-        dataIndex: 'createTime',
-    },
-    {
-        title: '操作',
-        dataIndex: 'action',
-        render: (_, record) => (
-            <div>
-                <a>编辑</a>
-                <a>删除</a>
-                <a>详情</a>
-            </div>
-        )
-    },
-];
-// const data = [];
-// for (let i = 0; i < 46; i++) {
-//     data.push({
-//         key: i,
-//         name: `Edward King ${i}`,
-//         age: 32,
-//         address: `London, Park Lane no. ${i}`,
-//     });
-// }
+const data = [];
+for (let i = 0; i < 46; i++) {
+    data.push({
+        key: i,
+        name: `Edward King ${i}`,
+        age: 32,
+        address: `London, Park Lane no. ${i}`,
+    });
+}
 function TableInfo() {
-
+    const [show, setShow] = useState(false)
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-    const [_data, setData] = useState([])
+    const [_data, setData] = useState(data)
     const onSelectChange = (newSelectedRowKeys) => {
         console.log('selectedRowKeys changed: ', newSelectedRowKeys);
         setSelectedRowKeys(newSelectedRowKeys);
@@ -95,9 +58,48 @@ function TableInfo() {
         //     },
         // ],
     };
-    // const handleOperate = () => {
-    //     console.log('handleOperate')
-    // }
+    const handleEdit = (data) => {
+        // console.log(data)  //操作事件
+    }
+    const columns = [
+        {
+            title: '名称',
+            dataIndex: 'name',
+        },
+        {
+            title: '编号',
+            dataIndex: 'number',
+        },
+        {
+            title: '关联数值',
+            dataIndex: 'relationName',
+        },
+        {
+            title: '费用类型',
+            dataIndex: 'specifyScale',
+        },
+        {
+            title: '创建人',
+            dataIndex: 'createBy',
+        },
+        {
+            title: '创建时间',
+            dataIndex: 'createTime',
+        },
+        {
+            title: '操作',
+            dataIndex: 'action',
+            render: (_, record, index) => {
+                return (
+                    <div>
+                        <a className='mr-10' onClick={() => {handleEdit(record)}}>编辑</a>
+                        <a className='mr-10'>删除</a>
+                        <a>详情</a>
+                    </div>
+                )
+            }
+        },
+    ];
     const _getqueryList = async () => {
         const params = {
             pageSize: 10,

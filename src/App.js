@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import Publish from './pages/Publish'
 import Dashboard from './pages/Dashboard'
 import OtherFree from '@/infomation/OtherFree'
+import Role from '@/infomation/Role'
 
 import LayoutSider from './Loyout/Sider';
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="publish" element={<Publish />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="free" element={<OtherFree />} />
+            <Route path="role" element={<Role />} />
           </Routes>
         </BrowserRouter>
       </Layout>

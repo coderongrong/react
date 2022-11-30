@@ -57,7 +57,8 @@ const routerObj = {
     1: '/',
     2: '/publish',
     3: '/dashboard',
-    '01': '/free'
+    '01': '/free',
+    '02': '/role',
 }
 export default function LayoutSider() {
     const [menu, setMenu] = useState(items)
