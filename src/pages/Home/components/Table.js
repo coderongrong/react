@@ -2,7 +2,7 @@
 import React from 'react';
 import { Table } from 'antd';
 
-import { getRootlist } from '../../../api/tree.js'
+import { getRootlist } from '@/api/tree.js'
 import { useEffect, useState } from 'react'
 import TabBar from './TabBar.js';
 import './index.css'

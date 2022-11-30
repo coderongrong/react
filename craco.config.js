@@ -21,14 +21,14 @@ module.exports = {
     },
     devServer: {
         open: false,
-        proxy: {
-            "jeecg-boot": {
-                target: 'http://localhost:3000',
-                changeOrigin: true,
-                pathRewrite: {
-                    "^jeecg-boot": "jeecg-boot"
-                }
-            },
-        }
+        // proxy: {
+        //     "jeecg-boot": {
+        //         target: 'http://localhost:3000',
+        //         changeOrigin: true,
+        //         pathRewrite: {
+        //             "^jeecg-boot": "jeecg-boot"
+        //         }
+        //     },
+        // }
     }
 }

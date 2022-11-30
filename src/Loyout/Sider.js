@@ -14,12 +14,12 @@ const items = [
         getItem('智慧公厕产品库', '3', <MailOutlined />),
     ]),
     getItem('子用户管理', 'sub2', <MailOutlined />, [
-        getItem('灯杆产品库', '01', <MailOutlined />),
-        getItem('综合箱产品库', '02', <MailOutlined />),
-        getItem('智慧公厕产品库', '03', <MailOutlined />),
+        getItem('其他费用', '01', <MailOutlined />),
+        getItem('角色管理', '02', <MailOutlined />),
+        getItem('子用户管理', '03', <MailOutlined />),
     ]),
     getItem('信息维护', 'sub3', <AppstoreOutlined />, [
-        getItem('菜单管理', '5', <AppstoreOutlined />),
+        getItem('其他费用', '5', <AppstoreOutlined />),
         getItem('产品库字段配置', '6', <AppstoreOutlined />),
         getItem('自动画线配置', 'sub4', <AppstoreOutlined />, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
     ]),

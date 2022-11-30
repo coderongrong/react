@@ -35,3 +35,12 @@ export const getRootlist = params => {
 export const getUserPermissionBy = params => {
     return axios.get('jeecg-boot/sys/permission/getUserPermissionByToken', { params })
 } 
+
+/**
+ * 
+ * 
+ * jeecg-boot/sys/otherCost/queryList
+*/
+export const getqueryList = params => {
+    return axios.get('jeecg-boot/sys/otherCost/queryList', { params })
+} 
