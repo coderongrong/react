@@ -14,7 +14,6 @@ const Publish = lazy(() => import('./pages/Publish'))
 const Sence = lazy(() => import('./pages/Sence'))
 const About = lazy(() => import('./pages/About'))
 
-
 // Suspense懒加载时候用到
 
 function App () {
