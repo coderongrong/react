@@ -13,6 +13,24 @@
   }
 }
 
+ul li {
+  list-style: none;
+  height: 36px;
+  line-height: 36px;
+}
+ul li:hover {
+  color: rgb(19, 31, 201) !important;
+  background-color: #fff;
+}
+a {
+  display: block;
+  width: 100%;
+  color: #FFF !important;
+}
+a:hover {
+  color:rgb(19, 31, 201) !important;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
