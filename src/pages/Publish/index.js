@@ -161,11 +161,8 @@ const Publish = () => {
           <Form.Item label="封面">
             <Form.Item name="type">
               <Radio.Group onChange={radioChange}>
-                {/* <Radio value={1}>单图</Radio>
-                <Radio value={3}>三图</Radio>
-                <Radio value={0}>无图</Radio> */}
                 {
-                  arrList.map((item, index) => <Radio value={index}>{ item }</Radio>)
+                  arrList.map((item, index) => <Radio value={index}>{item}</Radio>)
                 }
               </Radio.Group>
             </Form.Item>
