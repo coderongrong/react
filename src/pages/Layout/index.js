@@ -78,6 +78,12 @@ const GeekLayout = () => {
             <Menu.Item icon={<PlayCircleOutlined />} key="/about">
               <Link to='/about'> 首页</Link>
             </Menu.Item>
+            <Menu.Item icon={<PlayCircleOutlined />} key="/zpublish">
+              <Link to='/zpublish'> 新发布</Link>
+            </Menu.Item>
+            <Menu.Item icon={<PlayCircleOutlined />} key="/zarticle">
+              <Link to='/zarticle'> 新文章</Link>
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="layout-content" style={{ padding: 20 }}>

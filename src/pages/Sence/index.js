@@ -5,7 +5,6 @@ import { DownOutlined } from '@ant-design/icons';
 import './index.scss'
 
 const Sence = () => {
-    console.log('xx')
     const onSelect = (selectedKeys, info) => {
         console.log('selected', selectedKeys, info);
     };

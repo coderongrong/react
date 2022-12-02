@@ -13,6 +13,8 @@ const Article = lazy(() => import('./pages/Article'))
 const Publish = lazy(() => import('./pages/Publish'))
 const Sence = lazy(() => import('./pages/Sence'))
 const About = lazy(() => import('./pages/About'))
+const Zpublic = lazy(() => import('./pages/Zpublic'))
+const Zarticle = lazy(() => import('./pages/Zarticle'))
 
 // Suspense懒加载时候用到
 
@@ -47,6 +49,8 @@ function App () {
               <Route path='publish' element={<Publish />}></Route>
               <Route path='sence' element={<Sence />}></Route>
               <Route path='about' element={<About />}></Route>
+              <Route path='zpublish' element={<Zpublic />}></Route>
+              <Route path='zarticle' element={<Zarticle />}></Route>
             </Route>
             {/* 这个不需要 */}
             <Route path='/login' element={<Login />}></Route>
