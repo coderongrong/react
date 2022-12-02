@@ -99,6 +99,7 @@ const Publish = () => {
   const id = params.get('id')
   // 数据回填  id调用接口  1.表单回填 2.暂存列表 3.Upload组件fileList
   const [form] = Form.useForm()
+  const arrList = ['单图', '三图', '无图']
   useEffect(() => {
     const loadDetail = async () => {
       const { data } = await http.get(`/mp/articles/${id}`)
@@ -160,9 +161,12 @@ const Publish = () => {
           <Form.Item label="封面">
             <Form.Item name="type">
               <Radio.Group onChange={radioChange}>
-                <Radio value={1}>单图</Radio>
+                {/* <Radio value={1}>单图</Radio>
                 <Radio value={3}>三图</Radio>
-                <Radio value={0}>无图</Radio>
+                <Radio value={0}>无图</Radio> */}
+                {
+                  arrList.map((item, index) => <Radio value={index}>{ item }</Radio>)
+                }
               </Radio.Group>
             </Form.Item>
             {imgCount > 0 && (
