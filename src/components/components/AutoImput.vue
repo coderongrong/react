@@ -79,6 +79,39 @@ export default {
     //   default: [],
     // },
   },
+  directives: {
+    drag: {
+      // 指令的定义
+      bind: function (el) {
+        let odiv = el //获取当前元素
+        console.log(odiv)
+        el.onmousedown = (e) => {
+          //算出鼠标相对元素的位置
+          let disY = e.clientY - odiv.offsetTop
+          let disX = e.clientX - odiv.offsetLeft
+          console.log(disX)
+          let top = ''
+          let left = ''
+          let bottomY = document.documentElement.clientHeight - 150
+          let bottomX = document.documentElement.clientWidth
+          console.log(bottomX)
+          document.onmousemove = (e) => {
+            //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+            top = e.clientY - disY
+            left = e.clientX - disX
+            //绑定元素位置到positionY上面
+            //移动当前元素
+            odiv.style.top = top > 0 && top < bottomY ? top + 'px' : top <= 0 ? 0 : bottomY + 'px'
+            odiv.style.left = left > 0 && left < bottomX ? left + 'px' : left <= 0 ? 0 : bottomX + 'px'
+          }
+          document.onmouseup = (e) => {
+            document.onmousemove = null
+            document.onmouseup = null
+          }
+        }
+      },
+    },
+  },
   data() {
     return {
       form: {},
