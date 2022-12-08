@@ -18,7 +18,7 @@ const modules = import.meta.glob('./components/*.vue')
 const app = createApp(App)
 
 app.use(router)
-
+console.log(router)
 app.use(ElementPlus)
 
 app.use(createPinia())
