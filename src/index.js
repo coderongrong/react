@@ -5,8 +5,7 @@ import App from './App'
 import 'antd/dist/antd.min.css'
 // 引入index.scss文件
 import './index.scss'
-
-console.log('react')
+import  './utils/function.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
