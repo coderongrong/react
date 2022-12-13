@@ -28,15 +28,15 @@ const Article = () => {
     per_page: 10
   })
   // 获取文章列表
+  const loadList = async () => {
+    const { data } = await http.get('/mp/articles', { params })
+    const { results, total_count } = data
+    setArticleData({
+      list: results,
+      count: total_count
+    })
+  }
   useEffect(() => {
-    const loadList = async () => {
-      const res = await http.get('/mp/articles', { params })
-      const { results, total_count } = res.data
-      setArticleData({
-        list: results,
-        count: total_count
-      })
-    }
     loadList()
   }, [params])
 
@@ -47,7 +47,7 @@ const Article = () => {
     const _params = {}
     // 格式化status
     _params.status = status
-   
+
     // 初始化频道
     if (channel_id) {
       _params.channel_id = channel_id
