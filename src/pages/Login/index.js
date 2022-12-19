@@ -8,7 +8,6 @@ function Login () {
   const { loginStore } = useStore()
   const navigate = useNavigate()
   async function onFinish (values) {
-    console.log(values)
     // values：放置的是所有表单项中用户输入的内容
     // todo:登录
     const { mobile, code } = values
