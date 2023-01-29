@@ -3,6 +3,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import myPlugin from './myPlugin.js'
 import './assets/main.css'
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
 
 // import './assets/base.scss'
 import classes from './assets/example.module.css'
@@ -18,8 +20,9 @@ const modules = import.meta.glob('./components/*.vue')
 const app = createApp(App)
 
 app.use(router)
-console.log(router)
+// console.log(router)
 app.use(ElementPlus)
+app.use(Antd);
 
 app.use(createPinia())
 

@@ -32,7 +32,6 @@ const child = ref(null);
 
 const num = ref(0)
 onMounted(async () => {
-  // console.log('>>>>>', child.value);
   // console.log(import.meta.env.VITE_APP_SOME_KEY) // 123
   // const Token = {
   //   expire: 1669883827554,
