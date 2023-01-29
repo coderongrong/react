@@ -8,8 +8,6 @@ export default {
         //       if (o) return o[i]
         //     }, options)
         //   }
-        app.provide('data', {
-            ...options
-        })
+        app.provide('data', options)
     }
 }

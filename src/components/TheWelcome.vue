@@ -7,7 +7,7 @@
     text-color="#fff"
     @open="handleOpen"
     @close="handleClose"
-    @select='handleselect'
+    @select="handleselect"
   >
     <el-sub-menu index="1">
       <template #title>
@@ -41,6 +41,13 @@
         <div>body</div>
       </template>
     </el-menu-item>
+    <el-menu-item index="5">
+      <el-icon><setting /></el-icon>
+      <span>Navigator table</span>
+      <template>
+        <div>body</div>
+      </template>
+    </el-menu-item>
   </el-menu>
 </template>
 
@@ -52,17 +59,13 @@ import {
   Location,
   Setting,
 } from "@element-plus/icons-vue";
-const emti = defineEmits(['onKey'])
+const emti = defineEmits(["onKey"]);
 const isCollapse = ref(true);
-const handleOpen = (key, keyPath) => {
-};
-const handleClose = (key, keyPath) => {
-};
+const handleOpen = (key, keyPath) => {};
+const handleClose = (key, keyPath) => {};
 const handleselect = (key, keyPath) => {
-  emti('onKey', key)
-}
-
-
+  emti("onKey", key);
+};
 </script>
 
 <style>

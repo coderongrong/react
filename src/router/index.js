@@ -17,6 +17,7 @@ const routes = [
     },
     // 匹配 /p/books
     { path: '/home', component: () => import('@/components/Home.vue') },
+    { path: '/table', component: () => import('@/components/Table/index.vue') },
 ]
 
 const router = createRouter({
@@ -24,5 +25,7 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes, // `routes: routes` 的缩写
 })
+
+console.log('---> router', router)
 
 export default router
