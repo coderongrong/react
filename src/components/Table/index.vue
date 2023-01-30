@@ -54,12 +54,20 @@
     >
     <div :class="classes.red">123</div>
     <div :class="classes.blue">123</div>
+    <div>{{ state.count }}</div>
+    <div>{{ data1 }}</div>
+    <div>{{ data2 }}</div>
+    <component is="a-button" type="primary" ghost @click="handlebtn1"
+      >asdasd</component
+    >
+    <component is="a-button" type="primary" @click="handlebtn2"
+      >asdasd</component
+    >
   </div>
 </template>
 
 <script setup lang='ts'>
-
-import classes from "@/assets/example.module.css";  // 模块化 css
+import classes from "@/assets/example.module.css"; // 模块化 css
 // console.log(classes)
 
 import { reactive, toRaw, ref, watch, watchEffect } from "vue";
@@ -87,6 +95,24 @@ const formState = reactive<obj>({
     data: "",
   },
 });
+
+const state = reactive({
+  count: 0,
+});
+const data1 = ref(0);
+const data2 = ref(10);
+
+watch([data1, data2], ([newdata1, newdata2], [olddata1, olddata2]) => {
+  console.log([newdata1, newdata2], [olddata1, olddata2]);
+});
+
+const handlebtn1 = () => {
+  data1.value++;
+};
+const handlebtn2 = () => {
+  data2.value++;
+};
+
 const onFinish = (values: any) => {
   console.log("Success:", values);
   console.log("Success:", values.source.data);
@@ -96,8 +122,19 @@ const onFinishFailed = (errorInfo: any) => {
   console.log("Failed:", errorInfo);
 };
 const handlebtn = () => {
-  console.log("xxxx  btn");
+  state.count++;
+
+  console.log("xxxx  btn", toRaw(state));
 };
+watch(
+  () => state,
+  () => {
+    console.log("state");
+  },
+  {
+    deep: true,
+  }
+);
 const resetForm = () => {
   console.log("formRef", formRef);
   formRef.value.resetFields();
