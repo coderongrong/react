@@ -8,6 +8,7 @@ export default {
         //       if (o) return o[i]
         //     }, options)
         //   }
+        console.log('xxxxxxx plugin')
         app.provide('data', options)
     }
 }

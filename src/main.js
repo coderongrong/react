@@ -1,3 +1,4 @@
+import './config'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
@@ -19,7 +20,6 @@ const modules = import.meta.glob('./components/*.vue')
 
 const app = createApp(App)
 
-app.use(router)
 // console.log(router)
 app.use(ElementPlus)
 app.use(Antd);
@@ -31,5 +31,5 @@ app.use(myPlugin, {
     i18n: 'i18n',
     axios: service
 })
-
+app.use(router)
 app.mount('#app')

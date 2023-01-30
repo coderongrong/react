@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>table</div>
-    <a-form
+    <!-- <a-form
       ref="formRef"
       :model="formState"
       name="basic"
@@ -45,8 +45,8 @@
         <a-button type="primary" html-type="submit">Submit</a-button>
         <a-button type="primary" @click="resetForm">reset</a-button>
       </a-form-item>
-    </a-form>
-    <component is="a-button" type="primary" ghost @click="handlebtn"
+    </a-form> -->
+    <!-- <component is="a-button" type="primary" ghost @click="handlebtn"
       >asdasd</component
     >
     <component is="a-button" type="primary" @click="handlebtn"
@@ -55,12 +55,28 @@
     <div :class="classes.red">123</div>
     <div :class="classes.blue">123</div>
     <div>{{ state.count }}</div>
+    <div>state.data : {{ state.data }}</div>
     <div>{{ data1 }}</div>
-    <div>{{ data2 }}</div>
+    <div :class="classes.blue">{{ data2 }}</div>
     <component is="a-button" type="primary" ghost @click="handlebtn1"
       >asdasd</component
     >
     <component is="a-button" type="primary" @click="handlebtn2"
+      >asdasd</component
+    >
+    <div>{{ foo }} --- {{ bar }}</div>
+    <component is="a-button" type="primary" @click="handlebtn3"
+      >asdasd</component
+    >
+    <div>{{ _state.count }}</div>
+    <input v-model="text" /> -->
+    <!-- <div>{{ state.foo }}</div>
+    <div>{{ state.nested.bar }}</div>
+    <component is="a-button" type="primary" @click="handlebtn3"
+      >asdasd</component
+    > -->
+    <div ref='el'>{{ counter }}</div>
+    <component is="a-button" type="primary" @click="handlebtn3"
       >asdasd</component
     >
   </div>
@@ -70,81 +86,40 @@
 import classes from "@/assets/example.module.css"; // 模块化 css
 // console.log(classes)
 
-import { reactive, toRaw, ref, watch, watchEffect } from "vue";
+import {
+  shallowReactive,
+  isReactive,
+  shallowReadonly,
+  isReadonly,
+  effectScope,
+  computed,
+  watch,
+  ref,
+  onMounted,
+  watchEffect
+} from "vue";
 import type { FormInstance } from "ant-design-vue";
+const el = ref()
 
-const formRef = ref<FormInstance>();
+onMounted(() => {
+  el.value // <div>
+  console.log(el.value)
+})
+const scope = effectScope()
+const counter = ref(10)
 
-interface FormState {
-  username: string;
-  password: string;
-  remember: boolean;
+scope.run(() => {
+  const doubled = computed(() => counter.value * 2)
+
+  watch(doubled, () => console.log(doubled.value))
+
+  watchEffect(() => console.log('Count: ', doubled.value))
+})
+scope.stop()
+
+const handlebtn3 = () => {
+  counter.value ++ 
 }
-type obj = {
-  username: string;
-  password: string;
-  remember: boolean;
-  source: object;
-};
-
-const formState = reactive<obj>({
-  username: "",
-  password: "",
-  remember: true,
-  source: {
-    data: "",
-  },
-});
-
-const state = reactive({
-  count: 0,
-});
-const data1 = ref(0);
-const data2 = ref(10);
-
-watch([data1, data2], ([newdata1, newdata2], [olddata1, olddata2]) => {
-  console.log([newdata1, newdata2], [olddata1, olddata2]);
-});
-
-const handlebtn1 = () => {
-  data1.value++;
-};
-const handlebtn2 = () => {
-  data2.value++;
-};
-
-const onFinish = (values: any) => {
-  console.log("Success:", values);
-  console.log("Success:", values.source.data);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
-};
-const handlebtn = () => {
-  state.count++;
-
-  console.log("xxxx  btn", toRaw(state));
-};
-watch(
-  () => state,
-  () => {
-    console.log("state");
-  },
-  {
-    deep: true,
-  }
-);
-const resetForm = () => {
-  console.log("formRef", formRef);
-  formRef.value.resetFields();
-};
-watch(formState, (val, old) => {
-  console.log(val, old);
-});
-watchEffect(() => {
-  console.log("watchEffect");
-});
 </script>
 
 <style scoped>

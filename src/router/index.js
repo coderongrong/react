@@ -26,6 +26,4 @@ const router = createRouter({
     routes, // `routes: routes` 的缩写
 })
 
-console.log('---> router', router)
-
 export default router
