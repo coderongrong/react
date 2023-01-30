@@ -79,6 +79,8 @@
     <component is="a-button" type="primary" @click="handlebtn3"
       >asdasd</component
     >
+    <div>{{ foo.abc }}</div>
+    <!-- <Input /> -->
   </div>
 </template>
 
@@ -96,14 +98,16 @@ import {
   watch,
   ref,
   onMounted,
-  watchEffect
+  watchEffect,
+  inject
 } from "vue";
 import type { FormInstance } from "ant-design-vue";
 const el = ref()
-
+const foo = inject('foo')
+// console.log(foo)
 onMounted(() => {
   el.value // <div>
-  console.log(el.value)
+  // console.log(el.value)
 })
 const scope = effectScope()
 const counter = ref(10)
@@ -113,7 +117,7 @@ scope.run(() => {
 
   watch(doubled, () => console.log(doubled.value))
 
-  watchEffect(() => console.log('Count: ', doubled.value))
+  // watchEffect(() => console.log('Count: ', doubled.value))
 })
 scope.stop()
 

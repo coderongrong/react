@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-
+import { _replace } from './utils'
 // import About from '../components/About.vue'
 // import Home from '../components/Home.vue'
 
@@ -19,6 +19,8 @@ const routes = [
     { path: '/home', component: () => import('@/components/Home.vue') },
     { path: '/table', component: () => import('@/components/Table/index.vue') },
 ]
+
+_replace(routes)
 
 const router = createRouter({
     // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。

@@ -6,7 +6,7 @@ import myPlugin from './myPlugin.js'
 import './assets/main.css'
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
-
+import Input from './custom/input.vue'
 // import './assets/base.scss'
 import classes from './assets/example.module.css'
 
@@ -32,4 +32,5 @@ app.use(myPlugin, {
     axios: service
 })
 app.use(router)
+app.component(Input.name, Input)
 app.mount('#app')

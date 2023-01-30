@@ -154,7 +154,7 @@ let { state, foo } = toRefs(
 const isShow = ref(true);
 const handleCount = () => {
   foo.value++;
-  console.log(foo);
+  // console.log(foo);
 };
 </script>
 

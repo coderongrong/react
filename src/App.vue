@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, inject } from "vue";
 import HelloWrold from "./components/HelloWorld.vue";
 import TheWelcome from "@com/TheWelcome.vue";
 import { useRouter, useRoute } from 'vue-router'
@@ -75,6 +75,9 @@ const onKey = (key) => {
     router.push('/table')
   }
 }
+
+const foo = inject('foo')
+// console.log('APP----->', foo)
 </script>
 
 <template>

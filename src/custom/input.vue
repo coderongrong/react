@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'item',
+  name: 'Input',
   props: {
     dataProps: {
       type: Array,
