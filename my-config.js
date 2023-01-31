@@ -38,11 +38,11 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
 
 
     const env = loadEnv(mode, process.cwd(), '')
-    // console.log('env', env)
+    console.log('mode', mode)
 
     if (command === 'serve') {
         return {
-            base: '/vite',
+            base: '/vite/',
             // dev 独有配置
             runtimeCompiler: true,  // 加上这一段
             plugins: [
