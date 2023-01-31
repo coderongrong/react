@@ -45,7 +45,9 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
             runtimeCompiler: true,  // 加上这一段
             plugins: [
                 { enforce: 'pre' },
-                vue(),
+                vue({
+                    reactivityTransform: true
+                }),
                 splitVendorChunkPlugin(),
                 legacy({
                     targets: ['defaults', 'not IE 11']
