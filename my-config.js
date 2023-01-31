@@ -1,4 +1,4 @@
-
+/** @type {import('vite').UserConfig} */
 
 import { fileURLToPath, URL } from 'node:url'
 // import { someMethod } from 'my-dep'
@@ -26,6 +26,7 @@ console.log(resolve(__dirname, 'index.html'))
 //     }
 //   },
 // })
+
 function asyncFunction() {
     return new Promise((res, rej) => {
         res('100')
@@ -41,6 +42,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
 
     if (command === 'serve') {
         return {
+            base: '/vite',
             // dev 独有配置
             runtimeCompiler: true,  // 加上这一段
             plugins: [
