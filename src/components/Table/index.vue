@@ -75,19 +75,44 @@
     <component is="a-button" type="primary" @click="handlebtn3"
       >asdasd</component
     > -->
-    <div ref='el'>{{ counter }}</div>
+    <div ref="el">{{ counter }}</div>
     <component is="a-button" type="primary" @click="handlebtn3"
       >asdasd</component
     >
     <div>{{ foo.abc }}</div>
     <!-- <Input /> -->
+    <span v-pre
+      >{{ this will not be compiled }}
+      <span>asdasd</span>
+    </span>
+    <span v-once>This will never change: {{ msg }}</span>
+    <div v-cloak>
+      {{ msg }}
+    </div>
+    <transition>
+      <div style="width: 500px; text-align: center" :key="text">
+        <span style="display: block; width: 500px; text-align: center">{{
+          text
+        }}</span>
+      </div>
+    </transition>
+    <div>
+      <component is="a-button" type="primary" @click="handlebtn4"
+        >asdasd</component
+      >
+      <Children
+        :msg="msg"
+        @changeChildren="changeChildren"
+        @delete="hanlddelete"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang='ts'>
 import classes from "@/assets/example.module.css"; // 模块化 css
 // console.log(classes)
-
+import Children from "./children.vue";
 import {
   shallowReactive,
   isReactive,
@@ -99,32 +124,57 @@ import {
   ref,
   onMounted,
   watchEffect,
-  inject
+  inject,
 } from "vue";
 import type { FormInstance } from "ant-design-vue";
-const el = ref()
-const foo = inject('foo')
+const el = ref();
+const foo = inject("foo");
+const text = ref(1);
+const handlebtn4 = () => {
+  text.value++;
+};
 // console.log(foo)
 onMounted(() => {
-  el.value // <div>
+  el.value; // <div>
   // console.log(el.value)
+});
+const scope = effectScope();
+const counter = ref(10);
+const msg = ref(100);
+setTimeout(() => {
+  msg.value = 12321;
+}, 1000);
+
+const a = 1
+const b = ref(2)
+
+defineExpose({
+  a,
+  b
 })
-const scope = effectScope()
-const counter = ref(10)
 
-scope.run(() => {
-  const doubled = computed(() => counter.value * 2)
+// scope.run(() => {
+//   const doubled = computed(() => counter.value * 2);
 
-  watch(doubled, () => console.log(doubled.value))
+//   watch(doubled, () => console.log(doubled.value));
 
-  // watchEffect(() => console.log('Count: ', doubled.value))
-})
-scope.stop()
+//   // watchEffect(() => console.log('Count: ', doubled.value))
+// });
+// scope.stop();
 
+const changeChildren = (value) => {
+  msg.value = value;
+};
+const hanlddelete = (value) => {
+  msg.value = value;
+};
 const handlebtn3 = () => {
-  counter.value ++ 
-}
+  counter.value++;
+};
 </script>
 
 <style scoped>
+[v-cloak] {
+  display: none;
+}
 </style>

@@ -16,11 +16,10 @@ import router from './router'
 
 import { service } from './config/require'
 
-const modules = import.meta.glob('./components/*.vue')
+const modules = import.meta.glob('./custom/*.vue')
 
+// console.log('>>>>>> modules', modules)
 const app = createApp(App)
-
-// console.log(router)
 app.use(ElementPlus)
 app.use(Antd);
 
@@ -32,5 +31,5 @@ app.use(myPlugin, {
     axios: service
 })
 app.use(router)
-app.component(Input.name, Input)
+app.component(Input.name, Input)  // 全局组件
 app.mount('#app')
