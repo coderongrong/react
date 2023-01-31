@@ -6,9 +6,11 @@ export function useDebouncedRef(value, delay = 200) {
     return {
       get() {
         track()
+        // console.log('get')
         return value
       },
       set(newValue) {
+        console.log('set')
         clearTimeout(timeout)
         timeout = setTimeout(() => {
           value = newValue
