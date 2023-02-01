@@ -10,7 +10,8 @@ const service = axios.create({
 //baseURL: '/jeecg-boot',
 // baseURL: apiBaseUrl, // api base_url  http://2l916746t7.goho.co:1008/jeecg-boot
   // baseURL: 'http://2l916746t7.goho.co:1008/jeecg-boot',
-  baseURL: 'http://192.168.2.3:1008/jeecg-boot',
+  // baseURL: 'http://192.168.2.3:1008/jeecg-boot',
+  // baseURL: '',
   timeout: 5000 // 请求超时时间
 })
 service.interceptors.request.use(config => {
@@ -49,9 +50,10 @@ onMounted(async () => {
     "loginType": "3"
   }
   const { result } = await service.post('/sys/login', params)
+  // console.log('>>> res', result)
   localStorage.setItem('Access-Token',result.token)
   try {
-    const res = await service.get(`/sys/productClass/queryByParentId?_t=1669339352&parentId=0&type=1`)
+    const res = await service.get(`/sys/productClass/queryByParentId?_t=1669339352&parentId=0&type=1&classType=xxx`)
     // console.log('res', res)
   } catch (e) {
     // console.log(e)
@@ -69,7 +71,7 @@ const onKey = (key) => {
     }
   })
   if(key == 2) {
-    router.push('/about/123')
+    router.push('/about')
   }
   if(key == 5) {
     router.push('/table')

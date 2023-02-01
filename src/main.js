@@ -16,9 +16,9 @@ import router from './router'
 
 import { service } from './config/require'
 
-const modules = import.meta.glob('./custom/*.vue')
-
+// const modules = import.meta.glob('./custom/*.vue')
 // console.log('>>>>>> modules', modules)
+
 const app = createApp(App)
 app.use(ElementPlus)
 app.use(Antd);
@@ -33,3 +33,8 @@ app.use(myPlugin, {
 app.use(router)
 app.component(Input.name, Input)  // 全局组件
 app.mount('#app')
+
+
+
+
+// https://github.com/coderongrong/react/blob/vite2.0/my-config.js

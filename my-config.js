@@ -8,6 +8,15 @@ import { resolve } from 'path'
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
+// var dotenv = require('dotenv')
+// var dotenvExpand = require('dotenv-expand')
+
+// var myEnv = dotenv.config()
+// dotenvExpand.expand(myEnv)
+
+// console.log('>>>>>>>>>>  ,env', process.env)
+
+
 console.log(resolve(__dirname, 'index.html'))
 
 
@@ -41,7 +50,11 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
     console.log('mode', mode)
 
     if (command === 'serve') {
+
         return {
+            transform() {
+                console.log('-------> transform() {},')
+            },
             base: '/vite/',
             // dev 独有配置
             runtimeCompiler: true,  // 加上这一段
@@ -55,11 +68,18 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
                     targets: ['defaults', 'not IE 11']
                 })
             ],
+            envPrefix: 'APP_',
+            // publicDir: false,
+            css: {
+                devSourcemap: true
+            },
+            clearScreen: true,
             resolve: {
                 alias: {
                     '@': fileURLToPath(new URL('./src', import.meta.url)),
                     '@com': fileURLToPath(new URL('./src/components', import.meta.url)),
-                }
+                },
+                extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
             },
             define: {
                 __APP_ENV__: env.APP_ENV
@@ -79,13 +99,25 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
                 }
             },
             server: {
+                open: false,
+                // port: 5566,
                 proxy: {
-                    '/api': {
-                        // https://jsonplaceholder.typicode.com/todos/1
-                        target: 'http://jsonplaceholder.typicode.com',
-                        changeOrigin: true,
-                        rewrite: (path) => path.replace(/^\/api/, '')
+                    '/jeecg-boot': {
+                        // target: 'http://misaya.wicp.net',  // 石家庄测试环境和朝阳本地
+                        // target: 'http://39.98.118.21',  // 正式环境
+                        target: 'http://192.168.2.3:1008',  // 智友本地
+                        changeOrigin: true, //是否跨域
+                        pathRewrite: {
+                            '^/jeecg-boot': ''
+                        }
                     },
+                    '/sys': {
+                        // target: 'http://misaya.wicp.net',  // 石家庄测试环境和朝阳本地
+                        // target: 'http://39.98.118.21',  // 正式环境
+                        target: 'http://192.168.2.3:1008/jeecg-boot',  // 智友本地
+                        changeOrigin: true, //是否跨域
+                        rewrite: (path) => path.replace(/^\/sys/, '/sys'),
+                    }
                 }
             }
         }
