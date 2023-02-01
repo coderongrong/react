@@ -14,12 +14,13 @@
   <List />
   <div>storeData: {{ count }}</div>
   <button @click='increment'>+ 1</button>
-  <!-- <Demo /> -->
+  <h1>-------</h1>
+  <Demo :msg='1000' />
 </template>
 
 <script setup lang='ts'>
 import List from './List.vue'
-import Demo from './Demo.jsx'
+import Demo from './Demo.vue'
 
 import { useSlots,
   useAttrs,
