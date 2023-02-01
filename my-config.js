@@ -7,7 +7,6 @@ import { resolve } from 'path'
 
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
-
 // var dotenv = require('dotenv')
 // var dotenvExpand = require('dotenv-expand')
 
@@ -52,10 +51,14 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
     if (command === 'serve') {
 
         return {
+            esbuild: {
+                jsxFactory: 'h',
+                jsxFragment: 'Fragment',
+            },
             transform() {
                 console.log('-------> transform() {},')
             },
-            base: '/vite/',
+            // base: '/vite/',
             // dev 独有配置
             runtimeCompiler: true,  // 加上这一段
             plugins: [
@@ -94,10 +97,18 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
                 commonjsOptions: {
                     include: [/linked-dep/, /node_modules/]
                 },
+                modulePreload: {
+                    resolveDependencies: (filename, deps, { hostId, hostType }) => {
+                        // console.log('>>>>>>>  fliename', filename, deps)
+                        return deps.filter(condition)
+                    }
+                },
+                // cssCodeSplit: true,
                 watch: {
 
                 }
             },
+            sourcemap: true,
             server: {
                 open: false,
                 // port: 5566,
@@ -123,6 +134,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
         }
     } else {
         // command === 'build'
+        console.log("command === 'build'", command)
         return {
             // build 独有配置
             rollupOptions: {
@@ -134,6 +146,8 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
             commonjsOptions: {
                 include: [/linked-dep/, /node_modules/]
             },
+            cssCodeSplit: false,
+            sourcemap: true,
             watch: {
 
             }

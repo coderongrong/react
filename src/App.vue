@@ -4,14 +4,15 @@ import HelloWrold from "./components/HelloWorld.vue";
 import TheWelcome from "@com/TheWelcome.vue";
 import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
-import { defer } from 'lodash'
+import defer from 'lodash-es/defer'
+import map from 'lodash-es/map'
 
 const service = axios.create({
 //baseURL: '/jeecg-boot',
 // baseURL: apiBaseUrl, // api base_url  http://2l916746t7.goho.co:1008/jeecg-boot
   // baseURL: 'http://2l916746t7.goho.co:1008/jeecg-boot',
   // baseURL: 'http://192.168.2.3:1008/jeecg-boot',
-  // baseURL: '',
+  baseURL: '',
   timeout: 5000 // 请求超时时间
 })
 service.interceptors.request.use(config => {
@@ -34,6 +35,10 @@ const child = ref(null);
 
 const num = ref(0)
 onMounted(async () => {
+  // console.log('--------> defer', defer)
+  map([1,2,3,4], item => {
+    // console.log('---> item', item)
+  })
   // console.log(import.meta.env.VITE_APP_SOME_KEY) // 123
   // const Token = {
   //   expire: 1669883827554,

@@ -125,9 +125,9 @@ const num = 10;
 const count = ref(1);
 onMounted(async () => {
   const { result } = await service.axios.get(
-    `/sys/productClass/queryByParentId?_t=1669339352&parentId=0&type=1`
+    `/sys/productClass/queryByParentId?_t=1669339352&parentId=0&type=1&classType=aaxxxx`
   );
-  data.data = result.map((item) => {
+  data.data = result?.map((item) => {
     return {
       ...item,
       label: item.productClassName,

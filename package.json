@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --config my-config.js --host --port 8000",
-    "build": "vite build",
-    "preview": "vite preview --host --port 8000"
+    "build": "vite build --config my-config.js",
+    "preview": "vite preview --config my-config.js --host --port 3000"
   },
   "dependencies": {
     "ant-design-vue": "^3.2.15",

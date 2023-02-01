@@ -12,10 +12,15 @@
   <button @click='handleBtn1'>+</button>
   <div>-----------list</div>
   <List />
+  <div>storeData: {{ count }}</div>
+  <button @click='increment'>+ 1</button>
+  <!-- <Demo /> -->
 </template>
 
 <script setup lang='ts'>
 import List from './List.vue'
+import Demo from './Demo.jsx'
+
 import { useSlots,
   useAttrs,
   h,
@@ -35,6 +40,12 @@ import { useSlots,
   triggerRef
 } from 'vue'
 import type { Ref } from 'vue'
+import { useCounterStore } from '@/stores/counter.js'
+import { storeToRefs } from 'pinia'
+
+const store = useCounterStore()
+const { count } = storeToRefs(store)
+const { increment } = useCounterStore()
 
 // ref reactive computed watch watchEffect readonly
 
@@ -129,7 +140,7 @@ const emit = defineEmits<{
   (e: 'delete', value: string | number): void
 }>();
 
-let count = $ref(0)
+let counts = $ref(0)
 // console.log(count)
 
 h('div', { id: 'foo' }, 'hello')
