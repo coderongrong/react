@@ -70,7 +70,7 @@ function quickSort(arr2) {
  * 括号配对
  * 
  * [()[]{()}]
- * 
+ * '[()[]{()}](('
 */
 var str = '[()[]{()}](('
 function matchStr(str) {
@@ -93,3 +93,23 @@ function matchStr(str) {
 }
 // console.log(matchStr(str))
 
+/**
+ * 防抖
+ * debounce function
+ * 
+*/
+var debounce = (function () {
+  var timer = null
+  return function (fn) {
+    if(timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      fn()
+    }, 200)
+  }
+}())
+function debounce_fn() {
+  console.log('debounce')
+}
+Array(5).fill(1).forEach(item => {
+  debounce(debounce_fn)
+})
