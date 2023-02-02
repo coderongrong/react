@@ -12,7 +12,7 @@ export default {
 
     const count = ref(1)
     const ok = ref(1)
-    console.log(props)
+    // console.log(props)
 
     return () => h('div', [ok.value ? h('div', 'yes') : h('span', 'no')])
     return () => [
