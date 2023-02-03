@@ -1,4 +1,3 @@
-
 /*
 *
 * flat 
@@ -7,12 +6,15 @@
 
 var arr = [1, 2, 3, [4, 5, [6, 7]]]
 function flat(arr) {
-  return arr.reduce((pre, cur) => {
-    return pre.concat(Array.isArray(cur) ? flat(cur) : cur)
-  }, [])
+  // return arr.reduce((pre, cur) => {
+  //   return pre.concat(Array.isArray(cur) ? flat(cur) : cur)
+  // }, [])
+  while(arr.some(item => Array.isArray(item))) {
+    arr = [].concat(...arr)
+  }
+  return arr
 }
 // console.log(flat(arr))
-
 /**
  * 
  * unique
@@ -108,7 +110,7 @@ var debounce = (function () {
   }
 }())
 function debounce_fn() {
-  console.log('debounce')
+  // console.log('debounce')
 }
 Array(5).fill(1).forEach(item => {
   debounce(debounce_fn)

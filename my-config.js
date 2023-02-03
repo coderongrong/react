@@ -43,8 +43,6 @@ function asyncFunction() {
 
 export default defineConfig(async ({ command, mode, ssrBuild }) => {
     const data = await asyncFunction()
-
-
     const env = loadEnv(mode, process.cwd(), '')
     console.log('mode', mode)
 
