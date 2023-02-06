@@ -61,8 +61,11 @@ const treeData = [
 function TreeData ()  {
   useEffect(async () => {
     console.log('TreeDataTreeDataTreeData')
-
-    const res = await getUseInfo({})
+    const params = {
+      password: '123456+kkk',
+      username: 'jieyingjing'
+    }
+    const res = await getUseInfo(params)
   })
   const onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
