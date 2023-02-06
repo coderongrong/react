@@ -4,10 +4,15 @@ import './index.css';
 import App from './App';
 import './assets/main.css'
 
+
 // import { Button } from 'element-react';
 import 'element-theme-default';
 
 // import reportWebVitals from './reportWebVitals';
+
+import { axios } from './http/index'
+console.log('----->', axios)
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
