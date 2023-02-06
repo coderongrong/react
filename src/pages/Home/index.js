@@ -1,11 +1,7 @@
 
-
-
-
-
 function Home () {
     return (
-        <div>Home...</div>
+        <div>产品库</div>
     )
 }
 export default Home

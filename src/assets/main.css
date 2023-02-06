@@ -1,0 +1,46 @@
+.mt-10 {
+    margin-top: 10px;;
+}
+
+.mt-15 {
+    margin-top: 15px;;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.ml-20 {
+    margin-left: 20px;
+}
+
+.d-f {
+    display:  flex;
+}
+
+.b-c {
+    background-color: #40a9ff;
+}
+
+.t-c {
+    color: rgba(0,0,0,.65);
+}
+
+.main-size {
+    font-size: 16px;
+}
+
+
+.red {
+    color: red;
+}
+
+.ant-layout-content {
+    width: calc(100% - 256px) !important;
+}
+
+.ant-layout-sider {
+    width: 256px !important;
+    max-width: 256px !important;
+    flex: 0 0 256px !important;
+}

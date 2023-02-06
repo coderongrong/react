@@ -1,10 +1,9 @@
 import './index.css'
 
-
 function Dashboard () {
     return (
         <div className='main_box'>
-            Dashboard...
+            Dashboard
         </div>
     )
 }
