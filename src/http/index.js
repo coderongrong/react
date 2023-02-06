@@ -11,4 +11,17 @@ const service = axios.create({
     retryDelay: 1000,
 });
 
+service.interceptors.request.use(config => {
+    const token = localStorage.getItem('Access-Token')
+    // config.headers['max-age'] = 31536000
+    if (token) {
+        config.headers['X-Access-Token'] = token
+    }
+    return config
+})
+
+service.interceptors.response.use(response => {
+    return response.data
+}, () => { })
+
 export { service as axios };
