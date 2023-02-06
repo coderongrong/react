@@ -8,16 +8,27 @@ const items = [
         getItem('综合箱产品库', '2', <MailOutlined />),
         getItem('智慧公厕产品库', '3', <MailOutlined />),
     ]),
-    getItem('信息维护', 'sub2', <AppstoreOutlined />, [
+    getItem('子用户管理', 'sub2', <MailOutlined />, [
+        getItem('灯杆产品库', '01', <MailOutlined />),
+        getItem('综合箱产品库', '02', <MailOutlined />),
+        getItem('智慧公厕产品库', '03', <MailOutlined />),
+    ]),
+    getItem('信息维护', 'sub3', <AppstoreOutlined />, [
         getItem('菜单管理', '5', <AppstoreOutlined />),
         getItem('产品库字段配置', '6', <AppstoreOutlined />),
-        getItem('自动画线配置', 'sub3', <AppstoreOutlined />, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
+        getItem('自动画线配置', 'sub4', <AppstoreOutlined />, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
     ]),
-    getItem('Navigation Three', 'sub4', <SettingOutlined />, [
+    getItem('系统管理', 'sub5', <SettingOutlined />, [
         getItem('Option 9', '9'),
         getItem('Option 10', '10'),
         getItem('Option 11', '11'),
         getItem('Option 12', '12'),
+    ]),
+    getItem('系统监控', 'sub6', <SettingOutlined />, [
+        getItem('Option 9', '13'),
+        getItem('Option 10', '14'),
+        getItem('Option 11', '15'),
+        getItem('Option 12', '16'),
     ]),
 ];
 

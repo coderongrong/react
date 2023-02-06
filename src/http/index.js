@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-
-
 const baseDomain = 'http://192.168.1.222:1007/'
 
 const service = axios.create({
@@ -12,7 +10,7 @@ const service = axios.create({
 });
 
 service.interceptors.request.use(config => {
-    const token = localStorage.getItem('Access-Token')
+    const token = localStorage.getItem('usreToken')
     // config.headers['max-age'] = 31536000
     if (token) {
         config.headers['X-Access-Token'] = token

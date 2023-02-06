@@ -11,7 +11,6 @@ import 'element-theme-default';
 // import reportWebVitals from './reportWebVitals';
 
 import { axios } from './http/index'
-console.log('----->', axios)
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

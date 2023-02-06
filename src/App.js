@@ -2,7 +2,7 @@
 
 import { Layout } from 'antd';
 
-import { BrowserRouter, Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
+import { BrowserRouter,Route, Routes } from 'react-router-dom'
 
 
 import Home from './pages/Home'
@@ -10,38 +10,12 @@ import Publish from './pages/Publish'
 import Dashboard from './pages/Dashboard'
 
 import LayoutSider from './Loyout/Sider';
-import { Divider } from 'rc-menu';
-import { useEffect } from 'react'
-
-
-
 
 // import { Button } from 'element-react';
 
 const { Header, Content } = Layout;
 
-const ele = [
-  {
-    path: '/about',
-    element: <Home />
-  },
-  {
-    path: '/home',
-    element: <Publish />
-  },
-  {
-    path: '/',
-    element: <Navigate to="/about" />
-  }
-]
-
-
-
-
 function App() {
-  useEffect(() => {
-    console.log('Appp   --->  App')
-  })
   return (
     <Layout>
       <Header className='t-c'>

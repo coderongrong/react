@@ -1,5 +1,4 @@
 import { axios } from '../http/index'
-console.log('axios --->>> axios', axios)
 
 /**
  * getUseInfo
@@ -7,10 +6,8 @@ console.log('axios --->>> axios', axios)
  * 
 */
 export const getUseInfo = params => {
-    console.log(params)
     return axios.post('jeecg-boot/sys/login', params)
-} 
-
+}
 
 /**
  * tree DATA
@@ -18,6 +15,14 @@ export const getUseInfo = params => {
  * 
 */
 export const getTreeData = params => {
-    console.log(params)
-    return axios.post('jeecg-boot/sys/login', params)
+    return axios.get('jeecg-boot/sys/productClass/queryByParentId', { params })
+}
+
+/**
+ * rootlist
+ * 
+ * 
+*/
+export const getRootlist = params => {
+    return axios.get('jeecg-boot/sys/product/rootList', { params })
 } 
