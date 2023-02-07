@@ -2,7 +2,7 @@
 
 import { Layout } from 'antd';
 
-import { BrowserRouter,Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 
 import Home from './pages/Home'
@@ -11,11 +11,13 @@ import Dashboard from './pages/Dashboard'
 
 import LayoutSider from './Loyout/Sider';
 
+
 // import { Button } from 'element-react';
 
 const { Header, Content } = Layout;
 
 function App() {
+
   return (
     <Layout>
       <Header className='t-c'>

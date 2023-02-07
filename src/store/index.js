@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware  } from 'redux'
 import { counterReducer } from './reducer.js'
 import { booksReducer } from './books.js'
 

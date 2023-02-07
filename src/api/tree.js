@@ -26,3 +26,12 @@ export const getTreeData = params => {
 export const getRootlist = params => {
     return axios.get('jeecg-boot/sys/product/rootList', { params })
 } 
+
+/**
+ * 
+ * 
+ * jeecg-boot/sys/permission/getUserPermissionBy
+*/
+export const getUserPermissionBy = params => {
+    return axios.get('jeecg-boot/sys/permission/getUserPermissionByToken', { params })
+} 

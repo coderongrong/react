@@ -21,11 +21,11 @@ function Home(props) {
     const cb2 = (data) => {
         setShow(data)
     }
+    const showClassdec = () => {
+        onTodoClick({ type: 'counter/decremented' })
+    }
     const showClassAdd = () => {
         onTodoClick({ type: 'counter/incremented' })
-    }
-    const showClassdec = () => {
-        onTodoClick({type: 'counter/decremented'})
     }
     return (
         <div className='main_box'>
@@ -45,10 +45,12 @@ function Home(props) {
 
 export default connect(
     state => {
-        return ({todos: state.count})
+        return ({ todos: state.count })
     },
-    dispatch => ({onTodoClick: state => {
-        return dispatch(state)
-    }})
+    dispatch => ({
+        onTodoClick: state => {
+            return dispatch(state)
+        }
+    })
 )(Home)
 

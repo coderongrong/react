@@ -2,6 +2,11 @@ import { Layout } from 'antd';
 import { Menu } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom'
+
+import { getUserPermissionBy } from '../api/tree'
+import { useEffect, useState } from 'react';
+import { handleTree } from '../utils/index'
+
 const items = [
     getItem('产品库', 'sub1', <MailOutlined />, [
         getItem('灯杆产品库', '1', <MailOutlined />),
@@ -32,7 +37,7 @@ const items = [
     ]),
 ];
 
-const { Header, Sider, Content } = Layout;
+const { Sider } = Layout;
 function getItem(
     label,
     key,
@@ -54,10 +59,20 @@ const routerObj = {
     3: '/dashboard'
 }
 export default function LayoutSider() {
+    const [menu, setMenu] = useState(items)
+    const _getUserPermissionBy = async () => {
+        const { result } = await getUserPermissionBy()
+        const resData = handleTree(result.menu)
+        // setMenu(resData)
+    }
+    useEffect(() => {
+        _getUserPermissionBy()
+    }, [])
     const navigate = useNavigate()
     const onClick = (e) => {
         navigate(routerObj[e.key])
     };
+
     return <Sider>
         <Menu
             onClick={onClick}
@@ -65,7 +80,7 @@ export default function LayoutSider() {
             defaultSelectedKeys={['1']}
             defaultOpenKeys={['sub1']}
             mode="inline"
-            items={items}
+            items={menu}
         />
     </Sider>
 }
