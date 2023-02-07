@@ -1,5 +1,3 @@
-import { createStore } from 'redux'
-
 
 function counterReducer(state = { value: 0 }, action) {
     switch (action.type) {
@@ -13,15 +11,14 @@ function counterReducer(state = { value: 0 }, action) {
 }
 
 
-let store = createStore(counterReducer)
 
-store.subscribe(() => console.log(store.getState()))
+// store.subscribe(() => console.log(store.getState()))
 
-store.dispatch({ type: 'counter/incremented' })
+// store.dispatch({ type: 'counter/incremented' })
+// // {value: 1}
+// store.dispatch({ type: 'counter/incremented' })
+// // {value: 2}
+// store.dispatch({ type: 'counter/decremented' })
 // {value: 1}
-store.dispatch({ type: 'counter/incremented' })
-// {value: 2}
-store.dispatch({ type: 'counter/decremented' })
-// {value: 1}
 
-export { store }
+export { counterReducer }

@@ -5,6 +5,8 @@ import { Table } from 'antd';
 import { getRootlist } from '../../../api/tree.js'
 import { useEffect, useState } from 'react'
 import TabBar from './TabBar.js';
+import './index.css'
+import { connect } from 'react-redux';
 
 const columns = [
     {
@@ -150,12 +152,20 @@ const TableData = (props) => {
         })
         setTableData(_data)
     }
+    const change = () => {
+        props.changeNum({type: 'counter/incremented'})
+
+    }
     return (
         <div style={{ width: '80%', padding: '0 0 0 20px' }}>
             < TabBar/>
+            <div className='text_num'>已选择 {props.num.value}项   <span onClick={change}>清空已选删除</span></div>
             <Table columns={columns} dataSource={tableData} />
         </div>
     )
 };
 
-export default TableData
+export default connect(
+    state => ({ num: state}),
+    dispatch => ({ changeNum: params => dispatch(params)})
+)(TableData)

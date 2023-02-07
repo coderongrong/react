@@ -9,7 +9,7 @@ import { ConfigProvider } from 'antd';
 // import { Button } from 'element-react';
 import 'element-theme-default';
 import { Provider } from 'react-redux'
-import { store } from './store/reducer';
+import store from './store/index';
 // import reportWebVitals from './reportWebVitals';
 
 import { axios } from './http/index'

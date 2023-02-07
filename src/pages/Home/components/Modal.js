@@ -2,7 +2,6 @@ import { Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import FormInput from './FormInput';
 const ModalInput =(props) => {
-    console.log(props)
     const { show, callback } = props
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [title, setTitle] = useState('新增分类');
