@@ -153,19 +153,20 @@ const TableData = (props) => {
         setTableData(_data)
     }
     const change = () => {
-        props.changeNum({type: 'counter/incremented'})
+        props.changeNum({ type: 'counter/incremented' })
+        props._push({ type: 'book/push' })
 
     }
     return (
         <div style={{ width: '80%', padding: '0 0 0 20px' }}>
-            < TabBar/>
-            <div className='text_num'>已选择 {props.num.value}项   <span onClick={change}>清空已选删除</span></div>
+            < TabBar />
+            <div className='text_num'>已选择 {props.num.value}--{props.book.value}项   <span onClick={change}>清空已选删除</span></div>
             <Table columns={columns} dataSource={tableData} />
         </div>
     )
 };
 
 export default connect(
-    state => ({ num: state}),
-    dispatch => ({ changeNum: params => dispatch(params)})
+    state => ({ num: state.count, book: state.books }),
+    dispatch => ({ changeNum: params => dispatch(params), _push: params => dispatch(params) })
 )(TableData)

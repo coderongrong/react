@@ -1,6 +1,8 @@
 
+console.log('---->  webpack')
 
 module.exports = {
+
     // entry: [
     //     './app/main.js'
     // ],

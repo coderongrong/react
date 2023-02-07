@@ -1,16 +1,13 @@
-
-function counterReducer(state = { value: 0 }, action) {
+function booksReducer(state = { value: ['css', 'html'] }, action) {
     switch (action.type) {
-        case 'counter/incremented':
-            return { value: state.value + 1 }
-        case 'counter/decremented':
-            return { value: state.value - 1 }
+        case 'book/push':
+            return { value: state.value.concat('js') }
+        case 'book/pop':
+            return { value: state.value.pop() }
         default:
             return state
     }
 }
-
-
 
 
 // store.dispatch({ type: 'counter/incremented' })
@@ -20,4 +17,4 @@ function counterReducer(state = { value: 0 }, action) {
 // store.dispatch({ type: 'counter/decremented' })
 // {value: 1}
 
-export { counterReducer }
+export { booksReducer }

@@ -24,14 +24,14 @@ function Home(props) {
     const showClassAdd = () => {
         onTodoClick({ type: 'counter/incremented' })
     }
-    const showClassinc = () => {
-        onTodoClick({type: 'counter/incremented'})
+    const showClassdec = () => {
+        onTodoClick({type: 'counter/decremented'})
     }
     return (
         <div className='main_box'>
             <div style={{ width: '300px' }}>
                 <Button type="primary" className='mr-10' size='small' onClick={showClass}>新增类别</Button>
-                <Button type="primary" className='mr-10' size='small' onClick={showClassinc}>科学布点{todos.value}</Button>
+                <Button type="primary" className='mr-10' size='small' onClick={showClassdec}>科学布点{todos.value}</Button>
                 <Button type="primary" size='small' onClick={showClassAdd}>抽象模型{todos.value}</Button>
                 <div className='mt-20 left_tree'>
                     <TreeData callBack={cb} msg='abc'></TreeData>
@@ -43,8 +43,10 @@ function Home(props) {
     )
 }
 
-export default  connect(
-    state => ({todos: state}),
+export default connect(
+    state => {
+        return ({todos: state.count})
+    },
     dispatch => ({onTodoClick: state => {
         return dispatch(state)
     }})

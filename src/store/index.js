@@ -1,4 +1,5 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import { counterReducer } from './reducer.js'
+import { booksReducer } from './books.js'
 
-export default createStore(counterReducer)
+export default createStore(combineReducers({ count: counterReducer, books: booksReducer }))
