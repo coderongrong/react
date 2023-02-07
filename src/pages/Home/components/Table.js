@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Space, Table, Tag } from 'antd';
+import { Table } from 'antd';
 
 import { getRootlist } from '../../../api/tree.js'
 import { useEffect, useState } from 'react'

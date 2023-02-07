@@ -3,7 +3,6 @@
 import React from 'react';
 import { DownOutlined } from '@ant-design/icons';
 import { Tree } from 'antd';
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { handleData } from '../../../utils/index'
 import { getUseInfo, getTreeData  } from '../../../api/tree.js'

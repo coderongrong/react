@@ -8,11 +8,11 @@ import { ConfigProvider } from 'antd';
 
 // import { Button } from 'element-react';
 import 'element-theme-default';
-
+import { Provider } from 'react-redux'
+import { store } from './store/reducer';
 // import reportWebVitals from './reportWebVitals';
 
 import { axios } from './http/index'
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -25,9 +25,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 root.render(
-  <ConfigProvider locale={zhCN}>
-    <App />
-  </ConfigProvider>
+  <Provider store={store}>
+    <ConfigProvider locale={zhCN}>
+      <App />
+    </ConfigProvider>
+  </Provider>
 );
 // root.render(
 //   <React.StrictMode>

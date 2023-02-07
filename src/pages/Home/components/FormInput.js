@@ -42,18 +42,11 @@ const FormInput = forwardRef((props, ref) => {
         }
     };
     const onFinish = (values) => {
-        // console.log(values);
         callBack(values)
     };
     useEffect(() => {
         onFinish()
     }, [show])
-    // const onFill = () => {
-    //     form.setFieldsValue({ note: 'aaa', gender: 'xxx' });
-    // };
-    // const onReset = () => {
-    //     form.resetFields();
-    // };
     return (
         <Form
             ref={ref}
@@ -93,17 +86,6 @@ const FormInput = forwardRef((props, ref) => {
                     <Option value="male">male</Option>
                     <Option value="female">female</Option>
                 </Select>
-            </Form.Item>
-            <Form.Item {...tailLayout}>
-                {/* <Button type="primary" htmlType="submit">
-                    Submit
-                </Button> */}
-                {/* <Button htmlType="button" onClick={onReset}>
-                    Reset
-                </Button> */}
-                {/* <Button type="link" htmlType="button" onClick={onFill}>
-                    Fill form
-                </Button> */}
             </Form.Item>
         </Form>
     )
