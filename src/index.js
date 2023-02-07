@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import './assets/main.css'
-
+import zhCN from 'antd/es/locale/zh_CN';
+import { ConfigProvider } from 'antd';
 
 // import { Button } from 'element-react';
 import 'element-theme-default';
@@ -24,7 +25,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 root.render(
-  <App />
+  <ConfigProvider locale={zhCN}>
+    <App />
+  </ConfigProvider>
 );
 // root.render(
 //   <React.StrictMode>

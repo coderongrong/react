@@ -22,7 +22,7 @@ function Home() {
     }
     return (
         <div className='main_box'>
-            <div style={{ with: '30%' }}>
+            <div style={{ width: '300px' }}>
                 <Button type="primary" className='mr-10' size='small' onClick={showClass}>新增类别</Button>
                 <Button type="primary" className='mr-10' size='small'>科学布点</Button>
                 <Button type="primary" size='small'>抽象模型</Button>

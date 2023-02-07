@@ -1,30 +1,27 @@
-import { useState, useEffect } from 'react';
 import { Modal } from 'antd';
-
-const ModalInput = (props) => {
+import React, { useEffect, useState } from 'react';
+import FormInput from './FormInput';
+const ModalInput =(props) => {
     console.log(props)
     const { show, callback } = props
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [title, setTltle] = useState('新增分类')
-
+    const [title, setTitle] = useState('新增分类');
+    const searchRef = React.useRef()
     const handleOk = () => {
-        setIsModalOpen(false);
-        callback(false)
+        console.log('defer', searchRef.current.getFieldsValue())
     };
-
     const handleCancel = () => {
         setIsModalOpen(false);
         callback(false)
+        searchRef.current.resetFields()
     };
     useEffect(() => {
         setIsModalOpen(show)
     }, [show])
     return (
         <>
-            <Modal title={title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+            <Modal title={title} open={isModalOpen} onOk={() => handleOk('abc')} onCancel={handleCancel}>
+                <FormInput callBack={handleOk} show={show} ref={searchRef} />
             </Modal>
         </>
     );
