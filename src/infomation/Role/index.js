@@ -1,6 +1,7 @@
 
 import { map } from 'lodash'
 import Sence from './components/Sence'
+import Page from './components/Page'
 function Role() {
     // console.log(map)
     return (
@@ -11,6 +12,7 @@ function Role() {
                 <div>22222</div>
                 <div>33333</div>
             </Sence>
+            <Page user={{permalink: 'www.baidu.com'}} />
         </div>
     )
 }
