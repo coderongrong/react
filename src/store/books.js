@@ -4,11 +4,12 @@ function booksReducer(state = { value: ['css', 'html'] }, action) {
             return { value: state.value.concat('js') }
         case 'book/pop':
             return { value: state.value.pop() }
+        case 'book/reset':
+            return { value: ['css', 'html'] }
         default:
             return state
     }
 }
-
 
 // store.dispatch({ type: 'counter/incremented' })
 // // {value: 1}

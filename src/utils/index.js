@@ -8,7 +8,7 @@ export const handleData = (data) => {
 
 /**
  * handleTree
- * 
+ *  递归遍历树结构
 */
 
 export const handleTree = (data) => {

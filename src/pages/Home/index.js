@@ -26,6 +26,7 @@ function Home(props) {
     }
     const showClassAdd = () => {
         onTodoClick({ type: 'counter/incremented' })
+        props.reset({ type: 'book/reset' })
     }
     return (
         <div className='main_box'>
@@ -50,7 +51,8 @@ export default connect(
     dispatch => ({
         onTodoClick: state => {
             return dispatch(state)
-        }
+        },
+        reset: params => dispatch(params)
     })
 )(Home)
 

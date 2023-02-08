@@ -155,7 +155,6 @@ const TableData = (props) => {
     const change = () => {
         props.changeNum({ type: 'counter/incremented' })
         props._push({ type: 'book/push' })
-
     }
     return (
         <div style={{ width: '80%', padding: '0 0 0 20px' }}>
@@ -168,5 +167,9 @@ const TableData = (props) => {
 
 export default connect(
     state => ({ num: state.count, book: state.books }),
-    dispatch => ({ changeNum: params => dispatch(params), _push: params => dispatch(params) })
+    dispatch => ({
+        changeNum: params => dispatch(params),
+        _push: params => dispatch(params),
+        reset: params => dispatch(params)
+    })
 )(TableData)

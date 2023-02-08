@@ -11,6 +11,7 @@
     "element-react": "^1.4.34",
     "element-theme-default": "^1.4.13",
     "lodash": "^4.17.21",
+    "postcss-px2rem-exclude": "^0.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
@@ -20,7 +21,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "react-scripts start",
+    "serve": "react-scripts start",
+    "dev": "craco start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -42,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.20.13",
+    "@craco/craco": "^7.0.0"
   }
 }

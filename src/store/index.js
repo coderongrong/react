@@ -1,5 +1,8 @@
-import { createStore, combineReducers, applyMiddleware  } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { counterReducer } from './reducer.js'
 import { booksReducer } from './books.js'
 
-export default createStore(combineReducers({ count: counterReducer, books: booksReducer }))
+export default createStore(combineReducers({ 
+    count: counterReducer,
+    books: booksReducer
+}))

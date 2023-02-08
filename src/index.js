@@ -9,13 +9,11 @@ import { ConfigProvider } from 'antd';
 // import { Button } from 'element-react';
 import 'element-theme-default';
 import { Provider } from 'react-redux'
-import store from './store/index';
+
+import store from './store';
 // import reportWebVitals from './reportWebVitals';
 
-import { axios } from './http/index'
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
 
 // const element = React.createElement(
 //   'h1',

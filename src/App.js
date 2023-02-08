@@ -4,7 +4,6 @@ import { Layout } from 'antd';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-
 import Home from './pages/Home'
 import Publish from './pages/Publish'
 import Dashboard from './pages/Dashboard'
@@ -14,7 +13,7 @@ import LayoutSider from './Loyout/Sider';
 
 // import { Button } from 'element-react';
 
-const { Header, Content } = Layout;
+const { Header } = Layout;
 
 function App() {
 
