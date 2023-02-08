@@ -2,7 +2,6 @@
 import { Table } from 'antd';
 import { useState, useEffect } from 'react';
 import { getqueryList } from '@/api/tree'
-import { divide } from 'lodash';
 
 const data = [];
 for (let i = 0; i < 46; i++) {
@@ -92,7 +91,7 @@ function TableInfo() {
             render: (_, record, index) => {
                 return (
                     <div>
-                        <a className='mr-10' onClick={() => {handleEdit(record)}}>编辑</a>
+                        <a className='mr-10' onClick={() => { handleEdit(record) }}>编辑</a>
                         <a className='mr-10'>删除</a>
                         <a>详情</a>
                     </div>

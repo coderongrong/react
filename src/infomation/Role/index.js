@@ -1,12 +1,12 @@
 
-import { map } from 'lodash'
+// import { map } from 'lodash'
 import Sence from './components/Sence'
 import Page from './components/Page'
+
 function Role() {
     // console.log(map)
     return (
         <div>
-            Role
             <Sence>
                 <div>11111</div>
                 <div>22222</div>
