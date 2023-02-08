@@ -46,6 +46,13 @@
     padding: 10px;
 }
 
+.main_bc {
+    background-color: #fff;
+}
+.bc-black {
+    background-color: #f0f2f5;
+}
+
 .red {
     color: red;
 }

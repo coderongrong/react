@@ -2,17 +2,13 @@
 // import { map } from 'lodash'
 import Sence from './components/Sence'
 import Page from './components/Page'
-
+import Tabbar from '@/components/TabBar'
 function Role() {
-    // console.log(map)
     return (
-        <div>
+        <div className='w-100 bc-black p-10'>
             <Sence>
-                <div>11111</div>
-                <div>22222</div>
-                <div>33333</div>
+                <Tabbar title={'角色：'} hide={'添加角色'} />
             </Sence>
-            <Page user={{permalink: 'www.baidu.com'}} />
         </div>
     )
 }
