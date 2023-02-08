@@ -56,7 +56,8 @@ function getItem(
 const routerObj = {
     1: '/',
     2: '/publish',
-    3: '/dashboard'
+    3: '/dashboard',
+    '01': '/free'
 }
 export default function LayoutSider() {
     const [menu, setMenu] = useState(items)
@@ -70,6 +71,7 @@ export default function LayoutSider() {
     }, [])
     const navigate = useNavigate()
     const onClick = (e) => {
+        console.log(e)
         navigate(routerObj[e.key])
     };
 

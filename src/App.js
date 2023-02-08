@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Publish from './pages/Publish'
 import Dashboard from './pages/Dashboard'
+import OtherFree from '@/infomation/OtherFree'
 
 import LayoutSider from './Loyout/Sider';
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="publish" element={<Publish />} />
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="free" element={<OtherFree />} />
           </Routes>
         </BrowserRouter>
       </Layout>
