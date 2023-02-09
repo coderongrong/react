@@ -51,20 +51,20 @@ function Manage(props) {
             <Button type="primary" className='mt-10' onClick={handleBtn3} >Primary Button</Button>
         </div>
 
-
-
-    const [count, setCount] = useState(100)
+    const [list, setCount] = useState({a: 1})
     const handleBtn4 = () => {
         // console.log('handleBtn4')
-        setCount(count + 1)
+        // list.push(1)
+        console.log({a: 2})
+        setCount({a: 2})
     }
 
     return (
         <div>
             manage
-            <h1>{count}</h1>
+            <h1>{list.a}</h1>
             <Button type="primary" className='mt-10' onClick={handleBtn4} >Primary Button</Button>
-            <Tabbar count={count} />
+            <Tabbar />
         </div>
     )
 }

@@ -1,10 +1,12 @@
 
-function counterReducer(state = { value: 0 }, action) {
+function counterReducer(state = { value: 100 }, action) {
     switch (action.type) {
         case 'counter/add':
             return { value: state.value + 1 }
         case 'counter/dec':
             return { value: state.value - 1 }
+        case 'counter/equal':
+            return { value: 100 }
         default:
             return state
     }

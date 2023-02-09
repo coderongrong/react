@@ -11,6 +11,8 @@ import 'element-theme-default';
 import { Provider } from 'react-redux'
 
 import store from './store';
+
+console.log('store', store.getState())
 // import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
