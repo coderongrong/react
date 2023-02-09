@@ -12,6 +12,9 @@ import Dashboard from './pages/Dashboard'
 
 import LayoutSider from './Loyout/Sider';
 
+import Demo from './infomation/Manage/children/Demo';
+import Hellow from './infomation/Manage/children/hellow';
+
 const OtherFree = lazy(() => import('@/infomation/OtherFree'))
 const Role = lazy(() => import('@/infomation/Role'))
 const Manage = lazy(() => import('@/infomation/Manage'))
@@ -49,7 +52,10 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="free" element={<OtherFree />} />
               <Route path="role" element={<Role />} />
-              <Route path="manage" element={<Manage />} />
+              <Route path="manage" element={<Manage />}>
+                <Route path="demo" element={<Demo />} />
+                <Route path="hellow" element={<Hellow />} />
+              </Route>
             </Routes>
           </Suspense>
         </BrowserRouter>

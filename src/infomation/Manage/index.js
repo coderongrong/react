@@ -2,6 +2,10 @@
 import { Input, Button } from 'antd';
 import { useState, useRef } from 'react'
 import Tabbar from './components/Tabbar'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Demo from './children/Demo'
+import Hellow from './children/hellow';
+import { lazy, Suspense } from 'react'
 
 
 function Manage(props) {
@@ -51,20 +55,29 @@ function Manage(props) {
             <Button type="primary" className='mt-10' onClick={handleBtn3} >Primary Button</Button>
         </div>
 
-    const [list, setCount] = useState({a: 1})
+    const [list, setCount] = useState({ a: 1 })
     const handleBtn4 = () => {
         // console.log('handleBtn4')
         // list.push(1)
-        console.log({a: 2})
-        setCount({a: 2})
+        console.log({ a: 2 })
+        setCount({ a: 2 })
     }
 
+    // return (
+    //     <div>
+    //         manage
+    //         <h1>{list.a}</h1>
+    //         <Button type="primary" className='mt-10' onClick={handleBtn4} >Primary Button</Button>
+    //         <Tabbar />
+    //     </div>
+    // )
     return (
         <div>
-            manage
-            <h1>{list.a}</h1>
-            <Button type="primary" className='mt-10' onClick={handleBtn4} >Primary Button</Button>
-            <Tabbar />
+            <div>Demo</div>
+            <div>Hellow</div>
+            <div>
+                <outlet />
+            </div>
         </div>
     )
 }
