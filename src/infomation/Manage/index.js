@@ -74,12 +74,17 @@ function Manage(props) {
     // )
     const navigate = useNavigate()
     const handle = () => {
-        navigate('/namage/demo')
+        navigate('/manage/demo')
+    }
+    const handle1 = () => {
+        navigate('/manage/hellow')
     }
     return (
-        <div>
-            <div onClick={handle}>Demo</div>
-            <div>Hellow</div>
+        <div className='d-f mr-20'>
+            <div className='mr-20'>
+                <div onClick={handle}>Demo</div>
+                <div className='mt-20' onClick={handle1}>Hellow</div>
+            </div>
             <div>
                 <Outlet />
             </div>
