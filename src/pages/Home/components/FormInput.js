@@ -1,5 +1,5 @@
 
-import { Button, Form, Input, Select } from 'antd';
+import { Form, Input, Select } from 'antd';
 import { useEffect, forwardRef } from 'react';
 const { Option } = Select;
 const layout = {
@@ -7,12 +7,6 @@ const layout = {
         span: 8,
     },
     wrapperCol: {
-        span: 16,
-    },
-};
-const tailLayout = {
-    wrapperCol: {
-        offset: 8,
         span: 16,
     },
 };

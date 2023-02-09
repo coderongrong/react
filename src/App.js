@@ -14,7 +14,7 @@ import LayoutSider from './Loyout/Sider';
 
 const OtherFree = lazy(() => import('@/infomation/OtherFree'))
 const Role = lazy(() => import('@/infomation/Role'))
-
+const Manage = lazy(() => import('@/infomation/Manage'))
 
 // import { Button } from 'element-react';
 
@@ -49,6 +49,7 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="free" element={<OtherFree />} />
               <Route path="role" element={<Role />} />
+              <Route path="manage" element={<Manage />} />
             </Routes>
           </Suspense>
         </BrowserRouter>

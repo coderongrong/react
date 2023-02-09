@@ -3,11 +3,10 @@ import './index.css'
 import TreeData from './components/Tree';
 import TableData from './components/Table';
 import ModalInput from './components/Modal';
-import { connect } from 'react-redux'
 import { useState } from 'react'
 
-function Home(props) {
-    const { todos, onTodoClick } = props
+function Home() {
+    // const { todos, onTodoClick } = props
     const [_data, setData] = useState('')
     const [show, setShow] = useState(false)
     const cb = (data) => {
@@ -22,18 +21,17 @@ function Home(props) {
         setShow(data)
     }
     const showClassdec = () => {
-        onTodoClick({ type: 'counter/decremented' })
+        // onTodoClick({ type: 'counter/decremented' })
     }
     const showClassAdd = () => {
-        onTodoClick({ type: 'counter/incremented' })
-        props.reset({ type: 'book/reset' })
+        // onTodoClick({ type: 'counter/incremented' })
     }
     return (
         <div className='main_box'>
             <div style={{ width: '300px' }}>
                 <Button type="primary" className='mr-10' size='small' onClick={showClass}>新增类别</Button>
-                <Button type="primary" className='mr-10' size='small' onClick={showClassdec}>科学布点{todos.value}</Button>
-                <Button type="primary" size='small' onClick={showClassAdd}>抽象模型{todos.value}</Button>
+                <Button type="primary" className='mr-10' size='small' onClick={showClassdec}>科学布点</Button>
+                <Button type="primary" size='small' onClick={showClassAdd}>抽象模型</Button>
                 <div className='mt-20 left_tree'>
                     <TreeData callBack={cb} msg='abc'></TreeData>
                 </div>
@@ -44,15 +42,5 @@ function Home(props) {
     )
 }
 
-export default connect(
-    state => {
-        return ({ todos: state.count })
-    },
-    dispatch => ({
-        onTodoClick: state => {
-            return dispatch(state)
-        },
-        reset: params => dispatch(params)
-    })
-)(Home)
+export default Home
 

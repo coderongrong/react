@@ -1,9 +1,9 @@
 
 function counterReducer(state = { value: 0 }, action) {
     switch (action.type) {
-        case 'counter/incremented':
+        case 'counter/add':
             return { value: state.value + 1 }
-        case 'counter/decremented':
+        case 'counter/dec':
             return { value: state.value - 1 }
         default:
             return state
