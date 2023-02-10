@@ -74,7 +74,7 @@ function Manage(props) {
     // )
     const navigate = useNavigate()
     const handle = () => {
-        navigate('/manage/demo')
+        navigate('/manage')
     }
     const handle1 = () => {
         navigate('/manage/hellow')

@@ -53,7 +53,7 @@ function App() {
               <Route path="free" element={<OtherFree />} />
               <Route path="role" element={<Role />} />
               <Route path="manage" element={<Manage />}>
-                <Route path="demo" element={<Demo />} />
+                <Route path="" element={<Demo />} />
                 <Route path="hellow" element={<Hellow />} />
               </Route>
             </Routes>
