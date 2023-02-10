@@ -6,9 +6,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { Button } from 'antd';
 
 function Role() {
-    console.log('equal')
     const { message } = useSelector((state) => {
-        console.log(state)
         return {
             message: state.count.value
         }
@@ -24,7 +22,6 @@ function Role() {
     }
     return (
         <div className='w-100 bc-black p-10'>
-            <div>{message}</div>
             <Button type="primary" className='mt-10' onClick={handleBtn3} >Primary Button</Button>
             <Button type="primary" className='mt-10' onClick={handleEqual} >Primary equal</Button>
             <Sence>
