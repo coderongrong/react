@@ -2,7 +2,7 @@
 import { Input, Button } from 'antd';
 import { useState, useRef } from 'react'
 import Tabbar from './components/Tabbar'
-import { Outlet, Link, useLocation, useNavigate, NavLink } from 'react-router-dom'
+import { Outlet, Link, useLocation, useNavigate, NavLink, useSearchParams, useParams } from 'react-router-dom'
 import Demo from './children/Demo'
 import Hellow from './children/hellow';
 import { lazy, Suspense } from 'react'
@@ -78,8 +78,17 @@ function Manage(props) {
     const handle1 = () => {
         navigate('/manage/hellow')
     }
+    const state = useLocation()
+    console.log('----> state', useLocation())
+
+    // const [search, setsearch] = useSearchParams()
+    // console.log('----->', search.get('name'), search.get('age'))
+
+    // console.log('useParams --->', useParams())
+
     return (
         <div className='d-f mr-20'>
+            {/* {useLocation().state} */}
             <div className='mr-20'>
                 <></>
                 {/* <div onClick={handle}>Demo</div>

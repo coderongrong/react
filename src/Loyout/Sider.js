@@ -72,15 +72,15 @@ export default function LayoutSider() {
     let _key = null
     const keyData = () => {
         items.map(item => {
-           item.children.map(it => {
-                if(it.key == selcetData().toString()) {
+            item.children.map(it => {
+                if (it.key == selcetData().toString()) {
                     _key = item.key
                 }
             })
         })
     }
     keyData()
-    
+
     const [menu, setMenu] = useState(items)
     const [select, setSelect] = useState(...selcetData())
     const [key, setKey] = useState(_key)
@@ -95,10 +95,11 @@ export default function LayoutSider() {
 
     const navigate = useNavigate()
     const onClick = (e) => {
-        navigate(routerObj[e.key])
+        // navigate(routerObj[e.key] + '?name=tom&age=18')   // search参数
+        navigate(routerObj[e.key], { state: 10000 })    // state参数
+        // navigate(routerObj[e.key] + '/jack')    // 传递params参数
     };
     return <Sider>
-        <div>{select}</div>
         <Menu
             onClick={onClick}
             style={{ width: 256 }}

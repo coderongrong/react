@@ -52,6 +52,7 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="free" element={<OtherFree />} />
               <Route path="role" element={<Role />} />
+              {/* <Route path="manage/:name" element={<Manage />}> */}
               <Route path="manage" element={<Manage />}>
                 <Route index element={<Demo />} />
                 <Route exact path="hellow" element={<Hellow />} />
