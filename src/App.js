@@ -47,14 +47,15 @@ function App() {
             }
           >
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="home" element={<Home />} />
               <Route path="publish" element={<Publish />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="free" element={<OtherFree />} />
               <Route path="role" element={<Role />} />
               <Route path="manage" element={<Manage />}>
-                <Route path="" element={<Demo />} />
-                <Route path="hellow" element={<Hellow />} />
+                <Route index element={<Demo />} />
+                <Route exact path="hellow" element={<Hellow />} />
+                {/* <Redirect to="/demo"/> */}
               </Route>
             </Routes>
           </Suspense>

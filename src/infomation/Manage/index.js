@@ -2,8 +2,7 @@
 import { Input, Button } from 'antd';
 import { useState, useRef } from 'react'
 import Tabbar from './components/Tabbar'
-// import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, Link, useLocation, useNavigate, NavLink } from 'react-router-dom'
 import Demo from './children/Demo'
 import Hellow from './children/hellow';
 import { lazy, Suspense } from 'react'
@@ -82,8 +81,11 @@ function Manage(props) {
     return (
         <div className='d-f mr-20'>
             <div className='mr-20'>
-                <div onClick={handle}>Demo</div>
-                <div className='mt-20' onClick={handle1}>Hellow</div>
+                <></>
+                {/* <div onClick={handle}>Demo</div>
+                <div className='mt-20' onClick={handle1}>Hellow</div> */}
+                <NavLink to="/manage">manage</NavLink>
+                <NavLink to="/manage/hellow">hellow</NavLink>
             </div>
             <div>
                 <Outlet />

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { getUserPermissionBy } from '../api/tree'
 import { useEffect, useState } from 'react';
 import { handleTree } from '../utils/index'
+import { map } from 'lodash';
 
 const items = [
     getItem('产品库', 'sub1', <MailOutlined />, [
@@ -54,7 +55,7 @@ function getItem(
     };
 }
 const routerObj = {
-    1: '/',
+    1: '/home',
     2: '/publish',
     3: '/dashboard',
     '01': '/free',
@@ -62,7 +63,27 @@ const routerObj = {
     '03': '/manage',
 }
 export default function LayoutSider() {
+
+    const selcetData = () => {
+        return map(routerObj, (item, index) => {
+            if (item == window.location.pathname) return index
+        }).filter(item => item)
+    }
+    let _key = null
+    const keyData = () => {
+        items.map(item => {
+           item.children.map(it => {
+                if(it.key == selcetData().toString()) {
+                    _key = item.key
+                }
+            })
+        })
+    }
+    keyData()
+    
     const [menu, setMenu] = useState(items)
+    const [select, setSelect] = useState(...selcetData())
+    const [key, setKey] = useState(_key)
     const _getUserPermissionBy = async () => {
         const { result } = await getUserPermissionBy()
         const resData = handleTree(result.menu)
@@ -71,17 +92,18 @@ export default function LayoutSider() {
     useEffect(() => {
         _getUserPermissionBy()
     }, [])
+
     const navigate = useNavigate()
     const onClick = (e) => {
         navigate(routerObj[e.key])
     };
-
     return <Sider>
+        <div>{select}</div>
         <Menu
             onClick={onClick}
             style={{ width: 256 }}
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
+            defaultSelectedKeys={select}
+            defaultOpenKeys={[`${key}`]}
             mode="inline"
             items={menu}
         />
