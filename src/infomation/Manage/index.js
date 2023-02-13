@@ -78,11 +78,18 @@ function Manage(props) {
     const handle1 = () => {
         navigate('/manage/hellow')
     }
-    const state = useLocation()
-    console.log('----> state', useLocation())
+
+    // navigate(routerObj[e.key] + '?name=tom&age=18')   // search参数
+    //  navigate(routerObj[e.key], { state: 10000 })    // state参数
+    // navigate(routerObj[e.key] + '/jack')    // 传递params参数
+
 
     // const [search, setsearch] = useSearchParams()
     // console.log('----->', search.get('name'), search.get('age'))
+
+    const state = useLocation()
+    console.log('----> state', useLocation())
+
 
     // console.log('useParams --->', useParams())
 

@@ -22,7 +22,8 @@ function TreeData(props) {
     }
     const { result } = await getUseInfo(params)
     if (result.token) {
-      localStorage.setItem('usreToken', result.token)
+      // localStorage.setItem('usreToken', result.token)
+      localStorage.setItem('usreToken', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NzY2NTkzMDAsInVzZXJuYW1lIjoiamlleWluZ2ppbmcifQ.wELjYcYgZS7spsmsvmmsZxNXSzppczEe1L25wtUiSvg')
 
     }
   }
@@ -33,7 +34,8 @@ function TreeData(props) {
   const _getTreeData = async () => {
     const params = {
       parentId: 0,
-      type: 1
+      type: 1,
+      classType: 'Lamppost'
     }
     const { result } = await getTreeData(params)
     setTreeData(handleData(result))
