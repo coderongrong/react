@@ -1,9 +1,9 @@
 
-function App() {
+function App(props) {
 
 
     return (
-        <div>right</div>
+        <div>right-- {props.b}</div>
     )
 }
 

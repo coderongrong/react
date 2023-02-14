@@ -11,7 +11,7 @@ import 'element-theme-default';
 import { Provider } from 'react-redux'
 
 import store from './store';
-
+import _ from 'lodash'
 // console.log('store', store.getState())
 // import reportWebVitals from './reportWebVitals';
 
@@ -22,25 +22,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 //   {className: 'greeting'},
 //   'Hello, world!'
 // );
-
-
-// function Foo() {
-//   this.a = 1;
-//   this.b = 2
-// }
-
-// Foo.prototype.c = 10
-
-// console.log(new Foo())
-
-// const arr = []
-// for(const key in new Foo()) {
-//   if(new Foo().hasOwnProperty(key)) {
-//     // console.log(key)
-//     arr.push([key, new Foo()[key]])
-//   }
-// }
-// console.log(arr)
 
 root.render(
   <Provider store={store}>
@@ -62,3 +43,36 @@ root.render(
 
 
 // lodash   http://lodash.think2011.net/pick
+
+// const memoize = function (func, content) {
+//   let cache = Object.create(null)
+//   console.log(cache)
+//   return (...key) => {
+//     if (!cache[key]) {
+//       cache[key] = func.apply(content, key)
+//     }
+//     return cache[key]
+//   }
+// }
+
+// var cache = function (fn) {
+//   var temp = {}
+//   console.log(temp)
+//   return  (...key) => {
+//     if(!temp[key]) {
+//       temp[key] = fn(key)
+//     }
+//     return temp[key]
+//   }
+// }
+// var fn = (a, b) => {
+//   console.log('aaaaa')
+//   return a + b
+// }
+
+// var add = cache(fn)
+
+// add(1,2,3)
+// add(1,2,3)
+// add(1,2)
+// add(1,2)

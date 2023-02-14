@@ -6,10 +6,9 @@ import { Space, Tag } from 'antd';
 import { useLocation } from 'react-router-dom'
 
 import { useState } from 'react'
+import Child from './child'
 
 function App() {
-
-
     const state = useLocation()
     // console.log(state)
     const [_data, setData] = useState([{
@@ -33,6 +32,7 @@ function App() {
         address: 'Sydney No. 1 Lake Park',
         tags: ['cool', 'teacher'],
     },])
+    
     const [columns, setColums] = useState([
         {
             title: 'Name',
@@ -82,6 +82,7 @@ function App() {
         },])
     return (
         <div className='w-100 bc-black p-10'>
+            {/* <Child /> */}
             <Sence>
                 <MyTabbar title={'标题'} hide={''} />
                 <MyTable data={_data} columns={columns} />
