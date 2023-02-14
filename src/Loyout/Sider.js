@@ -19,10 +19,10 @@ const items = [
         getItem('角色管理', '02', <MailOutlined />),
         getItem('子用户管理', '03', <MailOutlined />),
     ]),
-    getItem('信息维护', 'sub3', <AppstoreOutlined />, [
-        getItem('其他费用', '5', <AppstoreOutlined />),
-        getItem('产品库字段配置', '6', <AppstoreOutlined />),
-        getItem('自动画线配置', 'sub4', <AppstoreOutlined />, [getItem('Option 7', '7'), getItem('Option 8', '8')]),
+    getItem('系统管理', 'sub3', <AppstoreOutlined />, [
+        getItem('多租用户', '5', <AppstoreOutlined />),
+        getItem('客户端权限', '6', <AppstoreOutlined />),
+        getItem('信息反馈', 'sub4', <AppstoreOutlined />),
     ]),
     getItem('系统管理', 'sub5', <SettingOutlined />, [
         getItem('Option 9', '9'),
@@ -61,6 +61,7 @@ const routerObj = {
     '01': '/free',
     '02': '/role',
     '03': '/manage',
+    '5': '/muitil'
 }
 export default function LayoutSider() {
 
@@ -96,7 +97,7 @@ export default function LayoutSider() {
     const navigate = useNavigate()
     const onClick = (e) => {
         // navigate(routerObj[e.key] + '?name=tom&age=18')   // search参数
-        navigate(routerObj[e.key], { state: 10000 })    // state参数
+        navigate(routerObj[e.key], { state: 999 })    // state参数
         // navigate(routerObj[e.key] + '/jack')    // 传递params参数
     };
     return <Sider>

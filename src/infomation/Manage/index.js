@@ -1,12 +1,14 @@
 
-import { Input, Button } from 'antd';
+import { Input, Button, Space, Tag } from 'antd';
 import { useState, useRef } from 'react'
 import Tabbar from './components/Tabbar'
 import { Outlet, Link, useLocation, useNavigate, NavLink, useSearchParams, useParams } from 'react-router-dom'
 import Demo from './children/Demo'
 import Hellow from './children/hellow';
 import { lazy, Suspense } from 'react'
-
+import Sence from '@/infomation/Role/components/Sence.js'
+import MyTabbar from '@/components/TabBar'
+import MyTable from '@/components/Table'
 
 function Manage(props) {
     // console.log('Manage', props)
@@ -92,7 +94,81 @@ function Manage(props) {
 
 
     // console.log('useParams --->', useParams())
-
+    const [_data, setData] = useState([{
+        key: '1',
+        name: 'John Brown',
+        age: 32,
+        address: 'New York No. 1 Lake Park',
+        tags: ['nice', 'developer'],
+    },
+    {
+        key: '2',
+        name: 'Jim Green',
+        age: 42,
+        address: 'London No. 1 Lake Park',
+        tags: ['loser'],
+    },
+    {
+        key: '3',
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sydney No. 1 Lake Park',
+        tags: ['cool', 'teacher'],
+    },])
+    const [columns, setColums] = useState([
+        {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+            render: (text) => <a>{text}</a>,
+        },
+        {
+            title: 'Age',
+            dataIndex: 'age',
+            key: 'age',
+        },
+        {
+            title: 'Address',
+            dataIndex: 'address',
+            key: 'address',
+        },
+        {
+            title: 'Tags',
+            key: 'tags',
+            dataIndex: 'tags',
+            render: (_, { tags }) => (
+                <>
+                    {tags.map((tag) => {
+                        let color = tag.length > 5 ? 'geekblue' : 'green';
+                        if (tag === 'loser') {
+                            color = 'volcano';
+                        }
+                        return (
+                            <Tag color={color} key={tag}>
+                                {tag.toUpperCase()}
+                            </Tag>
+                        );
+                    })}
+                </>
+            ),
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            render: (_, record) => (
+                <Space size="middle">
+                    <a>Invite {record.name}</a>
+                    <a>Delete</a>
+                </Space>
+            ),
+        },])
+    return (
+        <div className='w-100 bc-black p-10'>
+            <Sence>
+                <MyTabbar title={'管理列表：'} hide={'添加管理数据'} />
+                <MyTable data={_data} columns={columns} />
+            </Sence>
+        </div>)
     return (
         <div className='d-f mr-20'>
             {/* {useLocation().state} */}

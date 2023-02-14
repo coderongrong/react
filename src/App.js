@@ -18,6 +18,7 @@ import Hellow from './infomation/Manage/children/hellow';
 const OtherFree = lazy(() => import('@/infomation/OtherFree'))
 const Role = lazy(() => import('@/infomation/Role'))
 const Manage = lazy(() => import('@/infomation/Manage'))
+const Muitil = lazy(() => import('@/system/MultiTenancy'))
 
 // import { Button } from 'element-react';
 
@@ -58,6 +59,7 @@ function App() {
                 <Route exact path="hellow" element={<Hellow />} />
                 {/* <Redirect to="/demo"/> */}
               </Route>
+              <Route path="muitil" element={<Muitil />} />
             </Routes>
           </Suspense>
         </BrowserRouter>
