@@ -24,6 +24,24 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // );
 
 
+// function Foo() {
+//   this.a = 1;
+//   this.b = 2
+// }
+
+// Foo.prototype.c = 10
+
+// console.log(new Foo())
+
+// const arr = []
+// for(const key in new Foo()) {
+//   if(new Foo().hasOwnProperty(key)) {
+//     // console.log(key)
+//     arr.push([key, new Foo()[key]])
+//   }
+// }
+// console.log(arr)
+
 root.render(
   <Provider store={store}>
     <ConfigProvider locale={zhCN}>
@@ -42,3 +60,5 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 // reportWebVitals();
 
+
+// lodash   http://lodash.think2011.net/pick

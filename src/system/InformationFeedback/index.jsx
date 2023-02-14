@@ -83,7 +83,7 @@ function App() {
     return (
         <div className='w-100 bc-black p-10'>
             <Sence>
-                <MyTabbar title={'多租户：'} hide={'添加多租户'} />
+                <MyTabbar title={'标题'} hide={''} />
                 <MyTable data={_data} columns={columns} />
             </Sence>
         </div>

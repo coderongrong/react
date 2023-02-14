@@ -8,6 +8,7 @@ import TabBar from './TabBar.js';
 import './index.css'
 import { connect } from 'react-redux';
 
+
 const columns = [
     {
         title: '序号',
@@ -158,15 +159,15 @@ const TableData = (props) => {
     }
     return (
         <div style={{ width: '80%', padding: '0 0 0 20px' }}>
-            < TabBar />
-            <div className='text_num'>已选择 {props.num.value}--{props.book.value}项   <span onClick={change}>清空已选删除</span></div>
+            <TabBar />
+            <div className='text_num'>已选择 {props.count.value}--{props.books.value}项   <span onClick={change}>清空已选删除</span></div>
             <Table columns={columns} dataSource={tableData} />
         </div>
     )
 };
 
 export default connect(
-    state => ({ num: state.count, book: state.books }),
+    state => state,
     dispatch => ({
         changeNum: params => dispatch(params),
         _push: params => dispatch(params),

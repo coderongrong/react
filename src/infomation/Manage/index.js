@@ -9,9 +9,13 @@ import { lazy, Suspense } from 'react'
 import Sence from '@/infomation/Role/components/Sence.js'
 import MyTabbar from '@/components/TabBar'
 import MyTable from '@/components/Table'
+// import { connect } from 'react-redux'
+
+
 
 function Manage(props) {
-    // console.log('Manage', props)
+
+
     const [key, setKey] = useState(false)
     const [input, setInput] = useState('')
     const [input1, setInput1] = useState('')
@@ -90,7 +94,7 @@ function Manage(props) {
     // console.log('----->', search.get('name'), search.get('age'))
 
     const state = useLocation()
-    console.log('----> state', useLocation())
+    // console.log('----> state', useLocation())
 
 
     // console.log('useParams --->', useParams())
@@ -140,9 +144,7 @@ function Manage(props) {
                 <>
                     {tags.map((tag) => {
                         let color = tag.length > 5 ? 'geekblue' : 'green';
-                        if (tag === 'loser') {
-                            color = 'volcano';
-                        }
+                        if (tag === 'loser')  color = 'volcano'
                         return (
                             <Tag color={color} key={tag}>
                                 {tag.toUpperCase()}

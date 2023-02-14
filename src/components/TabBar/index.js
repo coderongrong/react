@@ -18,7 +18,12 @@ function TabBar(props) {
                 <Button type="primary" icon={<UndoOutlined />}>重置</Button>
             </div>
             {
-                props.hide && <div className='mr-10 mt-10' onClick={() => props.des()}><Button type="primary"> <span className='mr-10'>+</span>{props.hide || '添加其他设备'}</Button></div>
+                props.hide
+                && <div className='mr-10 mt-10' onClick={() => props.des()}>
+                    <Button type="primary">
+                        <span className='mr-10'>+</span>{props.hide || '添加其他设备'}
+                    </Button>
+                </div>
             }
         </div>
     )

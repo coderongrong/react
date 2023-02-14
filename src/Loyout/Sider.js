@@ -61,7 +61,9 @@ const routerObj = {
     '01': '/free',
     '02': '/role',
     '03': '/manage',
-    '5': '/muitil'
+    '5': '/muitil',
+    '6': '/client',
+    'sub4': '/freed'
 }
 export default function LayoutSider() {
 
@@ -82,9 +84,9 @@ export default function LayoutSider() {
     }
     keyData()
 
-    const [menu, setMenu] = useState(items)
-    const [select, setSelect] = useState(...selcetData())
-    const [key, setKey] = useState(_key)
+    const [menu ] = useState(items)
+    const [select] = useState(...selcetData())
+    const [key ] = useState(_key)
     const _getUserPermissionBy = async () => {
         const { result } = await getUserPermissionBy()
         const resData = handleTree(result.menu)
@@ -100,14 +102,16 @@ export default function LayoutSider() {
         navigate(routerObj[e.key], { state: 999 })    // state参数
         // navigate(routerObj[e.key] + '/jack')    // 传递params参数
     };
-    return <Sider>
-        <Menu
-            onClick={onClick}
-            style={{ width: 256 }}
-            defaultSelectedKeys={select}
-            defaultOpenKeys={[`${key}`]}
-            mode="inline"
-            items={menu}
-        />
-    </Sider>
+    return (
+        <Sider>
+            <Menu
+                onClick={onClick}
+                style={{ width: 256 }}
+                defaultSelectedKeys={select}
+                defaultOpenKeys={[`${key}`]}
+                mode="inline"
+                items={menu}
+            />
+        </Sider>
+    )
 }

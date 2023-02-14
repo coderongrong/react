@@ -11,7 +11,7 @@ function App() {
 
 
     const state = useLocation()
-    // console.log(state)
+
     const [_data, setData] = useState([{
         key: '1',
         name: 'John Brown',
@@ -83,7 +83,7 @@ function App() {
     return (
         <div className='w-100 bc-black p-10'>
             <Sence>
-                <MyTabbar title={'多租户：'} hide={'添加多租户'} />
+                <MyTabbar title={'客户端权限：'} hide={'添加客户端权限'} />
                 <MyTable data={_data} columns={columns} />
             </Sence>
         </div>
