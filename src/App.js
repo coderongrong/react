@@ -21,6 +21,7 @@ const Manage = lazy(() => import('@/infomation/Manage'))
 const Muitil = lazy(() => import('@/system/MultiTenancy'))
 const Client = lazy(() => import('@/system/ClientPermissions'))
 const Freedback = lazy(() => import('@/system/InformationFeedback'))
+const Inherit = lazy(() => import('@/Inherit'))
 
 // import { Button } from 'element-react';
 
@@ -50,6 +51,7 @@ function App() {
             }
           >
             <Routes>
+              <Route path="inherit" element={<Inherit />} />
               <Route path="home" element={<Home />} />
               <Route path="publish" element={<Publish />} />
               <Route path="dashboard" element={<Dashboard />} />
