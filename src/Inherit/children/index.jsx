@@ -1,6 +1,8 @@
+import { useMemo } from 'react'
+
 
 function App(props) {
-    // console.log(props)
+    // console.log('re-render')
     return (
         <div>
             {props.left}

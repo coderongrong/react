@@ -1,11 +1,10 @@
 
 import { Input, Button, Space, Tag } from 'antd';
-import { useState, useRef } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import Tabbar from './components/Tabbar'
 import { Outlet, Link, useLocation, useNavigate, NavLink, useSearchParams, useParams } from 'react-router-dom'
 import Demo from './children/Demo'
 import Hellow from './children/hellow';
-import { lazy, Suspense } from 'react'
 import Sence from '@/infomation/Role/components/Sence.js'
 import MyTabbar from '@/components/TabBar'
 import MyTable from '@/components/Table'
@@ -14,7 +13,6 @@ import MyTable from '@/components/Table'
 
 
 function Manage(props) {
-
 
     const [key, setKey] = useState(false)
     const [input, setInput] = useState('')
@@ -144,7 +142,7 @@ function Manage(props) {
                 <>
                     {tags.map((tag) => {
                         let color = tag.length > 5 ? 'geekblue' : 'green';
-                        if (tag === 'loser')  color = 'volcano'
+                        if (tag === 'loser') color = 'volcano'
                         return (
                             <Tag color={color} key={tag}>
                                 {tag.toUpperCase()}
@@ -164,6 +162,20 @@ function Manage(props) {
                 </Space>
             ),
         },])
+
+    let a = 1;
+    let b = 2;
+
+    const memoizedCallback = useCallback(
+        () => {
+            console.log('a', 'b');
+        },
+        [a, b],
+    );
+
+    // useEffect(() => {
+    //     memoizedCallback()
+    // })
     return (
         <div className='w-100 bc-black p-10'>
             <Sence>
