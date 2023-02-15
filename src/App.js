@@ -52,7 +52,7 @@ function App() {
           >
             <Routes>
               <Route path="inherit" element={<Inherit />} />
-              <Route path="home" element={<Home />} />
+              <Route index element={<Home />} />
               <Route path="publish" element={<Publish />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="free" element={<OtherFree />} />

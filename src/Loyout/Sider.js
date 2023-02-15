@@ -55,7 +55,7 @@ function getItem(
     };
 }
 const routerObj = {
-    1: '/home',
+    1: '/',
     2: '/publish',
     3: '/dashboard',
     '01': '/free',
