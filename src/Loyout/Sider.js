@@ -63,7 +63,8 @@ const routerObj = {
     '03': '/manage',
     '5': '/muitil',
     '6': '/client',
-    'sub4': '/freed'
+    'sub4': '/freed',
+    9: '/echart'
 }
 export default function LayoutSider() {
 
@@ -84,9 +85,9 @@ export default function LayoutSider() {
     }
     keyData()
 
-    const [menu ] = useState(items)
+    const [menu] = useState(items)
     const [select] = useState(...selcetData())
-    const [key ] = useState(_key)
+    const [key] = useState(_key)
     const _getUserPermissionBy = async () => {
         const { result } = await getUserPermissionBy()
         const resData = handleTree(result.menu)

@@ -22,6 +22,7 @@ const Muitil = lazy(() => import('@/system/MultiTenancy'))
 const Client = lazy(() => import('@/system/ClientPermissions'))
 const Freedback = lazy(() => import('@/system/InformationFeedback'))
 const Inherit = lazy(() => import('@/Inherit'))
+const Chart = lazy(() => import('@/Chart'))
 
 // import { Button } from 'element-react';
 
@@ -66,6 +67,7 @@ function App() {
               <Route path="muitil" element={<Muitil />} />
               <Route path="client" element={<Client />} />
               <Route path="freed" element={<Freedback />} />
+              <Route path="echart" element={<Chart />} />
             </Routes>
           </Suspense>
         </BrowserRouter>
