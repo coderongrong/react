@@ -25,7 +25,7 @@ const items = [
         getItem('信息反馈', 'sub4', <AppstoreOutlined />),
     ]),
     getItem('系统管理', 'sub5', <SettingOutlined />, [
-        getItem('Option 9', '9'),
+        getItem('Echarts图表', '9'),
         getItem('Option 10', '10'),
         getItem('Option 11', '11'),
         getItem('Option 12', '12'),
