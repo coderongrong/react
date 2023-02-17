@@ -42,6 +42,8 @@ root.render(
 // reportWebVitals();
 
 
+// 面试react https://www.jianshu.com/p/c298b408e44e
+
 // lodash   http://lodash.think2011.net/pick
 
 // const memoize = function (func, content) {

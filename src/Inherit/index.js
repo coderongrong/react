@@ -1,7 +1,10 @@
 // import Child from './children'
 // import Left from './left'
 // import Right from './right'
-import { useState, useMemo, useRef, useCallback, useEffect } from 'react'
+import { useState, useMemo, useRef, useCallback, useEffect, useContext } from 'react'
+import Count from './components/Count'
+import ThemeContext from '@/useContext'
+import useNumber from '@/Hook/Number'
 
 // function App() {
 //     const a = 1;
@@ -67,10 +70,13 @@ import { useState, useMemo, useRef, useCallback, useEffect } from 'react'
 // }
 
 // _useCallback()
+
+
 function App() {
+
     const [count, setCount] = useState(60)
     const timerId = useRef(null)
-    console.log(timerId)
+
     const handleStart = () => {
         timerId.current = setInterval(() => {
             setCount(pre => pre - 1)
@@ -96,6 +102,11 @@ function TextInputWithFocusButton() {
     const [count, setCount] = useState(0)
     const [numb, setnumb] = useState(0)
 
+    const countRef = useRef(null)   
+    const donDiv = useRef(null)
+    const [aNumber, setANumber] = useNumber()
+    const themeCount = useContext(ThemeContext)
+
     const onButtonClick = useCallback(() => {
         setCount(count + 1)
     }, [count])
@@ -111,6 +122,10 @@ function TextInputWithFocusButton() {
 
     useEffect(() => {
         getCount()
+        // console.log(countRef)
+        // console.log('donDiv', donDiv)
+        // console.log('themeCount', themeCount)
+        console.log('aNumber', aNumber)
     }, [])
 
     const getnum = useCallback(() => {
@@ -121,16 +136,21 @@ function TextInputWithFocusButton() {
         console.log(numb)
     }, [numb])
 
+    const handleChangde = () => {
+        console.log('countRef', countRef)
+    }
     return (
-        <div>
+        <ThemeContext.Provider value={'xx prov'}>
             <div>count: {count}</div>
             <div>count - res: {res}</div>
-            <div>numb: {numb}</div>
+            <div ref={donDiv}>numb: {numb}</div>
             <button onClick={onButtonClick}>Focus the input</button>
             <button onClick={getCount}>get count</button>
             <button onClick={getnum}>change num</button>
             <button onClick={_getnum}>get num</button>
-        </div>
+            <Count ref={countRef} />
+            <button onClick={handleChangde}>click me</button>
+        </ThemeContext.Provider>
     );
 }
 
