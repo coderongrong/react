@@ -1,9 +1,12 @@
 
 import { Button, Input, Select } from 'antd';
 import { EyeTwoTone, SearchOutlined, UndoOutlined } from '@ant-design/icons';
+import { useContext, useEffect, useState } from 'react';
+import ThemeContext from '../../../useContext';
 
-function TabBar() {
-
+function TabBar(props) {
+    let count = useContext(ThemeContext)
+    console.log(props)
     return (
         <div>
             <Button type="primary" className='mr-10'>上传产品</Button>
@@ -40,6 +43,8 @@ function TabBar() {
             />
             <Button type="primary" className='mr-10' icon={<SearchOutlined />}>查询</Button>
             <Button type="primary" className='mr-10' icon={<UndoOutlined />}>重置</Button>
+            <span> { count } </span>
+            <button onClick={() => props.onhandle(count + 100)}>onhandle</button>
         </div>
     )
 }

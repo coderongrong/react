@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 import TabBar from './TabBar.js';
 import './index.css'
 import { connect } from 'react-redux';
+import { useContext } from 'react'
+import ThemeContext from '@/useContext/index.js';
 
 
 const columns = [
@@ -133,6 +135,10 @@ const data = [
 ];
 
 const TableData = (props) => {
+    let count = useContext(ThemeContext)
+
+    const [myCount, setMyCount] = useState(count)
+
     const [tableData, setTableData] = useState(data)
     useEffect(() => {
         fn()
@@ -157,11 +163,28 @@ const TableData = (props) => {
         props.changeNum({ type: 'counter/incremented' })
         props._push({ type: 'book/push' })
     }
+    useEffect(() => {
+        count = myCount
+        // console.log(count)
+    }, [myCount])
+    const dart = (e) => {
+        e.stopPropagation()
+        setMyCount(pre => pre + 100)
+    }
+    const onhandle = (value) => {
+        setMyCount(value)
+    }
     return (
         <div style={{ width: '80%', padding: '0 0 0 20px' }}>
-            <TabBar />
-            <div className='text_num'>已选择 {props.count.value}--{props.books.value}项   <span onClick={change}>清空已选删除</span></div>
-            <Table columns={columns} dataSource={tableData} />
+            <ThemeContext.Provider value={myCount}>
+                <TabBar onhandle={onhandle} />
+                <div className='text_num'>已选择 {props.count.value}--{props.books.value}项   <span onClick={change}>
+                    清空已选删除
+                    <span>context: {myCount}</span>
+                    <button onClick={dart}>click me</button>
+                </span></div>
+                <Table columns={columns} dataSource={tableData} />
+            </ThemeContext.Provider>
         </div>
     )
 };

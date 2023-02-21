@@ -98,25 +98,22 @@ function App() {
 
 
 function TextInputWithFocusButton() {
-    console.log(' render ')
     const [count, setCount] = useState(0)
     const [numb, setnumb] = useState(0)
 
-    const countRef = useRef(null)   
+    const countRef = useRef(null)
     const donDiv = useRef(null)
     const [aNumber, setANumber] = useNumber()
-    const themeCount = useContext(ThemeContext)
 
     const onButtonClick = useCallback(() => {
         setCount(count + 1)
     }, [count])
 
     const getCount = useCallback(() => {
-        console.log(count)
+        // console.log(count)
     }, [count])
 
     const res = useMemo(() => {
-        console.log('memo count')
         return count + 5
     }, [count])
 
@@ -125,7 +122,7 @@ function TextInputWithFocusButton() {
         // console.log(countRef)
         // console.log('donDiv', donDiv)
         // console.log('themeCount', themeCount)
-        console.log('aNumber', aNumber)
+        // console.log('aNumber', aNumber)
     }, [])
 
     const getnum = useCallback(() => {
@@ -141,15 +138,17 @@ function TextInputWithFocusButton() {
     }
     return (
         <ThemeContext.Provider value={'xx prov'}>
-            <div>count: {count}</div>
-            <div>count - res: {res}</div>
-            <div ref={donDiv}>numb: {numb}</div>
-            <button onClick={onButtonClick}>Focus the input</button>
-            <button onClick={getCount}>get count</button>
-            <button onClick={getnum}>change num</button>
-            <button onClick={_getnum}>get num</button>
-            <Count ref={countRef} />
-            <button onClick={handleChangde}>click me</button>
+            <div>
+                <div>count: {count}</div>
+                <div>count - res: {res}</div>
+                <div ref={donDiv}>numb: {numb}</div>
+                <button onClick={onButtonClick}>Focus the input</button>
+                <button onClick={getCount}>get count</button>
+                <button onClick={getnum}>change num</button>
+                <button onClick={_getnum}>get num</button>
+                <Count ref={countRef} />
+                <button onClick={handleChangde}>click me</button>
+            </div>
         </ThemeContext.Provider>
     );
 }

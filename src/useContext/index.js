@@ -1,5 +1,5 @@
 import { createContext } from 'react'
 
-const ThemeContext = createContext('themeCount 12500')
+const ThemeContext = createContext()
 
 export default ThemeContext

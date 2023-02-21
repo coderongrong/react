@@ -89,8 +89,13 @@ export default function LayoutSider() {
     const [select] = useState(...selcetData())
     const [key] = useState(_key)
     const _getUserPermissionBy = async () => {
-        const { result } = await getUserPermissionBy()
-        const resData = handleTree(result.menu)
+        try {
+            const res = await getUserPermissionBy()
+            console.log('-------->', res)
+            // const resData = handleTree(result.menu)
+        } catch (e) {
+            console.log(e)
+        }
         // setMenu(resData)
     }
     useEffect(() => {

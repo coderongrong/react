@@ -14,8 +14,8 @@ function TreeData(props) {
 
   const login = async () => {
     const params = {
-      "username": "jieyingjing",
-      "password": "123456kkk",
+      "username": "rqw",
+      "password": "rqw123456",
       "captcha": "1",
       "remember_me": true,
       "loginType": "3"
@@ -23,7 +23,7 @@ function TreeData(props) {
     const { result } = await getUseInfo(params)
     if (result.token) {
       // localStorage.setItem('usreToken', result.token)
-      localStorage.setItem('usreToken', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NzY2NTkzMDAsInVzZXJuYW1lIjoiamlleWluZ2ppbmcifQ.wELjYcYgZS7spsmsvmmsZxNXSzppczEe1L25wtUiSvg')
+      localStorage.setItem('usreToken', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Nzg3MzkzODgsInVzZXJuYW1lIjoicnF3In0.mAojkdfQUwM9M-QMPsChWAkL9CfAzjdf6utp9Kmduuw')
 
     }
   }
