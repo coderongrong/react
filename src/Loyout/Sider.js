@@ -1,12 +1,14 @@
-import { Layout } from 'antd';
-import { Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd'
+import {
+    AppstoreOutlined,
+    MailOutlined,
+    SettingOutlined,
+} from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 
 import { getUserPermissionBy } from '../api/tree'
-import { useEffect, useState } from 'react';
-import { handleTree } from '../utils/index'
-import { map } from 'lodash';
+import { useEffect, useState } from 'react'
+import { map } from 'lodash'
 
 const items = [
     getItem('产品库', 'sub1', <MailOutlined />, [
@@ -36,23 +38,17 @@ const items = [
         getItem('Option 11', '15'),
         getItem('Option 12', '16'),
     ]),
-];
+]
 
-const { Sider } = Layout;
-function getItem(
-    label,
-    key,
-    icon,
-    children,
-    type,
-) {
+const { Sider } = Layout
+function getItem(label, key, icon, children, type) {
     return {
         key,
         icon,
         children,
         label,
         type,
-    };
+    }
 }
 const routerObj = {
     1: '/',
@@ -61,22 +57,21 @@ const routerObj = {
     '01': '/free',
     '02': '/role',
     '03': '/manage',
-    '5': '/muitil',
-    '6': '/client',
-    'sub4': '/freed',
-    9: '/echart'
+    5: '/muitil',
+    6: '/client',
+    sub4: '/freed',
+    9: '/echart',
 }
 export default function LayoutSider() {
-
     const selcetData = () => {
         return map(routerObj, (item, index) => {
             if (item == window.location.pathname) return index
-        }).filter(item => item)
+        }).filter((item) => item)
     }
     let _key = null
     const keyData = () => {
-        items.map(item => {
-            item.children.map(it => {
+        items.map((item) => {
+            item.children.map((it) => {
                 if (it.key == selcetData().toString()) {
                     _key = item.key
                 }
@@ -105,9 +100,9 @@ export default function LayoutSider() {
     const navigate = useNavigate()
     const onClick = (e) => {
         // navigate(routerObj[e.key] + '?name=tom&age=18')   // search参数
-        navigate(routerObj[e.key], { state: 999 })    // state参数
+        navigate(routerObj[e.key], { state: 999 }) // state参数
         // navigate(routerObj[e.key] + '/jack')    // 传递params参数
-    };
+    }
     return (
         <Sider>
             <Menu

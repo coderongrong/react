@@ -1,4 +1,3 @@
-
 function counterReducer(state = { value: 100 }, action) {
     switch (action.type) {
         case 'counter/add':
@@ -11,9 +10,6 @@ function counterReducer(state = { value: 100 }, action) {
             return state
     }
 }
-
-
-
 
 // store.dispatch({ type: 'counter/incremented' })
 // // {value: 1}

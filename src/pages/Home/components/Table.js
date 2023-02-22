@@ -1,15 +1,13 @@
-
-import React from 'react';
-import { Table } from 'antd';
+import React from 'react'
+import { Table } from 'antd'
 
 import { getRootlist } from '@/api/tree.js'
 import { useEffect, useState } from 'react'
-import TabBar from './TabBar.js';
+import TabBar from './TabBar.js'
 import './index.css'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { useContext } from 'react'
-import ThemeContext from '@/useContext/index.js';
-
+import ThemeContext from '@/useContext/index.js'
 
 const columns = [
     {
@@ -108,7 +106,7 @@ const columns = [
     //         </Space>
     //     ),
     // },
-];
+]
 
 const data = [
     {
@@ -132,7 +130,7 @@ const data = [
         address: 'Sydney No. 1 Lake Park',
         tags: ['cool', 'teacher'],
     },
-];
+]
 
 const TableData = (props) => {
     let count = useContext(ThemeContext)
@@ -148,13 +146,13 @@ const TableData = (props) => {
             productClassId: props.data || 1601050155552403457,
             order: 'desc',
             pageNo: 1,
-            pageSize: 10
+            pageSize: 10,
         }
         const { result } = await getRootlist(params)
-        const _data = result.records.map(item => {
+        const _data = result.records.map((item) => {
             return {
                 ...item,
-                key: item.id
+                key: item.id,
             }
         })
         setTableData(_data)
@@ -169,7 +167,7 @@ const TableData = (props) => {
     }, [myCount])
     const dart = (e) => {
         e.stopPropagation()
-        setMyCount(pre => pre + 100)
+        setMyCount((pre) => pre + 100)
     }
     const onhandle = (value) => {
         setMyCount(value)
@@ -178,22 +176,25 @@ const TableData = (props) => {
         <div style={{ width: '80%', padding: '0 0 0 20px' }}>
             <ThemeContext.Provider value={myCount}>
                 <TabBar onhandle={onhandle} />
-                <div className='text_num'>已选择 {props.count.value}--{props.books.value}项   <span onClick={change}>
-                    清空已选删除
-                    <span>context: {myCount}</span>
-                    <button onClick={dart}>click me</button>
-                </span></div>
+                <div className="text_num">
+                    已选择 {props.count.value}--{props.books.value}项{' '}
+                    <span onClick={change}>
+                        清空已选删除
+                        <span>context: {myCount}</span>
+                        <button onClick={dart}>click me</button>
+                    </span>
+                </div>
                 <Table columns={columns} dataSource={tableData} />
             </ThemeContext.Provider>
         </div>
     )
-};
+}
 
 export default connect(
-    state => state,
-    dispatch => ({
-        changeNum: params => dispatch(params),
-        _push: params => dispatch(params),
-        reset: params => dispatch(params)
+    (state) => state,
+    (dispatch) => ({
+        changeNum: (params) => dispatch(params),
+        _push: (params) => dispatch(params),
+        reset: (params) => dispatch(params),
     })
 )(TableData)

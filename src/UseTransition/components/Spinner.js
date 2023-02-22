@@ -1,6 +1,3 @@
-
-
-
 function Spinner() {
     return (
         <div>

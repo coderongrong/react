@@ -1,10 +1,8 @@
-
 import { useCallback, useState } from 'react'
 
 import Child from './child'
 
 function App() {
-
     // console.log('parent')
 
     const [count, setCount] = useState(0)
@@ -12,19 +10,19 @@ function App() {
     const [num, setNum] = useState(10)
 
     const handleClcik = () => {
-        setCount(pre => pre + 1)
+        setCount((pre) => pre + 1)
     }
 
     const getCount = useCallback(() => {
         console.log(count)
     }, [num])
-    
+
     const handleClcikNow = () => {
         console.log(count)
     }
-    
+
     const handleNum = () => {
-        setNum(pre => pre + 1)
+        setNum((pre) => pre + 1)
     }
     return (
         <div>

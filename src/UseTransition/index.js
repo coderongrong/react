@@ -1,14 +1,12 @@
-
-
 import Spinner from './components/Spinner'
 import { useTransition, useState } from 'react'
 function App() {
-    const [isPending, startTransition] = useTransition();
-    const [count, setCount] = useState(0);
+    const [isPending, startTransition] = useTransition()
+    const [count, setCount] = useState(0)
 
     function handleClick() {
         startTransition(() => {
-            setCount(c => c + 1);
+            setCount((c) => c + 1)
         })
     }
 
@@ -17,6 +15,6 @@ function App() {
             {isPending && <Spinner />}
             {!isPending && <button onClick={handleClick}>{count}</button>}
         </div>
-    );
+    )
 }
 export default App
