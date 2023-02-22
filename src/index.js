@@ -11,7 +11,8 @@ import 'element-theme-default';
 import { Provider } from 'react-redux'
 
 import store from './store';
-import _ from 'lodash'
+
+// import _ from 'lodash'
 // console.log('store', store.getState())
 // import reportWebVitals from './reportWebVitals';
 
@@ -23,6 +24,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 //   'Hello, world!'
 // );
 
+// console.log(store)
 root.render(
   <Provider store={store}>
     <ConfigProvider locale={zhCN}>

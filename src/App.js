@@ -24,6 +24,7 @@ const Freedback = lazy(() => import('@/system/InformationFeedback'))
 const Inherit = lazy(() => import('@/Inherit'))
 const Chart = lazy(() => import('@/Chart'))
 const UseCallback = lazy(() => import('@/UseCallback'))
+const UseMemo = lazy(() => import('@/UseMemo'))
 
 // import { Button } from 'element-react';
 
@@ -70,6 +71,7 @@ function App() {
               <Route path="freed" element={<Freedback />} />
               <Route path="echart" element={<Chart />} />
               <Route path="useCallback" element={<UseCallback />} />
+              <Route path="useMemo" element={<UseMemo />} />
             </Routes>
           </Suspense>
         </BrowserRouter>
