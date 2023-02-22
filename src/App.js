@@ -25,6 +25,9 @@ const Inherit = lazy(() => import('@/Inherit'))
 const Chart = lazy(() => import('@/Chart'))
 const UseCallback = lazy(() => import('@/UseCallback'))
 const UseMemo = lazy(() => import('@/UseMemo'))
+const UseRef = lazy(() => import('@/UseRef'))
+const UseLayoutEffect = lazy(() => import('@/UseLayoutEffect'))
+const UseTransition = lazy(() => import('@/UseTransition'))
 
 // import { Button } from 'element-react';
 
@@ -72,6 +75,9 @@ function App() {
               <Route path="echart" element={<Chart />} />
               <Route path="useCallback" element={<UseCallback />} />
               <Route path="useMemo" element={<UseMemo />} />
+              <Route path="useRef" element={<UseRef />} />
+              <Route path="useLayoutEffect" element={<UseLayoutEffect />} />
+              <Route path="useTransition" element={<UseTransition />} />
             </Routes>
           </Suspense>
         </BrowserRouter>

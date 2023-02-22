@@ -1,37 +1,41 @@
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import Child from './child'
 
-function App () {
+function App() {
+
     // console.log('parent')
+
     const [count, setCount] = useState(0)
-    const fn1 = useCallback(() => {
-        console.log('fn1')
-    })
 
-    const fn2 = () => {
-        console.log('fn2')
-    }
+    const [num, setNum] = useState(10)
 
-    useEffect(() => {
-        // fn1()
-        // fn2()
-    }, [count])
     const handleClcik = () => {
         setCount(pre => pre + 1)
     }
 
     const getCount = useCallback(() => {
         console.log(count)
-    }, [count])
+    }, [num])
     
+    const handleClcikNow = () => {
+        console.log(count)
+    }
+    
+    const handleNum = () => {
+        setNum(pre => pre + 1)
+    }
     return (
         <div>
             useCallback
-            <div>{ count }</div>
+            <div>{count}</div>
+            <div>{num}</div>
             <button onClick={getCount}>get count</button>
-            <div onClick={handleClcik}>click me </div>
+            <button onClick={handleClcik}>click me </button>
+            <button onClick={handleClcikNow}>Now me </button>
+            <br />
+            <button onClick={handleNum}>click Num</button>
             <Child />
         </div>
     )

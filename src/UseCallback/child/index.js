@@ -3,6 +3,7 @@ import { memo, useState } from 'react'
 
 function App () {
     console.log('child')
+    
     const [num, setNum] = useState(10)
 
     const handleChild = () => {
