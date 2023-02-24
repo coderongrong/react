@@ -23,7 +23,9 @@
 .d-f {
     display:  flex;
 }
-
+.f-1 {
+    flex: 1;
+}
 .b-c {
     background-color: #40a9ff;
 }

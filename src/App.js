@@ -22,7 +22,6 @@ const _arr = files.keys().reduce((pre, item) => {
     obj.default = files(item).default
     return pre.concat(obj)
 }, [])
-console.log(_arr)
 
 const OtherFree = lazy(() => import('@/infomation/OtherFree'))
 const Role = lazy(() => import('@/infomation/Role'))
@@ -32,9 +31,6 @@ const Client = lazy(() => import('@/system/ClientPermissions'))
 const Freedback = lazy(() => import('@/system/InformationFeedback'))
 const Inherit = lazy(() => import('@/Inherit'))
 const Chart = lazy(() => import('@/Chart'))
-const UseCallback = lazy(() => import('@/UseCallback'))
-const UseMemo = lazy(() => import('@/UseMemo'))
-const UseRef = lazy(() => import('@/UseRef'))
 const UseLayoutEffect = lazy(() => import('@/UseLayoutEffect'))
 const UseTransition = lazy(() => import('@/UseTransition'))
 const WebGL = lazy(() => import('@/WebGL'))
@@ -88,12 +84,6 @@ function App() {
                             <Route path="client" element={<Client />} />
                             <Route path="freed" element={<Freedback />} />
                             <Route path="echart" element={<Chart />} />
-                            <Route
-                                path="useCallback"
-                                element={<UseCallback />}
-                            />
-                            <Route path="useMemo" element={<UseMemo />} />
-                            <Route path="useRef" element={<UseRef />} />
                             <Route
                                 path="useLayoutEffect"
                                 element={<UseLayoutEffect />}

@@ -3,8 +3,6 @@ import { useCallback, useState } from 'react'
 import Child from './child'
 
 function App() {
-    // console.log('parent')
-
     const [count, setCount] = useState(0)
 
     const [num, setNum] = useState(10)
