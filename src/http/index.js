@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseDomain = 'http://192.168.2.3:1008/'
+const baseDomain = 'http://192.168.1.222:1008/'
 
 const service = axios.create({
     baseURL: baseDomain,

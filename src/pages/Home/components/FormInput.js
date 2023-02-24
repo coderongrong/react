@@ -12,7 +12,7 @@ const layout = {
 };
 
 const FormInput = forwardRef((props, ref) => {
-    console.log(props)
+    // console.log(props)
     const { callBack, show } = props
     const [form] = Form.useForm();
     const onGenderChange = (value) => {

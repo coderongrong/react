@@ -5,7 +5,7 @@ import ThemeContext from '../../../useContext'
 
 function TabBar(props) {
     let count = useContext(ThemeContext)
-    console.log(props)
+    // console.log(props)
     return (
         <div>
             <Button type="primary" className="mr-10">

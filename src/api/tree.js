@@ -1,4 +1,4 @@
-import { axios } from '../http/index'
+import { axios } from '@/http/index'
 
 /**
  * getUseInfo
