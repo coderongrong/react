@@ -28,6 +28,7 @@ const UseMemo = lazy(() => import('@/UseMemo'))
 const UseRef = lazy(() => import('@/UseRef'))
 const UseLayoutEffect = lazy(() => import('@/UseLayoutEffect'))
 const UseTransition = lazy(() => import('@/UseTransition'))
+const WebGL = lazy(() => import('@/WebGL'))
 
 // import { Button } from 'element-react';
 
@@ -78,6 +79,7 @@ function App() {
               <Route path="useRef" element={<UseRef />} />
               <Route path="useLayoutEffect" element={<UseLayoutEffect />} />
               <Route path="useTransition" element={<UseTransition />} />
+              <Route path="WebGL" element={<WebGL />} />
             </Routes>
           </Suspense>
         </BrowserRouter>

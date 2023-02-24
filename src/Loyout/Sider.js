@@ -86,7 +86,6 @@ export default function LayoutSider() {
     const _getUserPermissionBy = async () => {
         try {
             const res = await getUserPermissionBy()
-            console.log('-------->', res)
             // const resData = handleTree(result.menu)
         } catch (e) {
             console.log(e)
