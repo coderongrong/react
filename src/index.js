@@ -11,6 +11,9 @@ import 'element-theme-default';
 import { Provider } from 'react-redux'
 
 import store from './store';
+import abc from  './myTemp.vsc'
+
+console.log(abc)
 
 // import _ from 'lodash'
 // console.log('store', store.getState())
