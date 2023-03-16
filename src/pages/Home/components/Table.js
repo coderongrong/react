@@ -180,8 +180,8 @@ const TableData = (props) => {
                     已选择 {props.count.value}--{props.books.value}项{' '}
                     <span onClick={change}>
                         清空已选删除
-                        <span>context: {myCount}</span>
-                        <button onClick={dart}>click me</button>
+                        {/* <span>context: {myCount}</span> */}
+                        {/* <button onClick={dart}>click me</button> */}
                     </span>
                 </div>
                 <Table columns={columns} dataSource={tableData} />

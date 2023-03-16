@@ -4,6 +4,7 @@ import { Tree } from 'antd'
 import { useEffect, useState } from 'react'
 import { handleData } from '../../../utils/index'
 import { getUseInfo, getTreeData } from '../../../api/tree.js'
+import { useLocation } from 'react-router-dom'
 
 function TreeData(props) {
     const { callBack } = props
@@ -29,12 +30,15 @@ function TreeData(props) {
     if (!localStorage.getItem('usreToken')) {
         login()
     }
+    const state = useLocation()
 
     const _getTreeData = async () => {
+        
+        console.log('_getTreeData', state)
         const params = {
             parentId: 0,
             type: 1,
-            classType: 'Lamppost',
+            classType: state.pathname?.split('/')[1] || 'Lamppost',
         }
         const { result } = await getTreeData(params)
         setTreeData(handleData(result))
@@ -45,6 +49,7 @@ function TreeData(props) {
     const onSelect = async (selectedKeys, info) => {
         // console.log('selected', selectedKeys, info);
         callBack(selectedKeys, info)
+        console.log('xxxxxxx')
     }
 
     return (

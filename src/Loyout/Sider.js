@@ -51,9 +51,9 @@ function getItem(label, key, icon, children, type) {
     }
 }
 const routerObj = {
-    1: '/',
-    2: '/publish',
-    3: '/dashboard',
+    1: '/Lamppost',
+    2: '/comprehensiveBox',
+    3: '/publicToilet',
     '01': '/free',
     '02': '/role',
     '03': '/manage',

@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import Home from './pages/Home'
 import Publish from './pages/Publish'
+import PublicToilet from './pages/publicToilet'
 import Dashboard from './pages/Dashboard'
 // import OtherFree from '@/infomation/OtherFree'
 // import Role from '@/infomation/Role'
@@ -66,9 +67,9 @@ function App() {
                         <Routes>
                             <Route path="inherit" element={<Inherit />} />
                             <Route index element={<Home />} />
-                            <Route path="publish" element={<Publish />} />
-                            <Route path="dashboard" element={<Dashboard />} />
-                            <Route path="free" element={<OtherFree />} />
+                            <Route path="Lamppost" element={<Publish />} />
+                            <Route path="comprehensiveBox" element={<Dashboard />} />
+                            <Route path="publicToilet" element={<PublicToilet />} />
                             <Route path="role" element={<Role />} />
                             {/* <Route path="manage/:name" element={<Manage />}> */}
                             <Route path="manage" element={<Manage />}>

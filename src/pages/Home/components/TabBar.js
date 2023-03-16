@@ -55,10 +55,10 @@ function TabBar(props) {
             <Button type="primary" className="mr-10" icon={<UndoOutlined />}>
                 重置
             </Button>
-            <span> {count} </span>
+            {/* <span> {count || '--'} </span>
             <button onClick={() => props.onhandle(count + 100)}>
                 onhandle
-            </button>
+            </button> */}
         </div>
     )
 }
