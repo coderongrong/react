@@ -47,7 +47,6 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
     console.log('mode', mode)
 
     if (command === 'serve') {
-
         return {
             esbuild: {
                 jsxFactory: 'h',
@@ -109,12 +108,12 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
             sourcemap: true,
             server: {
                 open: false,
-                // port: 5566,
+                port: 9000,
                 proxy: {
                     '/jeecg-boot': {
                         // target: 'http://misaya.wicp.net',  // 石家庄测试环境和朝阳本地
                         // target: 'http://39.98.118.21',  // 正式环境
-                        target: 'http://192.168.2.3:1008',  // 智友本地
+                        target: 'http://192.168.1.222:1008',  // 智友本地
                         changeOrigin: true, //是否跨域
                         pathRewrite: {
                             '^/jeecg-boot': ''

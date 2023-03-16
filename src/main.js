@@ -7,8 +7,8 @@ import './assets/main.css'
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import Input from './custom/input.vue'
-import '@/utils'
-import '@/utils/eventbus.ts'
+// import '@/utils'
+// import '@/utils/eventbus.ts'
 // import './assets/base.scss'
 import classes from './assets/example.module.css'
 

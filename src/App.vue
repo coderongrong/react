@@ -34,6 +34,7 @@ const itemRefs = ref([]);
 const child = ref(null);
 
 const num = ref(0)
+
 onMounted(async () => {
   // console.log('--------> defer', defer)
   map([1,2,3,4], item => {
@@ -89,9 +90,9 @@ const foo = inject('foo')
 
 <template>
   <div class='d-f'>
-    <!-- <div class='box'>
+    <div class='box'>
       <span class='demo'>demo</span>
-    </div> -->
+    </div>
     <TheWelcome @onKey="onKey"></TheWelcome>
     <div style="display: flex;">
       <router-view></router-view>
