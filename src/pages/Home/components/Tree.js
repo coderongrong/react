@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { DownOutlined } from '@ant-design/icons'
-import { Tree } from 'antd'
+import { Tree, Dropdown, Menu } from 'antd'
 import { useEffect, useState } from 'react'
 import { handleData } from '../../../utils/index'
 import { getUseInfo, getTreeData } from '../../../api/tree.js'
 import { useLocation } from 'react-router-dom'
+import ModalCom from '../children/Modal'
 
 function TreeData(props) {
+    console.log('props  parents')
     const { callBack } = props
     const [treeData, setTreeData] = useState([])
-
+    const [ obj, setObj ] = useState({})
     const login = async () => {
         const params = {
             username: 'rqw',
@@ -33,8 +35,6 @@ function TreeData(props) {
     const state = useLocation()
 
     const _getTreeData = async () => {
-        
-        console.log('_getTreeData', state)
         const params = {
             parentId: 0,
             type: 1,
@@ -43,23 +43,72 @@ function TreeData(props) {
         const { result } = await getTreeData(params)
         setTreeData(handleData(result))
     }
+
     useEffect(() => {
         _getTreeData()
     }, [])
+
     const onSelect = async (selectedKeys, info) => {
-        // console.log('selected', selectedKeys, info);
         callBack(selectedKeys, info)
-        console.log('xxxxxxx')
+    }
+    
+
+    const handleRightMouce = ({ node }) => {
+        console.log('xxxxxxxxxx handleRightMouce', node)
+        setObj(() => node)
     }
 
+    const [isOpen, setOpen] = useState(false)
+
+    const show = () => {
+        console.log('--------> obj', obj)
+        setOpen(true)
+    }
+
+    const hidden = (data) => {
+        setOpen(data)
+    }
+
+    const items = [
+        {
+            key: 'add',
+            label: <span>编辑</span>,
+            onClick() {
+                show()
+            },
+        },
+        {
+            key: 'delete',
+            label: <span>删除</span>,
+            onClick() {},
+        },
+        {
+            key: 'update',
+            label: <span>新增</span>,
+        },
+    ]
+    const titleRender = useCallback((nodeData) => {
+        return (
+            <Dropdown menu={{ items }} trigger={['contextMenu']}>
+                <div>
+                    <div>{nodeData.title}</div>
+                </div>
+            </Dropdown>
+        )
+    }, [])
     return (
-        <Tree
-            showLine
-            switcherIcon={<DownOutlined />}
-            defaultExpandedKeys={['0-0-0']}
-            onSelect={onSelect}
-            treeData={treeData}
-        />
+        <>
+            <Tree
+                showLine
+                switcherIcon={<DownOutlined />}
+                defaultExpandedKeys={['0-0-0']}
+                onSelect={onSelect}
+                treeData={treeData}
+                titleRender={titleRender}
+                onRightClick={handleRightMouce}
+            />
+            { isOpen && <ModalCom isOpen={isOpen} hidden={hidden} data={obj} />}
+        </>
     )
 }
 

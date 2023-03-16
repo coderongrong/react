@@ -177,7 +177,9 @@ const TableData = (props) => {
             <ThemeContext.Provider value={myCount}>
                 <TabBar onhandle={onhandle} />
                 <div className="text_num">
-                    已选择 {props.count.value}--{props.books.value}项{' '}
+                    已选择 
+                    {/* {props.count.value}--{props.books.value} */}
+                    项{' '}
                     <span onClick={change}>
                         清空已选删除
                         {/* <span>context: {myCount}</span> */}

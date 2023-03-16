@@ -6,6 +6,7 @@ import ModalInput from './components/Modal';
 import { useState } from 'react'
 
 function Home() {
+    console.log('home')
     // const { todos, onTodoClick } = props
     const [_data, setData] = useState('')
     const [show, setShow] = useState(false)

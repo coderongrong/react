@@ -11,14 +11,14 @@ import 'element-theme-default';
 import { Provider } from 'react-redux'
 
 import store from './store';
-import abc from  './myTemp.vsc'
+// import abc from  './myTemp.vsc'
 
-console.log(abc)
+// console.log(abc)
 
 // import _ from 'lodash'
 // console.log('store', store.getState())
 // import reportWebVitals from './reportWebVitals';
-
+document.oncontextmenu = () => false;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // const element = React.createElement(
