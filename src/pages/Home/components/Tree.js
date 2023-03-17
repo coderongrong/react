@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom'
 import ModalCom from '../children/Modal'
 
 function TreeData(props) {
-    console.log('props  parents')
+    // console.log('props  parents')
     const { callBack } = props
     const [treeData, setTreeData] = useState([])
     const [ obj, setObj ] = useState({})
@@ -54,14 +54,14 @@ function TreeData(props) {
     
 
     const handleRightMouce = ({ node }) => {
-        console.log('xxxxxxxxxx handleRightMouce', node)
+        // console.log('xxxxxxxxxx handleRightMouce', node)
         setObj(() => node)
     }
 
     const [isOpen, setOpen] = useState(false)
 
     const show = () => {
-        console.log('--------> obj', obj)
+        // console.log('--------> obj', obj)
         setOpen(true)
     }
 

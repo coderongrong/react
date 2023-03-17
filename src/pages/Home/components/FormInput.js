@@ -1,7 +1,6 @@
-
-import { Form, Input, Select } from 'antd';
-import { useEffect, forwardRef } from 'react';
-const { Option } = Select;
+import { Form, Input, Select } from 'antd'
+import { useEffect, forwardRef } from 'react'
+const { Option } = Select
 const layout = {
     labelCol: {
         span: 8,
@@ -9,37 +8,34 @@ const layout = {
     wrapperCol: {
         span: 16,
     },
-};
+}
 
 const FormInput = forwardRef((props, ref) => {
     // console.log(props)
-    const { callBack, show } = props
-    const [form] = Form.useForm();
+    const { show } = props
+    const [form] = Form.useForm()
     const onGenderChange = (value) => {
         switch (value) {
             case 'male':
                 form.setFieldsValue({
                     note: 'Hi, man!',
-                });
-                break;
+                })
+                break
             case 'female':
                 form.setFieldsValue({
                     note: 'Hi, lady!',
-                });
-                break;
+                })
+                break
             case 'other':
                 form.setFieldsValue({
                     note: 'Hi there!',
-                });
-                break;
+                })
+                break
             default:
         }
-    };
-    const onFinish = (values) => {
-        callBack(values)
-    };
+    }
     useEffect(() => {
-        onFinish()
+        // onFinish()
     }, [show])
     return (
         <Form
@@ -47,7 +43,6 @@ const FormInput = forwardRef((props, ref) => {
             {...layout}
             form={form}
             name="control-hooks"
-            onFinish={onFinish}
             style={{
                 maxWidth: 500,
             }}
