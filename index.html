@@ -1,15 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
   <body>
     <div id="app"></div>
+    <div id="box" class="demo" name="xxx" age="20">
+      <div>{{ name }}</div>
+      <div>{{ age }}</div>
+      <div>{{ age }}</div>
+      <div>{{ name }}</div>
+      <input type="text" v-model="value" />
+      <div>{{ value }}</div>
+      <button @click="handleOk">xxxxxxxxx</button>
+      <button @click="handleDes">click me</button>
+      <button @click="handleName">click name</button>
+    </div>
+
+    <script>
+      class Vue {
+        constructor(options) {
+          // console.log(options)
+          this.$data = options.data
+          this.$methods = options.methods
+          this.initRoot(options.el)
+
+          this.defineProperty(this.$data)
+
+          new Observer(this.$data)
+          new Compiler(this)
+        }
+
+        initRoot(el) {
+          this.$el = document.getElementById(el)
+        }
+
+        defineProperty(data) {
+          Object.keys(data).forEach((key) => {
+            Object.defineProperty(this, key, {
+              configurable: true,
+              enumerable: true,
+              get() {
+                return data[key]
+              },
+              set(val) {
+                data[key] = val
+              },
+            })
+          })
+        }
+      }
+
+      class Observer {
+        constructor(data) {
+          this.tralv(data)
+        }
+
+        tralv(data) {
+          if (!data || typeof data != 'object') return
+          Object.keys(data).forEach((key) => {
+            this.tralv(data[key])
+            let value = data[key]
+            const that = this
+            const dep = new Dep()
+            Object.defineProperty(data, key, {
+              enumerable: true,
+              configurable: true,
+              set(val) {
+                if (val == value) return
+                value = val
+                that.tralv(value)
+                dep.notify()
+              },
+              get() {
+                Dep.target && dep.add(Dep.target)
+                return value
+              },
+            })
+          })
+        }
+      }
+
+      class Compiler {
+        constructor(options) {
+          this.data = options.$data
+          this.el = options.$el
+          this.methods = options.$methods
+          this.options = options
+          this.checkNodeType(this.el)
+        }
+        checkNodeType(el) {
+          const childNodes = el.childNodes
+          ;[...childNodes].forEach((node) => {
+            if (node.nodeType == 1) {
+              this.handleEle(node)
+            } else if (node.nodeType == 3) {
+              this.handleText(node)
+            }
+            if (node && node.childNodes.length) {
+              this.checkNodeType(node)
+            }
+          })
+        }
+        handleText(node) {
+          const value = node.textContent
+          const reg = /\{\{(.+?)\}\}/g
+          if (reg.test(value)) {
+            const key = node.textContent.replace(reg, '$1').trim()
+            node.textContent = this.data[key]
+            new Watcher(this.options, key, (msg) => {
+              node.textContent = msg
+            })
+          }
+        }
+
+        handleEle(node) {
+          if (node.attributes.length > 0) {
+            ;[...node.attributes].forEach((item) => {
+              const reg = /@/
+              if (reg.test(item.nodeName)) {
+                const type = item.nodeName.replace(reg, '')
+                this.bindEvent(node, type, item.value)
+              }
+              if (item.nodeName == 'v-model') {
+                this.modelUpdater(node, this.options[item.value], item.value)
+              }
+            })
+          }
+        }
+        bindEvent(node, type, fn) {
+          node.addEventListener(
+            type,
+            this.methods[fn].bind(this.options),
+            false
+          )
+        }
+
+        // 解析v-model
+        modelUpdater(node, value, key) {
+          //主要针对的是input，input可以通过e.detail.value来获取到值
+          node.value = value
+          // console.log(key)
+          new Watcher(this.options, key, (newVal) => {
+            node.value = newVal
+          })
+
+          //监听输入
+          node.addEventListener('input', (e) => {
+            console.log(node.value)
+            // 更新当前data值
+            this.options[key] = node.value
+          })
+        }
+      }
+
+      class Watcher {
+        constructor(options, key, callback) {
+          this.key = key
+          this.options = options
+          this.callback = callback
+          Dep.target = this
+          this.oldValue = options[key]
+          Dep.target = null
+        }
+
+        updata() {
+          let newValue = this.options[this.key]
+          this.callback(newValue)
+        }
+      }
+
+      class Dep {
+        constructor() {
+          this.subs = []
+        }
+        add(watcher) {
+          if (watcher && watcher.updata) {
+            this.subs.push(watcher)
+          }
+        }
+        notify() {
+          this.subs.forEach((w) => {
+            w.updata()
+          })
+        }
+      }
+
+      new Vue({
+        el: 'box',
+        data: {
+          name: 'hello world',
+          age: 20,
+          value: 199,
+        },
+        methods: {
+          handleOk() {
+            this.age++
+          },
+          handleDes() {
+            this.age--
+          },
+          handleName() {
+            this.name += 'A'
+          },
+        },
+      })
+    </script>
     <!-- <script type="module" src="/src/main.js"></script> -->
     <!-- <script type="module" src="http://localhost:8080/@vite/client"></script> -->
-    <script type="module" src="http://localhost:8000/src/main.js"></script>
+    <script type="module" src="http://localhost:9001/src/main.js"></script>
   </body>
 </html>

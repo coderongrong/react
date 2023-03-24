@@ -22,6 +22,7 @@ import { service } from './config/require'
 // console.log('>>>>>> modules', modules)
 
 const app = createApp(App)
+
 app.use(ElementPlus)
 app.use(Antd);
 

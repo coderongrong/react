@@ -91,7 +91,7 @@ const foo = inject('foo')
 <template>
   <div class='d-f'>
     <div class='box'>
-      <span class='demo'>demo</span>
+      <!-- <span class='demo'>demo</span> -->
     </div>
     <TheWelcome @onKey="onKey"></TheWelcome>
     <div style="display: flex;">
