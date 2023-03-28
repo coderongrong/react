@@ -15,9 +15,7 @@ import vue from '@vitejs/plugin-vue'
 
 // console.log('>>>>>>>>>>  ,env', process.env)
 
-
 console.log(resolve(__dirname, 'index.html'))
-
 
 // https://vitejs.dev/config/
 // export default defineConfig({
@@ -36,118 +34,121 @@ console.log(resolve(__dirname, 'index.html'))
 // })
 
 function asyncFunction() {
-    return new Promise((res, rej) => {
-        res('100')
-    })
+  return new Promise((res, rej) => {
+    res('100')
+  })
 }
 
 export default defineConfig(async ({ command, mode, ssrBuild }) => {
-    const data = await asyncFunction()
-    const env = loadEnv(mode, process.cwd(), '')
-    console.log('mode', mode)
+  const data = await asyncFunction()
+  const env = loadEnv(mode, process.cwd(), '')
+  console.log('mode', mode)
 
-    if (command === 'serve') {
-        return {
-            esbuild: {
-                jsxFactory: 'h',
-                jsxFragment: 'Fragment',
+  if (command === 'serve') {
+    return {
+      esbuild: {
+        jsxFactory: 'h',
+        jsxFragment: 'Fragment',
+      },
+      transform() {
+        console.log('-------> transform() {},')
+      },
+      // base: '/vite/',
+      // dev 独有配置
+      runtimeCompiler: true, // 加上这一段
+      plugins: [
+        { enforce: 'pre' },
+        vue({
+          reactivityTransform: true,
+        }),
+        splitVendorChunkPlugin(),
+        legacy({
+          targets: ['defaults', 'not IE 11'],
+        }),
+      ],
+      envPrefix: 'APP_',
+      // publicDir: false,
+      css: {
+        loaderOptions: {
+          less: {
+            lessOptions: {
+              javascriptEnabled: true,
+              math: 'always',
             },
-            transform() {
-                console.log('-------> transform() {},')
+          },
+        },
+      },
+      clearScreen: true,
+      resolve: {
+        alias: {
+          '@': fileURLToPath(new URL('./src', import.meta.url)),
+          '@com': fileURLToPath(new URL('./src/components', import.meta.url)),
+        },
+        extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
+      },
+      define: {
+        __APP_ENV__: env.APP_ENV,
+      },
+      build: {
+        rollupOptions: {
+          // input: {
+          //     main: resolve(__dirname, 'index.html'),
+          //     nested: resolve(__dirname, 'nested/index.html')
+          // }
+        },
+        commonjsOptions: {
+          include: [/linked-dep/, /node_modules/],
+        },
+        modulePreload: {
+          resolveDependencies: (filename, deps, { hostId, hostType }) => {
+            // console.log('>>>>>>>  fliename', filename, deps)
+            return deps.filter(condition)
+          },
+        },
+        // cssCodeSplit: true,
+        watch: {},
+      },
+      sourcemap: true,
+      server: {
+        open: false,
+        port: 9000,
+        proxy: {
+          '/jeecg-boot': {
+            // target: 'http://misaya.wicp.net',  // 石家庄测试环境和朝阳本地
+            // target: 'http://39.98.118.21',  // 正式环境
+            target: 'http://192.168.1.222:1008', // 智友本地
+            changeOrigin: true, //是否跨域
+            pathRewrite: {
+              '^/jeecg-boot': '',
             },
-            // base: '/vite/',
-            // dev 独有配置
-            runtimeCompiler: true,  // 加上这一段
-            plugins: [
-                { enforce: 'pre' },
-                vue({
-                    reactivityTransform: true
-                }),
-                splitVendorChunkPlugin(),
-                legacy({
-                    targets: ['defaults', 'not IE 11']
-                })
-            ],
-            envPrefix: 'APP_',
-            // publicDir: false,
-            css: {
-                devSourcemap: true
-            },
-            clearScreen: true,
-            resolve: {
-                alias: {
-                    '@': fileURLToPath(new URL('./src', import.meta.url)),
-                    '@com': fileURLToPath(new URL('./src/components', import.meta.url)),
-                },
-                extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
-            },
-            define: {
-                __APP_ENV__: env.APP_ENV
-            },
-            build: {
-                rollupOptions: {
-                    // input: {
-                    //     main: resolve(__dirname, 'index.html'),
-                    //     nested: resolve(__dirname, 'nested/index.html')
-                    // }
-                },
-                commonjsOptions: {
-                    include: [/linked-dep/, /node_modules/]
-                },
-                modulePreload: {
-                    resolveDependencies: (filename, deps, { hostId, hostType }) => {
-                        // console.log('>>>>>>>  fliename', filename, deps)
-                        return deps.filter(condition)
-                    }
-                },
-                // cssCodeSplit: true,
-                watch: {
-
-                }
-            },
-            sourcemap: true,
-            server: {
-                open: false,
-                port: 9000,
-                proxy: {
-                    '/jeecg-boot': {
-                        // target: 'http://misaya.wicp.net',  // 石家庄测试环境和朝阳本地
-                        // target: 'http://39.98.118.21',  // 正式环境
-                        target: 'http://192.168.1.222:1008',  // 智友本地
-                        changeOrigin: true, //是否跨域
-                        pathRewrite: {
-                            '^/jeecg-boot': ''
-                        }
-                    },
-                    '/sys': {
-                        // target: 'http://misaya.wicp.net',  // 石家庄测试环境和朝阳本地
-                        // target: 'http://39.98.118.21',  // 正式环境
-                        target: 'http://192.168.2.3:1008/jeecg-boot',  // 智友本地
-                        changeOrigin: true, //是否跨域
-                        rewrite: (path) => path.replace(/^\/sys/, '/sys'),
-                    }
-                }
-            }
-        }
-    } else {
-        // command === 'build'
-        console.log("command === 'build'", command)
-        return {
-            // build 独有配置
-            rollupOptions: {
-                // input: {
-                //     main: resolve(__dirname, 'index.html'),
-                //     nested: resolve(__dirname, 'nested/index.html')
-                // }
-            },
-            commonjsOptions: {
-                include: [/linked-dep/, /node_modules/]
-            },
-            cssCodeSplit: false,
-            sourcemap: true,
-            watch: {
-
-            }
-        }
+          },
+          '/sys': {
+            // target: 'http://misaya.wicp.net',  // 石家庄测试环境和朝阳本地
+            // target: 'http://39.98.118.21',  // 正式环境
+            target: 'http://192.168.1.222:1008/jeecg-boot', // 智友本地
+            changeOrigin: true, //是否跨域
+            rewrite: (path) => path.replace(/^\/sys/, '/sys'),
+          },
+        },
+      },
     }
+  } else {
+    // command === 'build'
+    console.log("command === 'build'", command)
+    return {
+      // build 独有配置
+      rollupOptions: {
+        // input: {
+        //     main: resolve(__dirname, 'index.html'),
+        //     nested: resolve(__dirname, 'nested/index.html')
+        // }
+      },
+      commonjsOptions: {
+        include: [/linked-dep/, /node_modules/],
+      },
+      cssCodeSplit: false,
+      sourcemap: true,
+      watch: {},
+    }
+  }
 })

@@ -2,8 +2,6 @@ import axios from 'axios'
 
 
 const service = axios.create({
-    //baseURL: '/jeecg-boot',
-    // baseURL: apiBaseUrl, // api base_url  http://2l916746t7.goho.co:1008/jeecg-boot
     baseURL: '/',
     timeout: 5000 // 请求超时时间
 })

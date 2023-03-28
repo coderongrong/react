@@ -7,11 +7,8 @@ import axios from 'axios'
 import defer from 'lodash-es/defer'
 import map from 'lodash-es/map'
 
+// baseURL: 'http://2l916746t7.goho.co:1008/jeecg-boot',
 const service = axios.create({
-//baseURL: '/jeecg-boot',
-// baseURL: apiBaseUrl, // api base_url  http://2l916746t7.goho.co:1008/jeecg-boot
-  // baseURL: 'http://2l916746t7.goho.co:1008/jeecg-boot',
-  // baseURL: 'http://192.168.2.3:1008/jeecg-boot',
   baseURL: '',
   timeout: 5000 // 请求超时时间
 })
@@ -36,18 +33,6 @@ const child = ref(null);
 const num = ref(0)
 
 onMounted(async () => {
-  // console.log('--------> defer', defer)
-  map([1,2,3,4], item => {
-    // console.log('---> item', item)
-  })
-  // console.log(import.meta.env.VITE_APP_SOME_KEY) // 123
-  // const Token = {
-  //   expire: 1669883827554,
-  //   value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njk2ODU5MjksInVzZXJuYW1lIjoiamlleWluZ2ppbmcifQ.I_NbFCVmZ8zjRvckwp59XYU5XHK1QDEHWQ04Oejr5LA"
-  // }
-  // localStorage.setItem('Access-Token', Token)
-  // const res = await axios.get(`http://2l916746t7.goho.co:1008/jeecg-boot/sys/productClass/queryByParentId?_t=1669339352&parentId=0&type=1`)
-  // console.log('res', res)
   const params = {
     "username": "jieyingjing",
     "password": "123456kkk",
@@ -93,10 +78,10 @@ const foo = inject('foo')
     <div class='box'>
       <!-- <span class='demo'>demo</span> -->
     </div>
-    <TheWelcome @onKey="onKey"></TheWelcome>
+    <!-- <TheWelcome @onKey="onKey"></TheWelcome>
     <div style="display: flex;">
       <router-view></router-view>
-    </div>
+    </div> -->
   </div>
 </template>
 

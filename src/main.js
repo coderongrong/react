@@ -17,6 +17,7 @@ import 'element-plus/dist/index.css'
 import router from './router'
 
 import { service } from './config/require'
+// import AllInput from 'make-loader-ui'
 
 // const modules = import.meta.glob('./custom/*.vue')
 // console.log('>>>>>> modules', modules)
