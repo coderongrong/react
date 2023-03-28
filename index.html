@@ -8,7 +8,7 @@
   </head>
   <body>
     <div id="app"></div>
-    <div id="box" class="demo" name="xxx" age="20">
+    <!-- <div id="box" class="demo" name="xxx" age="20">
       <div>{{ name }}</div>
       <div>{{ age }}</div>
       <div>{{ age }}</div>
@@ -18,7 +18,7 @@
       <button @click="handleOk">xxxxxxxxx</button>
       <button @click="handleDes">click me</button>
       <button @click="handleName">click name</button>
-    </div>
+    </div> -->
 
     <script>
       class Vue {
@@ -93,7 +93,8 @@
           this.checkNodeType(this.el)
         }
         checkNodeType(el) {
-          const childNodes = el.childNodes
+          if(!el) return
+          const childNodes = el?.childNodes
           ;[...childNodes].forEach((node) => {
             if (node.nodeType == 1) {
               this.handleEle(node)
@@ -208,9 +209,48 @@
           },
         },
       })
+
+      // setInterval(() => {
+      //   vm.age += 1
+      // }, 1000)
+
+      // 数组响应式
+      // 获取数组原型, 后面修改7个方法
+      const originProto = Array.prototype
+      // 创建对象做备份，修改响应式都是在备份的上进行，不影响原始数组方法
+      const arrayProto = Object.create(originProto)
+      // 拦截数组方法，在变更时发出通知
+      ;['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(
+        (method) => {
+          // 在备份的原型上做修改
+          arrayProto[method] = function () {
+            // 调用原始操作
+            originProto[method].apply(this, arguments)
+            // 发出变更通知
+            console.log(`method:${method} value:${Array.from(arguments)}`)
+          }
+        }
+      )
+
+      class Observe {
+        constructor(obj) {
+          if (Array.isArray(obj)) {
+            // 修改数组原型为自定义的
+            obj.__proto__ = arrayProto
+            this.observeArray(obj)
+          } else {
+            // 对象
+            this.walk(obj)
+          }
+        }
+        observeArray(items) {
+          // 如果数组内部元素时对象，继续做响应化处理
+          items.forEach((item) => observe(item))
+        }
+      }
     </script>
     <!-- <script type="module" src="/src/main.js"></script> -->
     <!-- <script type="module" src="http://localhost:8080/@vite/client"></script> -->
-    <script type="module" src="http://localhost:9001/src/main.js"></script>
+    <script type="module" src="http://localhost:7000/src/main.js"></script>
   </body>
 </html>

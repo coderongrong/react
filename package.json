@@ -2,7 +2,7 @@
   "name": "demo",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --config my-config.js --host --port 9000",
+    "dev": "vite --config my-config.js --host --port 7000",
     "build": "vite build --config my-config.js",
     "preview": "vite preview --config my-config.js --host --port 3000"
   },
