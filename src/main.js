@@ -1,4 +1,5 @@
 import './config'
+// import './file.md'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
@@ -19,21 +20,26 @@ import router from './router'
 import { service } from './config/require'
 // import AllInput from 'make-loader-ui'
 
+import StoreReset from '../plugins/storeReset.js'
 // const modules = import.meta.glob('./custom/*.vue')
 // console.log('>>>>>> modules', modules)
 
 const app = createApp(App)
 
+const pinia = createPinia()
+pinia.use(StoreReset)
+
 app.use(ElementPlus)
 app.use(Antd);
 
-app.use(createPinia())
+app.use(pinia)
 
 app.use(myPlugin, {
     /* 可选的选项 */
     i18n: 'i18n',
     axios: service
 })
+
 app.use(router)
 app.component(Input.name, Input)  // 全局组件
 app.mount('#app')

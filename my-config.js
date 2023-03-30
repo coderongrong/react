@@ -15,8 +15,6 @@ import vue from '@vitejs/plugin-vue'
 
 // console.log('>>>>>>>>>>  ,env', process.env)
 
-console.log(resolve(__dirname, 'index.html'))
-
 // https://vitejs.dev/config/
 // export default defineConfig({
 //   runtimeCompiler: true,  // 加上这一段
@@ -43,8 +41,8 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
   const data = await asyncFunction()
   const env = loadEnv(mode, process.cwd(), '')
   console.log('mode', mode)
-
   if (command === 'serve') {
+    console.log('serve')
     return {
       esbuild: {
         jsxFactory: 'h',
@@ -77,6 +75,18 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
             },
           },
         },
+      },
+      module: {
+        rules: [
+          {
+            test: /\.md$/,
+            use: [
+              {
+                loader: resolve(__dirname, 'loaders/fileLoader.js')
+              }
+            ],
+          },
+        ],
       },
       clearScreen: true,
       resolve: {

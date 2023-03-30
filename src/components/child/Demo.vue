@@ -1,8 +1,9 @@
 <template>
   <div>Demo...</div>
-  <span>Demo... --- {{ count }}</span>
+  <span>Demo... --- {{ count }} 🍍</span>
   <br />
   <button @click="handleADd">click me</button>
+  <button @click="handleReset">reset</button>
 </template>
 
 <script setup>
@@ -23,8 +24,9 @@ const { deccrement } = useCounterStore()
 const handleADd = () => {
   deccrement()
 }
+const handleReset = () => store.$reset()
 onMounted(() => {
-  console.log('onMounted --> useCounterStore', useCounterStore().count)
+  console.log('onMounted --> useCounterStore ✨', storeToRefs(store), store)
 })
 onUnmounted(() => {
   console.log('onUnmounted')
