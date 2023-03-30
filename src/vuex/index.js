@@ -24,13 +24,10 @@ class Store {
 }
 
 export function createStore() {
-
     const {state, mutations, actions} = [...arguments][0]
-
     return new Store(state, mutations, actions)
 }
 
 export function useStore() {
-
     return inject('store')
 }

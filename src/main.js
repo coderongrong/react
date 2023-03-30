@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import myPlugin from './myPlugin.js'
-import './assets/main.css'
+// import './assets/main.css'
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import Input from './custom/input.vue'

@@ -4,9 +4,9 @@ import HelloWrold from './components/HelloWorld.vue'
 import TheWelcome from '@com/TheWelcome.vue'
 import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
-import defer from 'lodash-es/defer'
-import map from 'lodash-es/map'
 import { Base64 } from 'js-base64'
+import Foo from './components/child/Foo.vue'
+import Demo from './components/child/Demo.vue'
 
 // baseURL: 'http://2l916746t7.goho.co:1008/jeecg-boot',
 const service = axios.create({
@@ -82,6 +82,8 @@ const foo = inject('foo')
   <div class="d-f">
     <div class="box">
       <!-- <span class='demo'>demo</span> -->
+      <Foo />
+      <Demo />
     </div>
     <!-- <TheWelcome @onKey="onKey"></TheWelcome>
     <div style="display: flex;">
@@ -93,6 +95,7 @@ const foo = inject('foo')
 <style scoped lang="scss">
 .box {
   color: red;
+  text-align: center;
   .demo {
     color: blue;
   }
