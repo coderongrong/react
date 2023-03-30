@@ -12,6 +12,7 @@
     "dotenv": "^16.0.3",
     "dotenv-expand": "^10.0.0",
     "element-plus": "^2.2.21",
+    "js-base64": "^3.7.5",
     "lodash": "^4.17.21",
     "make-loader": "^1.1.9",
     "make-loader-ui": "^1.0.0",
