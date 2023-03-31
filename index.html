@@ -218,9 +218,9 @@
       // 获取数组原型, 后面修改7个方法
       const originProto = Array.prototype
       // 创建对象做备份，修改响应式都是在备份的上进行，不影响原始数组方法
-      const arrayProto = Object.create(originProto)
+      const arrayProto = Object.create(originProto);
       // 拦截数组方法，在变更时发出通知
-      ;['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(
+      ['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(
         (method) => {
           // 在备份的原型上做修改
           arrayProto[method] = function () {
