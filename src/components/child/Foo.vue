@@ -2,7 +2,7 @@
   <div>foo...</div>
   <span>foo... --- {{ count }}</span>
   <br />
-  <button @click="increment">click me</button>
+  <button @click="handleAdd">click me</button>
 </template>
 
 <script setup>
@@ -13,6 +13,7 @@ import {
   onBeforeUnmount,
   reactive,
 } from 'vue'
+
 import { useCounterStore } from '../../stores/counter'
 import { storeToRefs } from 'pinia'
 
@@ -20,18 +21,17 @@ const store = useCounterStore()
 const { count } = storeToRefs(store)
 const { increment } = useCounterStore()
 
-const handleADd = () => {
+const handleAdd = () => {
   increment()
-  console.log(count)
 }
 onMounted(() => {
-  console.log('onMounted --> useCounterStore', useCounterStore().count)
+  // console.log('onMounted --> useCounterStore', useCounterStore().count)
 })
 onUnmounted(() => {
   console.log('onUnmounted')
 })
 onBeforeMount(() => {
-  console.log('onBeforeMount')
+  // console.log('onBeforeMount')
 })
 onBeforeUnmount(() => {
   console.log('onBeforeUnmount')

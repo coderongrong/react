@@ -26,13 +26,13 @@ const handleADd = () => {
 }
 const handleReset = () => store.$reset()
 onMounted(() => {
-  console.log('onMounted --> useCounterStore ✨', storeToRefs(store), store)
+  // console.log('onMounted --> useCounterStore ✨', storeToRefs(store), store)
 })
 onUnmounted(() => {
   console.log('onUnmounted')
 })
 onBeforeMount(() => {
-  console.log('onBeforeMount')
+  // console.log('onBeforeMount')
 })
 onBeforeUnmount(() => {
   console.log('onBeforeUnmount')
