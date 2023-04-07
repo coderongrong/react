@@ -1,6 +1,7 @@
 <template>
   <div>foo...</div>
   <span>foo... --- {{ count }}</span>
+  <span>foo... --- {{ doubleCount }}</span>
   <br />
   <button @click="handleAdd">click me</button>
 </template>
@@ -18,7 +19,7 @@ import { useCounterStore } from '../../stores/counter'
 import { storeToRefs } from 'pinia'
 
 const store = useCounterStore()
-const { count } = storeToRefs(store)
+const { count, doubleCount } = storeToRefs(store)  // doubleCount
 const { increment } = useCounterStore()
 
 const handleAdd = () => {
@@ -26,6 +27,7 @@ const handleAdd = () => {
 }
 onMounted(() => {
   // console.log('onMounted --> useCounterStore', useCounterStore().count)
+  console.log('useCounterStore', useCounterStore)
 })
 onUnmounted(() => {
   console.log('onUnmounted')

@@ -17,9 +17,10 @@ import {
 import { useCounterStore } from '../../stores/counter'
 import { storeToRefs } from 'pinia'
 
+const { deccrement } = useCounterStore()
 const store = useCounterStore()
 const { count } = storeToRefs(store)
-const { deccrement } = useCounterStore()
+
 
 const handleADd = () => {
   deccrement()

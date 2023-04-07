@@ -5,6 +5,7 @@ import TheWelcome from '@com/TheWelcome.vue'
 import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
 import { Base64 } from 'js-base64'
+import Three from './Three/index.vue'
 import Foo from './components/child/Foo.vue'
 import Demo from './components/child/Demo.vue'
 
@@ -80,15 +81,15 @@ const foo = inject('foo')
 
 <template>
   <div class="d-f">
-    <div class="box">
-      <!-- <span class='demo'>demo</span> -->
+    <!-- <div class="box">
       <Foo />
       <Demo />
-    </div>
+    </div> -->
     <!-- <TheWelcome @onKey="onKey"></TheWelcome>
     <div style="display: flex;">
       <router-view></router-view>
     </div> -->
+      <Three />
   </div>
 </template>
 
