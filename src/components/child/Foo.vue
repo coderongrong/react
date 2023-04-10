@@ -25,19 +25,6 @@ const { increment } = useCounterStore()
 const handleAdd = () => {
   increment()
 }
-onMounted(() => {
-  // console.log('onMounted --> useCounterStore', useCounterStore().count)
-  console.log('useCounterStore', useCounterStore)
-})
-onUnmounted(() => {
-  console.log('onUnmounted')
-})
-onBeforeMount(() => {
-  // console.log('onBeforeMount')
-})
-onBeforeUnmount(() => {
-  console.log('onBeforeUnmount')
-})
 </script>
 
 <style scoped lang="scss">

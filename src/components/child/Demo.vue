@@ -4,40 +4,31 @@
   <br />
   <button @click="handleADd">click me</button>
   <button @click="handleReset">reset</button>
+
+  <h1 v-for='item in list.data' :key='item'>{{ item }}</h1>
+  <button @click='incrementList'>incrementList</button>
+  <button @click='deccrementList'>deccrementList</button>
 </template>
 
 <script setup>
-import {
-  onMounted,
-  onUnmounted,
-  onBeforeMount,
-  onBeforeUnmount,
-  reactive,
-} from 'vue'
-import { useCounterStore } from '../../stores/counter'
+import { useCounterStore, useListStore } from '../../stores/counter'
 import { storeToRefs } from 'pinia'
 
 const { deccrement } = useCounterStore()
 const store = useCounterStore()
 const { count } = storeToRefs(store)
 
+const storeList = useListStore()
+const { list } = storeToRefs(storeList)
+const { incrementList, deccrementList } = useListStore()
 
 const handleADd = () => {
   deccrement()
 }
 const handleReset = () => store.$reset()
-onMounted(() => {
-  // console.log('onMounted --> useCounterStore ✨', storeToRefs(store), store)
-})
-onUnmounted(() => {
-  console.log('onUnmounted')
-})
-onBeforeMount(() => {
-  // console.log('onBeforeMount')
-})
-onBeforeUnmount(() => {
-  console.log('onBeforeUnmount')
-})
+
+
+
 </script>
 
 <style scoped lang="scss">

@@ -44,5 +44,4 @@ app.use(router)
 app.component(Input.name, Input) // 全局组件
 app.mount('#app')
 
-
 // https://github.com/coderongrong/react/blob/vite2.0/my-config.js

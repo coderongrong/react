@@ -1,6 +1,5 @@
-import { ref, computed } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import { defineStore } from 'pinia'
-
 
 export const useCounterStore = defineStore('counter', () => {
   const count = ref(100)
@@ -16,4 +15,21 @@ export const useCounterStore = defineStore('counter', () => {
   }
 
   return { count, doubleCount, increment, deccrement }
+})
+
+
+export const useListStore = defineStore('list', () => {
+  const list = reactive({
+    data: ['🍍', '✨', '😊']
+  })
+  
+  function incrementList() {
+    list.data.push('🍍')
+  }
+
+  function deccrementList() {
+    list.data.pop()
+  }
+
+  return { list, incrementList, deccrementList }
 })
