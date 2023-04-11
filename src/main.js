@@ -24,6 +24,9 @@ import StoreReset from '../plugins/storeReset.js'
 // const modules = import.meta.glob('./custom/*.vue')
 // console.log('>>>>>> modules', modules)
 
+import './promise.js'
+// import './apromise.js'
+
 const app = createApp(App)
 
 const pinia = createPinia()
@@ -42,6 +45,6 @@ app.use(myPlugin, {
 
 app.use(router)
 app.component(Input.name, Input) // 全局组件
-app.mount('#app')
+// app.mount('#app')
 
 // https://github.com/coderongrong/react/blob/vite2.0/my-config.js
