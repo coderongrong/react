@@ -23,7 +23,8 @@ export default defineConfig({
   //   port: 8080,
   //   proxy: {
   //     /* '/api': {
-  //        target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro', //mock API接口系统
+  //        target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro/&id=MIA9409', //mock API接口系统
+  //        target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro/&id=Mipy-1', //mock API接口系统
   //        ws: false,
   //        changeOrigin: true,
   //        pathRewrite: {
@@ -40,6 +41,11 @@ export default defineConfig({
   //       ws: false,
   //       changeOrigin: true
   //     }
+  // '/jeecg-boot': {
+    //       target: 'http://39.98.118.21', // 朝阳本地
+    //       ws: false,
+    //       changeOrigin: true
+    //     }
   //   }
   // },
 })
