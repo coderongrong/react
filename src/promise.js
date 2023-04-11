@@ -104,33 +104,63 @@ class _Promise {
   }
 }
 
-const p = new _Promise((resolve, reject) => {
-  console.log('start')
-  setTimeout(() => {
-    resolve('成功 1001')
-  }, 1000)
-})
-  .then((res) => {
-    console.log('success', res)
-    return new _Promise((resolve, rej) => {
-      setTimeout(() => {
-        resolve('成功 ---- 200')
-      }, 1000)
-    })
-  })
-  .then((res) => {
-    console.log('success then 2 ', res)
-    return new _Promise((resolve, rej) => {
-      setTimeout(() => {
-        resolve('成功 ---- 300')
-      }, 1000)
-    })
-  })
-  .then((res) => {
-    console.log('success then 3 ', res)
-    return 'asdasdasdasd'
-  })
-  .then((res) => {
-    console.log(res)
-  })
+// const p = new _Promise((resolve, reject) => {
+//   console.log('start')
+//   setTimeout(() => {
+//     resolve('成功 1001')
+//   }, 1000)
+// })
+//   .then((res) => {
+//     console.log('success', res)
+//     return new _Promise((resolve, rej) => {
+//       setTimeout(() => {
+//         resolve('成功 ---- 200')
+//       }, 1000)
+//     })
+//   })
+//   .then((res) => {
+//     console.log('success then 2 ', res)
+//     return new _Promise((resolve, rej) => {
+//       setTimeout(() => {
+//         resolve('成功 ---- 300')
+//       }, 1000)
+//     })
+//   })
+//   .then((res) => {
+//     console.log('success then 3 ', res)
+//     return 'asdasdasdasd'
+//   })
+//   .then((res) => {
+//     console.log(res)
+//   })
 
+
+class Observe {
+  constructor() {
+    this.arr = {}
+  }
+
+  on(str, fn) {
+   this.arr[str] = fn
+  }
+
+  go(event, data) {
+    if(this.arr[event]) {
+      this.arr[event](data)
+    }
+  }
+  remove(str) {
+    delete this.arr[str]
+  }
+}
+
+var ob = new Observe()
+
+ob.on('start', data => {
+  console.log(data)
+})
+
+ob.go('start', 100)
+ob.go('start', 1000)
+ob.remove('start')
+ob.go('start', 1000)
