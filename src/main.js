@@ -18,7 +18,7 @@ import 'element-plus/dist/index.css'
 import router from './router'
 
 import { service } from './config/require'
-// import AllInput from 'make-loader-ui'
+import { input, _Promise } from 'make-loader'
 
 import StoreReset from '../plugins/storeReset.js'
 // const modules = import.meta.glob('./custom/*.vue')
@@ -44,7 +44,12 @@ app.use(myPlugin, {
 })
 
 app.use(router)
-app.component(Input.name, Input) // 全局组件
-// app.mount('#app')
+app.component(input.default.name, input.default) // 全局组件
+app.mount('#app')
 
+new _Promise((res, rej) => {
+  res(100)
+}).then(res => {
+  // console.log('mian ---> res', res)
+})
 // https://github.com/coderongrong/react/blob/vite2.0/my-config.js

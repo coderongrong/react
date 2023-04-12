@@ -8,6 +8,7 @@ import { Base64 } from 'js-base64'
 import Three from './Three/index.vue'
 import Foo from './components/child/Foo.vue'
 import Demo from './components/child/Demo.vue'
+import { pinia } from 'make-loader'
 
 // baseURL: 'http://2l916746t7.goho.co:1008/jeecg-boot',
 const service = axios.create({
@@ -38,6 +39,7 @@ const child = ref(null)
 const num = ref(0)
 
 onMounted(async () => {
+  console.log('pinia', pinia)
   const params = {
     username: 'jieyingjing',
     password: Base64.encode('123456kkk'),
@@ -90,6 +92,7 @@ const foo = inject('foo')
       <router-view></router-view>
     </div> -->
       <!-- <Three /> -->
+      <AllInput />
   </div>
 </template>
 
