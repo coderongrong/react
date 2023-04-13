@@ -7,29 +7,6 @@ import { resolve } from 'path'
 
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
-// var dotenv = require('dotenv')
-// var dotenvExpand = require('dotenv-expand')
-
-// var myEnv = dotenv.config()
-// dotenvExpand.expand(myEnv)
-
-// console.log('>>>>>>>>>>  ,env', process.env)
-
-// https://vitejs.dev/config/
-// export default defineConfig({
-//   runtimeCompiler: true,  // 加上这一段
-//   plugins: [vue()],
-//   resolve: {
-//     alias: {
-//       '@': fileURLToPath(new URL('./src', import.meta.url))
-//     }
-//   },
-//   build: {
-//     commonjsOptions: {
-//       include: [/linked-dep/, /node_modules/]
-//     }
-//   },
-// })
 
 function asyncFunction() {
   return new Promise((res, rej) => {
@@ -41,6 +18,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
   const data = await asyncFunction()
   const env = loadEnv(mode, process.cwd(), '')
   console.log('mode', ['🍍', '✨', '😊'])
+  // return
   if (command === 'serve') {
     console.log('serve')
     return {
@@ -51,8 +29,6 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
       transform() {
         console.log('-------> transform() {},')
       },
-      // base: '/vite/',
-      // dev 独有配置
       runtimeCompiler: true, // 加上这一段
       plugins: [
         { enforce: 'pre' },

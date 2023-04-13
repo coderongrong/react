@@ -24,7 +24,7 @@ import StoreReset from '../plugins/storeReset.js'
 // const modules = import.meta.glob('./custom/*.vue')
 // console.log('>>>>>> modules', modules)
 
-import './promise.js'
+// import './promise.js'
 // import './apromise.js'
 
 const app = createApp(App)

@@ -91,8 +91,8 @@ const foo = inject('foo')
     <div style="display: flex;">
       <router-view></router-view>
     </div> -->
-      <!-- <Three /> -->
-      <AllInput />
+    <!-- <Three /> -->
+    <AllInput />
   </div>
 </template>
 
