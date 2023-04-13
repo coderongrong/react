@@ -3,6 +3,8 @@
 //   resolve('成功了')
 // })
 
+import { reject } from 'lodash'
+
 // console.log('after new promise')
 
 // const p2 = p1.then((data) => {
@@ -19,124 +21,158 @@
 //   }
 // )
 
+// class _Promise {
+//   constructor(options) {
+//     this.i = 0
+//     this.result = null
+//     this.status = 'PENDING'
+//     this.reason = null
+//     this.resolveCallback = []
+//     this.rejectCallback = []
+//     options &&
+//       options(
+//         (res) => {
+//           this.status = 'FULFILLED'
+//           this.result = res
+//           this.resolveCallback.forEach((fn) => fn())
+//         },
+//         (rea) => {
+//           this.status = 'REJECTED'
+//           this.reason = rea
+//           this.rejectCallback.forEach((fn) => fn())
+//         }
+//       )
+//   }
+
+//   resolvePromise(promise2, x, resolve, reject) {
+//     if (promise2 === x) {
+//       return reject(
+//         new TypeError('Chaining cycle detected for promise #<Promise>')
+//       )
+//     }
+//     let called
+//     if ((typeof x === 'object' && x != null) || typeof x === 'function') {
+//       try {
+//         let then = x.then
+//         if (typeof then == 'function') {
+//           then.call(x, (y) => {
+//             if (called) return
+//             called = true
+//             this.resolvePromise(promise2, y, resolve, reject)
+//           })
+//         } else {
+//           resolve(x)
+//         }
+//       } catch (e) {}
+//     } else {
+//       console.log('xxxxxxxxx')
+//       resolve(x)
+//     }
+//   }
+
+//   then(_resolve, _reject) {
+//     _resolve = typeof _resolve == 'function' ? _resolve : (v) => v
+//     _reject = typeof _reject == 'function' ? _reject : (v) => v
+
+//     let promise2 = new _Promise((resolve, reject) => {
+//       if (this.status == 'FULFILLED') {
+//         setTimeout(() => {
+//           let x = _resolve(this.result)
+//           this.resolvePromise(promise2, x, resolve, reject)
+//         })
+//       }
+//       if (this.status == 'PENDING') {
+//         this.resolveCallback.push(() => {
+//           try {
+//             let x = _resolve(this.result)
+//             this.resolvePromise(promise2, x, resolve, reject)
+//           } catch (e) {
+//             reject(e)
+//           }
+//         })
+//         this.rejectCallback.push(() => {
+//           setTimeout(() => {
+//             let x = _reject(this.reason)
+//             this.resolvePromise(promise2, x, resolve, reject)
+//           })
+//         })
+//       }
+//     })
+//     return promise2
+//   }
+
+//   catch(res) {
+//     if (this.status == 'REJECTED') {
+//       res(this.reason)
+//     }
+//   }
+// }
 class _Promise {
   constructor(options) {
-    this.i = 0
-    this.result = null
+    this.data = null
+    this.resolveArr = []
     this.status = 'PENDING'
-    this.reason = null
-    this.resolveCallback = []
-    this.rejectCallback = []
-    options &&
-      options(
-        (res) => {
-          this.status = 'FULFILLED'
-          this.result = res
-          this.resolveCallback.forEach((fn) => fn())
-        },
-        (rea) => {
-          this.status = 'REJECTED'
-          this.reason = rea
-          this.rejectCallback.forEach((fn) => fn())
-        }
-      )
+    options((result) => {
+      this.status = 'FULFILLED'
+      this.data = result
+      this.resolveArr.forEach((fn) => fn())
+    })
   }
 
-  resolvePromise(promise2, x, resolve, reject) {
-    if (promise2 === x) {
-      return reject(
-        new TypeError('Chaining cycle detected for promise #<Promise>')
-      )
-    }
-    let called
-    if ((typeof x === 'object' && x != null) || typeof x === 'function') {
-      try {
-        let then = x.then
-        if (typeof then == 'function') {
-          then.call(x, (y) => {
-            if (called) return
-            called = true
-            this.resolvePromise(promise2, y, resolve, reject)
-          })
-        } else {
-          resolve(x)
-        }
-      } catch (e) {}
+  fnResolve(x, resolve) {
+    let then = x?.then
+    if ((typeof x == 'object' && x != null) || typeof x == 'function') {
+      if (typeof then == 'function') {
+        then.call(x, (y) => {
+          this.fnResolve(y, resolve)
+        })
+      }
     } else {
       resolve(x)
     }
   }
-
-  then(_resolve, _reject) {
-    _resolve = typeof _resolve == 'function' ? _resolve : (v) => v
-    _reject = typeof _reject == 'function' ? _reject : (v) => v
-
-    let promise2 = new _Promise((resolve, reject) => {
-      if (this.status == 'FULFILLED') {
-        setTimeout(() => {
-          let x = _resolve(this.result)
-          this.resolvePromise(promise2, x, resolve, reject)
-        })
-      }
-      if (this.status == 'PENDING') {
-        this.resolveCallback.push(() => {
-          try {
-            let x = _resolve(this.result)
-            this.resolvePromise(promise2, x, resolve, reject)
-          } catch (e) {
-            reject(e)
-          }
-        })
-        this.rejectCallback.push(() => {
-          setTimeout(() => {
-            let x = _reject(this.reason)
-            this.resolvePromise(promise2, x, resolve, reject)
-          })
-        })
-      }
+  then(_resolve) {
+    return new _Promise((resolve, reject) => {
+      this.resolveArr.push(() => {
+        let x = _resolve(this.data)
+        this.fnResolve(x, resolve)
+      })
     })
-    return promise2
-  }
-
-  catch(res) {
-    if (this.status == 'REJECTED') {
-      res(this.reason)
-    }
   }
 }
-function options(resolve, reject){
+function options(resolve, reject) {
   setTimeout(() => {
-    resolve('成功 1001')
+    resolve('成功 100')
   }, 1000)
 }
-const p = new _Promise(options).then((res) => {
-  console.log('success', res)
-  return new _Promise((resolve, rej) => {
-    setTimeout(() => {
-      resolve('成功 ---- 200')
-    }, 1000)
+const p = new _Promise(options)
+  .then((res) => {
+    console.log('success', res)
+    return new _Promise((resolve, rej) => {
+      setTimeout(() => {
+        resolve('成功 ---- 200')
+      }, 1000)
+    })
   })
+  .then((res) => {
+    console.log('success then 2 ', res)
+    return new _Promise((resolve, rej) => {
+      setTimeout(() => {
+        resolve('成功 ---- 300')
+      }, 1000)
+    })
+  })
+  .then((res) => {
+    console.log('success then 3 ', res)
+    return new _Promise((res) => {
+      setTimeout(() => {
+        res(2000)
+      }, 1000)
+    })
+  })
+.then((res) => {
+  console.log(res)
 })
-// .then((res) => {
-//   console.log('success then 2 ', res)
-//   return new _Promise((resolve, rej) => {
-//     setTimeout(() => {
-//       resolve('成功 ---- 300')
-//     }, 1000)
-//   })
-// })
-// .then((res) => {
-//   console.log('success then 3 ', res)
-//   return new _Promise((res) => {
-//     setTimeout(() => {
-//       res(2000)
-//     }, 1000)
-//   })
-// })
-// .then((res) => {
-//   console.log(res)
-// })
-//
 
 
 export default _Promise

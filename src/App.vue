@@ -39,7 +39,7 @@ const child = ref(null)
 const num = ref(0)
 
 onMounted(async () => {
-  console.log('pinia', pinia)
+  // console.log('pinia', pinia)
   const params = {
     username: 'jieyingjing',
     password: Base64.encode('123456kkk'),
