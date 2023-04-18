@@ -20,7 +20,7 @@ export const useCounterStore = defineStore('counter', () => {
 
 export const useListStore = defineStore('list', () => {
   const list = reactive({
-    data: ['🍍', '✨', '😊']
+    data: ['🍍', '✨', '😊', '🥚', '🍎']
   })
   
   function incrementList() {

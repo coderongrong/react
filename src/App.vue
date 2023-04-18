@@ -83,10 +83,10 @@ const foo = inject('foo')
 
 <template>
   <div class="d-f">
-    <div class="box">
+    <!-- <div class="box">
       <Foo />
       <Demo />
-    </div>
+    </div> -->
     <!-- <TheWelcome @onKey="onKey"></TheWelcome>
     <div style="display: flex;">
       <router-view></router-view>

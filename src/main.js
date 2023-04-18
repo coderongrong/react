@@ -53,3 +53,5 @@ new _Promise((res, rej) => {
   // console.log('mian ---> res', res)
 })
 // https://github.com/coderongrong/react/blob/vite2.0/my-config.js
+
+  console.log('环境变量', import.meta.env)

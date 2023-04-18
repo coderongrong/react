@@ -36,7 +36,7 @@ export default defineConfig({
             target: 'http://192.168.1.222:1008/jeecg-boot',
             changeOrigin: true,
             rewrite: (path) => {
-                console.log('path --> ', path)
+                console.log("path --> 🍍, ✨, 😊, 🥚, 🍎", path)
                 return path.replace(/sys/, 'sys')
             },
         }
