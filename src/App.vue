@@ -35,8 +35,17 @@ const list = ref([1, 2, 3, 4, 5])
 
 const itemRefs = ref([])
 const child = ref(null)
+const canvasRef = ref(null)
 
 const num = ref(0)
+const numValue = ref('')
+const canvasFn = (color = 'green') => {
+  const canvas = document.getElementById('canvas')
+  const ctx = canvas.getContext('2d')
+
+  ctx.fillStyle = 'green'
+  ctx.fillRect(10, 10, 150, 100)
+}
 
 onMounted(async () => {
   const params = {
@@ -57,18 +66,23 @@ onMounted(async () => {
   } catch (e) {
     // console.log(e)
   }
+  console.log(canvasRef)
+  canvasFn('green')
 })
 const handleLoade = async () => {
   console.log('handleLoade')
-  let i = 1000000000
-  while ((i--, i > 0)) {}
-  console.log('执行完了')
+  // let i = 1000000000
+  // while ((i--, i > 0)) {}
+  // console.log('执行完了')
 
-  const fetchPromise1 = await fetch(
-    'https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json'
-  )
-  console.log('fetchPromise2', fetchPromise1)
+  // const fetchPromise1 = await fetch(
+  //   'https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json'
+  // )
+  // console.log('fetchPromise2', fetchPromise1)
+
+  canvasFn('red')
 }
+
 const onKey = (key) => {
   // console.log('app...', key)
   num.value = key
@@ -86,7 +100,20 @@ const onKey = (key) => {
     router.push('/table')
   }
 }
+const debounce = () => {
+  var timer
+  return function () {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      console.log('input')
+    }, 1000)
+  }
+}
+const fn = debounce()
 const foo = inject('foo')
+const handleChange = () => {
+  fn()
+}
 </script>
 
 <template>
@@ -94,9 +121,10 @@ const foo = inject('foo')
     <router-link to="/about"> <el-button> about </el-button></router-link>
     <router-link to="/home"> <el-button> home </el-button></router-link>
     <router-view></router-view>
-    <input type="text" value="1000" />
+    <el-input type="text" v-model="numValue" @input="handleChange" />
     <el-button type="primary" @click="handleLoade">加载</el-button>
-    <!-- <el-button type="primary" @click="handleLoade" style='margin-left: 50px'>333</el-button> -->
+    <br />
+    <canvas id="canvas" ref='canvasRef'></canvas>
   </div>
 </template>
 

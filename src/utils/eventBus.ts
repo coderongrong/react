@@ -1,6 +1,3 @@
-import { Fn } from "@vueuse/shared";
-
-
 // TX 
 type Listener = {
   (data: unknown): unknown;
@@ -30,7 +27,7 @@ class MyEvent implements EventSupport {
     //增加remove方法
     const that: any = this
     return {
-      remove: function() {
+      remove: function () {
         that[event] = null
       }
     }

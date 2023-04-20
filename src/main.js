@@ -11,7 +11,7 @@ import router from './router'
 import { service } from './config/require'
 import { input, _Promise } from 'make-loader'
 import StoreReset from '../plugins/storeReset.js'
-import './promise.js'
+// import './promise.js'
 const app = createApp(App)
 
 const pinia = createPinia()
