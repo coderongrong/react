@@ -39,7 +39,6 @@ const child = ref(null)
 const num = ref(0)
 
 onMounted(async () => {
-  // console.log('pinia', pinia)
   const params = {
     username: 'jieyingjing',
     password: Base64.encode('123456kkk'),
@@ -59,6 +58,17 @@ onMounted(async () => {
     // console.log(e)
   }
 })
+const handleLoade = async () => {
+  console.log('handleLoade')
+  let i = 1000000000
+  while ((i--, i > 0)) {}
+  console.log('执行完了')
+
+  const fetchPromise1 = await fetch(
+    'https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json'
+  )
+  console.log('fetchPromise2', fetchPromise1)
+}
 const onKey = (key) => {
   // console.log('app...', key)
   num.value = key
@@ -76,23 +86,17 @@ const onKey = (key) => {
     router.push('/table')
   }
 }
-
 const foo = inject('foo')
-// console.log('APP----->', foo)
 </script>
 
 <template>
   <div class="d-f">
-    <!-- <div class="box">
-      <Foo />
-      <Demo />
-    </div> -->
-    <!-- <TheWelcome @onKey="onKey"></TheWelcome>
-    <div style="display: flex;">
-      <router-view></router-view>
-    </div> -->
-    <!-- <Three /> -->
-    <AllInput />
+    <router-link to="/about"> <el-button> about </el-button></router-link>
+    <router-link to="/home"> <el-button> home </el-button></router-link>
+    <router-view></router-view>
+    <input type="text" value="1000" />
+    <el-button type="primary" @click="handleLoade">加载</el-button>
+    <!-- <el-button type="primary" @click="handleLoade" style='margin-left: 50px'>333</el-button> -->
   </div>
 </template>
 

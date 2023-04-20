@@ -10,14 +10,17 @@ import vue from '@vitejs/plugin-vue'
 
 function asyncFunction() {
   return new Promise((res, rej) => {
-    res('100')
+    setTimeout(() => {
+      res('100---11')
+    }, 1000)
   })
 }
 
 export default defineConfig(async ({ command, mode, ssrBuild }) => {
   const data = await asyncFunction()
-  const env = loadEnv(mode, process.cwd(), '')
-  console.log('mode', ['🍍', '✨', '😊'])
+  const env = loadEnv(mode, process.cwd(), 'APP_')
+  console.log('mode', ['🍍, ✨, 😊, 🥚, 🍎, 🍔， 🍌，📕， ❤'], env, data)
+  console.log(['❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤'])
   // return
   if (command === 'serve') {
     console.log('serve')
@@ -40,7 +43,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
           targets: ['defaults', 'not IE 11'],
         }),
       ],
-      envPrefix: 'APP_',
+      envPrefix: 'VITE_',
       // publicDir: false,
       css: {
         loaderOptions: {

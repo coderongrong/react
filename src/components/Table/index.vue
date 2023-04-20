@@ -100,19 +100,11 @@
       <component is="a-button" type="primary" @click="handlebtn4"
         >asdasd</component
       >
-      <Children
-        :msg="msg"
-        @changeChildren="changeChildren"
-        @delete="hanlddelete"
-      />
     </div>
   </div>
 </template>
 
 <script setup lang='ts'>
-import classes from "@/assets/example.module.css"; // 模块化 css
-// console.log(classes)
-import Children from "./children.vue";
 import {
   shallowReactive,
   isReactive,

@@ -109,70 +109,64 @@ import { reject } from 'lodash'
 // }
 class _Promise {
   constructor(options) {
-    this.data = null
-    this.resolveArr = []
-    this.status = 'PENDING'
-    options((result) => {
-      this.status = 'FULFILLED'
-      this.data = result
-      this.resolveArr.forEach((fn) => fn())
+    this.result = null
+    this.arrFn = []
+    options((data) => {
+      this.result = data
+      this.arrFn.forEach((fn) => fn())
     })
   }
 
-  fnResolve(x, resolve) {
-    let then = x?.then
+  handle(p, x, res) {
+    let called
     if ((typeof x == 'object' && x != null) || typeof x == 'function') {
+      let then = x.then
       if (typeof then == 'function') {
         then.call(x, (y) => {
-          this.fnResolve(y, resolve)
+          if (called) return
+          called = true
+          this.handle(p, y, res)
         })
+      } else {
+        res(x)
       }
     } else {
-      resolve(x)
+      res(x)
     }
   }
-  then(_resolve) {
-    return new _Promise((resolve, reject) => {
-      this.resolveArr.push(() => {
-        let x = _resolve(this.data)
-        this.fnResolve(x, resolve)
+
+  then(resolve) {
+    let p = new _Promise((res) => {
+      this.arrFn.push(() => {
+        const x = resolve(this.result)
+        this.handle(p, x, res)
       })
     })
+    return p
   }
 }
-function options(resolve, reject) {
+
+new _Promise((res) => {
   setTimeout(() => {
-    resolve('成功 100')
+    res(1000)
   }, 1000)
-}
-const p = new _Promise(options)
+})
   .then((res) => {
-    console.log('success', res)
-    return new _Promise((resolve, rej) => {
-      setTimeout(() => {
-        resolve('成功 ---- 200')
-      }, 1000)
-    })
-  })
-  .then((res) => {
-    console.log('success then 2 ', res)
-    return new _Promise((resolve, rej) => {
-      setTimeout(() => {
-        resolve('成功 ---- 300')
-      }, 1000)
-    })
-  })
-  .then((res) => {
-    console.log('success then 3 ', res)
+    console.log('res --> ', res)
     return new _Promise((res) => {
       setTimeout(() => {
-        res(2000)
+        res(200)
       }, 1000)
     })
   })
-.then((res) => {
-  console.log(res)
-})
-
+  .then((res) => {
+    console.log('res --> 2', res)
+    return new _Promise((res) => {
+      setTimeout(() => res(300), 1000)
+    })
+  })
+  .then((res) => {
+    console.log('res---> 3', res)
+  })
 
 export default _Promise
