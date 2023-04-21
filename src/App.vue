@@ -51,13 +51,12 @@ onMounted(async () => {
   const params = {
     username: 'jieyingjing',
     password: Base64.encode('123456kkk'),
-    captcha: '1',
+    captcha: '11',
     remember_me: true,
     loginType: '3',
   }
-  const { result } = await service.post('/sys/login', params)
-  // console.log('>>> res', result)
-  localStorage.setItem('Access-Token', result.token)
+  // const { result } = await service.post('/sys/login', params)
+  // localStorage.setItem('Access-Token', result.token)
   try {
     const res = await service.get(
       `/sys/productClass/queryByParentId?_t=1669339352&parentId=0&type=1&classType=xxx`
@@ -66,7 +65,7 @@ onMounted(async () => {
   } catch (e) {
     // console.log(e)
   }
-  console.log(canvasRef)
+  // console.log('%c', canvasRef, "color:red")
   canvasFn('green')
 })
 const handleLoade = async () => {

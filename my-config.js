@@ -8,6 +8,8 @@ import { resolve } from 'path'
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
+import { consoles } from './plugins/console.js'
+console.log('consoles', consoles)
 function asyncFunction() {
   return new Promise((res, rej) => {
     setTimeout(() => {
@@ -19,22 +21,20 @@ function asyncFunction() {
 export default defineConfig(async ({ command, mode, ssrBuild }) => {
   const data = await asyncFunction()
   const env = loadEnv(mode, process.cwd(), 'APP_')
-  console.log('mode', ['🍍, ✨, 😊, 🥚, 🍎, 🍔， 🍌，📕， ❤'], env, data)
+  // console.log('mode', ['🍍, ✨, 😊, 🥚, 🍎, 🍔， 🍌，📕， ❤'], env, data)
   console.log(['❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤'])
   // return
   if (command === 'serve') {
-    console.log('serve')
     return {
       esbuild: {
         jsxFactory: 'h',
         jsxFragment: 'Fragment',
       },
       transform() {
-        console.log('-------> transform() {},')
+        // console.log('-------> transform() {},')
       },
       runtimeCompiler: true, // 加上这一段
       plugins: [
-        { enforce: 'pre' },
         vue({
           reactivityTransform: true,
         }),
@@ -42,6 +42,10 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
         legacy({
           targets: ['defaults', 'not IE 11'],
         }),
+        {
+          ...consoles({ color: 'red' }),
+          enforce: 'pre'
+        }
       ],
       envPrefix: 'VITE_',
       // publicDir: false,
@@ -61,8 +65,8 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
             test: /\.md$/,
             use: [
               {
-                loader: resolve(__dirname, 'loaders/fileLoader.js')
-              }
+                loader: resolve(__dirname, 'loaders/fileLoader.js'),
+              },
             ],
           },
         ],
@@ -123,7 +127,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
     }
   } else {
     // command === 'build'
-    console.log("command === 'build'", command)
+    // console.log("command === 'build'", command)
     return {
       // build 独有配置
       rollupOptions: {

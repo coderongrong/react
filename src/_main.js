@@ -36,7 +36,7 @@ var obj = {
   }
 }
 console.log('%c----------->', 'color:red',  obj)
-console.log('aaaaa')
+console.log('bbbbb')
 
 app.use(router)
 app.component(input.default.name, input.default) // 全局组件
