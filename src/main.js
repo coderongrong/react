@@ -28,24 +28,11 @@ app.use(myPlugin, {
   axios: service,
 })
 
-var obj = {
-  a: 1,
-  b: 2,
-  c: { 
-    d: 11
-  }
-}
-console.log('%c----------->', 'color:red',  obj)
-console.log('aaaaa')
-
 app.use(router)
-app.component(input.default.name, input.default) // 全局组件
 app.mount('#app')
+console.log('_main.js')
+console.log('_main.js')
+console.log('_main.js')
 
-new _Promise((res, rej) => {
-  res(100)
-}).then((res) => {
-  // console.log('mian ---> res', res)
-})
 // https://github.com/coderongrong/react/blob/vite2.0/my-config.js
 // console.log('环境变量', import.meta.env)

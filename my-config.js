@@ -4,11 +4,15 @@ import { fileURLToPath, URL } from 'node:url'
 // import { someMethod } from 'my-dep'
 import legacy from '@vitejs/plugin-legacy'
 import { resolve } from 'path'
-
+import fs from 'fs'
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
-
-import { consoles } from './plugins/console.js'
+import { consoles, printLoader } from 'make-loader'
+var files = ''
+fs.readFile('./src/_main.js', 'utf8', (err, data) => {
+  files = data
+})
+// import { consoles } from './plugins/console.js'
 console.log('consoles', consoles)
 function asyncFunction() {
   return new Promise((res, rej) => {
@@ -43,7 +47,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
           targets: ['defaults', 'not IE 11'],
         }),
         {
-          ...consoles({ color: 'red' }),
+          ...consoles({ color: 'red'}, files),
           enforce: 'pre'
         }
       ],
@@ -69,6 +73,14 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
               },
             ],
           },
+          {
+            test: /main\.js$/,
+            use: [
+              {
+                loader: printLoader
+              }
+            ]
+          }
         ],
       },
       clearScreen: true,
