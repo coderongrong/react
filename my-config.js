@@ -7,13 +7,15 @@ import { resolve } from 'path'
 import fs from 'fs'
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { consoles, printLoader } from 'make-loader'
+// import { consoles, printLoader } from 'make-loader'
+
+import { consoles } from './plugins/console'
+
 var files = ''
 fs.readFile('./src/_main.js', 'utf8', (err, data) => {
   files = data
 })
-// import { consoles } from './plugins/console.js'
-console.log('consoles', consoles)
+
 function asyncFunction() {
   return new Promise((res, rej) => {
     setTimeout(() => {
@@ -46,8 +48,12 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
         legacy({
           targets: ['defaults', 'not IE 11'],
         }),
+        // {
+        //   ...consoles({ color: 'red'}, files),
+        //   enforce: 'pre'
+        // },
         {
-          ...consoles({ color: 'red'}, files),
+          ...consoles(),
           enforce: 'pre'
         }
       ],
@@ -73,14 +79,6 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
               },
             ],
           },
-          {
-            test: /main\.js$/,
-            use: [
-              {
-                loader: printLoader
-              }
-            ]
-          }
         ],
       },
       clearScreen: true,
