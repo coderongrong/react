@@ -99,19 +99,18 @@ const onKey = (key) => {
     router.push('/table')
   }
 }
-const debounce = () => {
+const debounce = (() => {
   var timer
   return function () {
     if (timer) clearTimeout(timer)
     timer = setTimeout(() => {
       console.log('input')
-    }, 1000)
+    }, 500)
   }
-}
-const fn = debounce()
+})()
 const foo = inject('foo')
 const handleChange = () => {
-  fn()
+  debounce()
 }
 </script>
 

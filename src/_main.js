@@ -30,9 +30,9 @@ app.use(myPlugin, {
 
 app.use(router)
 app.mount('#app')
-console.log('_main.js')
-console.log('_main.js')
-console.log('_main.js')
+// console.log('_main.js')
+// console.log('_main.js')
+// console.log('_main.js')
 
 // https://github.com/coderongrong/react/blob/vite2.0/my-config.js
 // console.log('环境变量', import.meta.env)

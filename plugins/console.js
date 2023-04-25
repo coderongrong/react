@@ -1,25 +1,42 @@
-
-const fs = require("fs")
-
-const consoles = (data, file) => {
-  console.log(data, file)
-  fs.readdir('./src', (err, data) => {
-    // console.log('data -------->', data)
-    // data.forEach(file => {
-    //   fs.readFile('./src/' + file, 'utf8', (err, data) => {
-    //     if(data) {
-    //       console.log('----------->', file, data)
-    //     }
-    //   })
-    // })
+const fs = require('fs')
+function handleFiles(str) {
+  fs.readdir(str, (_, data) => {
+    data.forEach((item) => {
+      fs.readFile(str + '/' + item, 'utf8', (err, data) => {
+        if (data) {
+          // console.log('读到的文件-------->', data)
+        } else {
+          const _str = str + '/' + item
+          handleFiles(_str)
+        }
+      })
+    })
   })
+}
+const consoles = (data, file) => {
+  const str = './zipCheck'
+  handleFiles(str)
   fs.readFile('./src/a.js', 'utf8', (err, data) => {
     fs.writeFile('./src/main.js', file, () => {
-        console.log('success')
+      console.log('success')
     })
+  })
+  fs.unlink('./zipCheck/d.js',(err,data)=>{
+    if (err) {
+      console.log(err);
+    } else{
+      console.log('删除文件成功');
+    }
+  })
+  fs.writeFile('./zipCheck/d.js', 'console.log("dddddddd")', (err,data)=>{
+    if (err) {
+      console.log(err);
+    } else{
+      console.log('删除文件成功');
+    }
   })
 }
 
 module.exports = {
-  consoles
+  consoles,
 }
