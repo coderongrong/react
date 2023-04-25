@@ -112,7 +112,7 @@ var debounce = (function () {
 
 
 function debounce_fn() {
-  // console.log('debounce')
+  // console.log('debouncessssss')
 }
 Array(5).fill(1).forEach(item => {
   debounce(debounce_fn)
