@@ -9,6 +9,7 @@ import Three from './Three/index.vue'
 import Foo from './components/child/Foo.vue'
 import Demo from './components/child/Demo.vue'
 import { pinia } from 'make-loader'
+import { debounce } from './utils/index.js'
 
 // baseURL: 'http://2l916746t7.goho.co:1008/jeecg-boot',
 const service = axios.create({
@@ -99,18 +100,12 @@ const onKey = (key) => {
     router.push('/table')
   }
 }
-const debounce = (() => {
-  var timer
-  return function () {
-    if (timer) clearTimeout(timer)
-    timer = setTimeout(() => {
-      console.log('input')
-    }, 500)
-  }
-})()
+
 const foo = inject('foo')
 const handleChange = () => {
-  debounce()
+  debounce(() => {
+    console.log('input updata')
+  })
 }
 </script>
 
@@ -122,7 +117,7 @@ const handleChange = () => {
     <el-input type="text" v-model="numValue" @input="handleChange" />
     <el-button type="primary" @click="handleLoade">加载</el-button>
     <br />
-    <canvas id="canvas" ref='canvasRef'></canvas>
+    <canvas id="canvas" ref="canvasRef"></canvas>
   </div>
 </template>
 

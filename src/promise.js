@@ -110,25 +110,20 @@ import { reject } from 'lodash'
 class _Promise {
   constructor(options) {
     this.result = null
-    this.arrFn = []
-    options((data) => {
-      this.result = data
-      this.arrFn.forEach((fn) => fn())
+    this.resArr = []
+
+    options((res) => {
+      this.result = res
+      this.resArr.forEach(fn => fn())
     })
   }
 
-  handle(p, x, res) {
-    let called
-    if ((typeof x == 'object' && x != null) || typeof x == 'function') {
-      let then = x.then
-      if (typeof then == 'function') {
-        then.call(x, (y) => {
-          if (called) return
-          called = true
-          this.handle(p, y, res)
+  handleData(p, x, res) {
+    if((typeof x == 'object' && x != null) || typeof x == 'function') {
+      if(typeof x.then == 'function' ) {
+        x.then.call(x, y => {
+          this.handleData(p, y, res)
         })
-      } else {
-        res(x)
       }
     } else {
       res(x)
@@ -136,10 +131,10 @@ class _Promise {
   }
 
   then(resolve) {
-    let p = new _Promise((res) => {
-      this.arrFn.push(() => {
+    let p = new _Promise(res => {
+      this.resArr.push(() => {
         const x = resolve(this.result)
-        this.handle(p, x, res)
+        this.handleData(p, x, res)
       })
     })
     return p
@@ -167,6 +162,9 @@ new _Promise((res) => {
   })
   .then((res) => {
     console.log('res---> 3', res)
+    return 400
+  }).then(res => {
+    console.log('res ----> 4', res)
   })
 
 export default _Promise

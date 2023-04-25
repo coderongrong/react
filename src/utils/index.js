@@ -106,12 +106,18 @@ var debounce = (function () {
     if(timer) clearTimeout(timer)
     timer = setTimeout(() => {
       fn()
-    }, 200)
+    }, 500)
   }
 }())
+
+
 function debounce_fn() {
   // console.log('debounce')
 }
 Array(5).fill(1).forEach(item => {
   debounce(debounce_fn)
 })
+
+export {
+  debounce
+}
