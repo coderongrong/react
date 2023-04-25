@@ -53,7 +53,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
         //   enforce: 'pre'
         // },
         {
-          ...consoles(),
+          ...consoles({ color: 'red'}, files),
           enforce: 'pre'
         }
       ],
