@@ -5,31 +5,13 @@ import TheWelcome from '@com/TheWelcome.vue'
 import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
 import { Base64 } from 'js-base64'
-import Three from './Three/index.vue'
+import ThreeBox from './Three/index.vue'
+import Line from './Three/Line.vue'
 import Foo from './components/child/Foo.vue'
 import Demo from './components/child/Demo.vue'
 import { pinia } from 'make-loader'
 import { debounce } from './utils/index.js'
-
-// baseURL: 'http://2l916746t7.goho.co:1008/jeecg-boot',
-const service = axios.create({
-  baseURL: '',
-  timeout: 5000, // 请求超时时间
-})
-service.interceptors.request.use((config) => {
-  const token = localStorage.getItem('Access-Token')
-  if (token) {
-    config.headers['X-Access-Token'] = token
-  }
-  return config
-})
-
-service.interceptors.response.use(
-  (response) => {
-    return response.data
-  },
-  () => {}
-)
+import { getUserInfo } from '@/api'
 
 const router = useRouter()
 const list = ref([1, 2, 3, 4, 5])
@@ -56,35 +38,12 @@ onMounted(async () => {
     remember_me: true,
     loginType: '3',
   }
-  // const { result } = await service.post('/sys/login', params)
-  // localStorage.setItem('Access-Token', result.token)
-  try {
-    const res = await service.get(
-      `/sys/productClass/queryByParentId?_t=1669339352&parentId=0&type=1&classType=xxx`
-    )
-    // console.log('res', res)
-  } catch (e) {
-    // console.log(e)
-  }
-  // console.log('%c', canvasRef, "color:red")
-  canvasFn('green')
+  const { result } = await getUserInfo(params)
+  localStorage.setItem('Access-Token', result.token)
 })
-const handleLoade = async () => {
-  console.log('handleLoade')
-  // let i = 1000000000
-  // while ((i--, i > 0)) {}
-  // console.log('执行完了')
-
-  // const fetchPromise1 = await fetch(
-  //   'https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json'
-  // )
-  // console.log('fetchPromise2', fetchPromise1)
-
-  canvasFn('red')
-}
+const handleLoade = async () => {}
 
 const onKey = (key) => {
-  // console.log('app...', key)
   num.value = key
   router.push({
     path: '/home',
@@ -107,17 +66,20 @@ const handleChange = () => {
     console.log('input updata')
   })
 }
+
 </script>
 
 <template>
-  <div class="d-f">
-    <router-link to="/about"> <el-button> about </el-button></router-link>
+  <div class="w-100 h-100">
+    <!-- <router-link to="/about"> <el-button> about </el-button></router-link>
     <router-link to="/home"> <el-button> home </el-button></router-link>
     <router-view></router-view>
     <el-input type="text" v-model="numValue" @input="handleChange" />
     <el-button type="primary" @click="handleLoade">加载</el-button>
     <br />
-    <canvas id="canvas" ref="canvasRef"></canvas>
+    <canvas id="canvas" ref="canvasRef"></canvas> -->
+    <ThreeBox />
+    <!-- <Line /> -->
   </div>
 </template>
 
@@ -128,5 +90,15 @@ const handleChange = () => {
   .demo {
     color: blue;
   }
+}
+.wrapper {
+  width: 200px;
+  height: 200px;
+  background: red;
+}
+.main {
+  width: 100px;
+  height: 100px;
+  background: rgb(52, 49, 97);
 }
 </style>

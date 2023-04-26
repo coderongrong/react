@@ -9,7 +9,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import router from './router'
 import { service } from './config/require'
-import { input, _Promise } from 'make-loader'
+import { _Promise } from 'make-loader'
 import StoreReset from '../plugins/storeReset.js'
 // import './promise.js'
 const app = createApp(App)
@@ -30,9 +30,6 @@ app.use(myPlugin, {
 
 app.use(router)
 app.mount('#app')
-// console.log('_main.js')
-// console.log('_main.js')
-// console.log('_main.js')
 
 // https://github.com/coderongrong/react/blob/vite2.0/my-config.js
 // console.log('环境变量', import.meta.env)
