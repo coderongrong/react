@@ -6,7 +6,8 @@ import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
 import { Base64 } from 'js-base64'
 import ThreeBox from './Three/index.vue'
-import Line from './Three/Line.vue'
+import Line from './Three/Line.vue' 
+import BufferGeometry from './Three/BufferGeometry.vue'  //BufferGeometry
 import Foo from './components/child/Foo.vue'
 import Demo from './components/child/Demo.vue'
 import { pinia } from 'make-loader'
@@ -80,6 +81,7 @@ const handleChange = () => {
     <canvas id="canvas" ref="canvasRef"></canvas> -->
     <ThreeBox />
     <!-- <Line /> -->
+    <!-- <BufferGeometry /> -->
   </div>
 </template>
 

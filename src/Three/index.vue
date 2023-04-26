@@ -5,6 +5,8 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import THREE from 'three.js'
+// import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
 const threeBox = ref(null)
 
 const scene = new THREE.Scene()
@@ -22,6 +24,10 @@ const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
 var cube = new THREE.Mesh(geometry, material)
 scene.add(cube)
 camera.position.z = 5
+
+const object = new THREE.Object3D();
+scene.add( object );
+console.log(scene, object)
 
 // 渲染场景
 function animate() {
