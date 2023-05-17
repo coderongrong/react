@@ -2,7 +2,7 @@
   "name": "demo",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --config my-config.js --host --port 7000 --mode development",
+    "dev": "vite --config viteconfig.js --host --port 7000 --mode development",
     "build": "vite build --config my-config.js",
     "preview": "vite preview --config my-config.js --host --port 3000"
   },
@@ -15,7 +15,7 @@
     "js-base64": "^3.7.5",
     "less": "^4.1.3",
     "lodash": "^4.17.21",
-    "make-loader": "^1.2.29",
+    "make-loader": "^1.2.30",
     "make-loader-ui": "^1.0.0",
     "pinia": "^2.0.23",
     "three.js": "^0.77.1",
