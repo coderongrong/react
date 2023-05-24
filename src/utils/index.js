@@ -1,32 +1,34 @@
+import { customRef } from 'vue'
+
 /*
-*
-* flat 
-* params { * } arr
-*/
+ *
+ * flat
+ * params { * } arr
+ */
 
 var arr = [1, 2, 3, [4, 5, [6, 7]]]
 function flat(arr) {
   // return arr.reduce((pre, cur) => {
   //   return pre.concat(Array.isArray(cur) ? flat(cur) : cur)
   // }, [])
-  while(arr.some(item => Array.isArray(item))) {
+  while (arr.some((item) => Array.isArray(item))) {
     arr = [].concat(...arr)
   }
   return arr
 }
 // console.log(flat(arr))
 /**
- * 
+ *
  * unique
- * 
- * 
+ *
+ *
  * **/
 var _arr = [1, '1', 2, '2', 3, '3', 4, 5, 5, '6', '6', {}, {}]
 function unique(arr) {
   const _arr = []
   const left = []
   const temp = {}
-  arr.forEach(item => {
+  arr.forEach((item) => {
     if (typeof item == 'number') {
       left.push(item)
     } else {
@@ -41,28 +43,28 @@ function unique(arr) {
 // console.log(unique(_arr))
 
 /**
- * 
+ *
  * sort function
- * 
+ *
  * quickSort 快速
- * 
-*/
+ *
+ */
 var arr2 = [6, 5, 4, 7, 8, 9, 4, 2, 3, 1]
 function quickSort(arr2) {
   if (arr2.length <= 1) return arr2
-  var left = [];
-  var right = [];
-  var mid = arr2.splice(0, 1);
+  var left = []
+  var right = []
+  var mid = arr2.splice(0, 1)
   // var mid = arr2[0];
 
-  arr2.forEach(item => {
+  arr2.forEach((item) => {
     if (item >= mid) {
       right.push(item)
     } else {
       left.push(item)
     }
   })
-  
+
   return quickSort(left).concat(mid, quickSort(right))
   // return quickSort(left).concat(quickSort(right))
 }
@@ -70,22 +72,22 @@ function quickSort(arr2) {
 
 /**
  * 括号配对
- * 
+ *
  * [()[]{()}]
  * '[()[]{()}](('
-*/
+ */
 var str = '[()[]{()}](('
 function matchStr(str) {
-  if(str.length % 2 == 1) return false
+  if (str.length % 2 == 1) return false
   var obj = {
-    "}": '{',
-    ")": '(',
-    "]": '[',
+    '}': '{',
+    ')': '(',
+    ']': '[',
   }
   var arr = []
   str = str.split('')
-  str.forEach(item => {
-    if(obj[item]) {
+  str.forEach((item) => {
+    if (obj[item]) {
       arr.pop()
     } else {
       arr.push(item)
@@ -98,26 +100,44 @@ function matchStr(str) {
 /**
  * 防抖
  * debounce function
- * 
-*/
+ *
+ */
 var debounce = (function () {
   var timer = null
   return function (fn) {
-    if(timer) clearTimeout(timer)
+    if (timer) clearTimeout(timer)
     timer = setTimeout(() => {
       fn()
     }, 500)
   }
-}())
-
+})()
 
 function debounce_fn() {
   // console.log('debouncessssss')
 }
-Array(5).fill(1).forEach(item => {
-  debounce(debounce_fn)
-})
+Array(5)
+  .fill(1)
+  .forEach((item) => {
+    debounce(debounce_fn)
+  })
 
-export {
-  debounce
+export { debounce }
+
+export function useDebouncedRef(value, delay = 200) {
+  let timeout
+  return customRef((track, trigger) => {
+    return {
+      get() {
+        track()
+        return value
+      },
+      set(newValue) {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          value = newValue
+          trigger()
+        }, delay)
+      },
+    }
+  })
 }
