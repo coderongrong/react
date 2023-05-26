@@ -90,8 +90,27 @@ interface Len {
 
 function demo<T = string>(arg: T): T {
   return arg
+};
+// console.log(demo('100'))
+
+type Listener = {
+  (data: unknown): unknown
 }
-console.log(demo('100'))
+
+const myObj: Listener = (data: unknown) => {
+
+}
+
+
+interface Person {
+    name: string;
+    age: number;
+}
+
+type PersonProps = keyof Person
+// ref reactive readonly watch watchEffect computed
+//  isRef unRef toValue toRef toRefs isReactive iDReadonly ixProxy
+// shollawRef shollawReactvie shollawReaonly triggerRef customRef toRaw makeRaw
 </script>
 
 <style lang="less" scoped>

@@ -5,6 +5,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import './assets/main.css'
 import { createPinia } from 'pinia'
+// import './utils/eventBus.ts'
 const app = createApp(App)
 
 app.use(ElementPlus)

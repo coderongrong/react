@@ -19,15 +19,13 @@ interface EventSupport {
 }
 
 class MyEvent implements EventSupport {
-  obj: any;
   // code here
   on(event: string, callBack: any): any {
     this[event] = callBack;
-
     //增加remove方法
     const that: any = this
     return {
-      remove: function () {
+      remove() {
         that[event] = null
       }
     }
