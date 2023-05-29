@@ -141,3 +141,47 @@ export function useDebouncedRef(value, delay = 200) {
     }
   })
 }
+
+export function randomNum(x = 0, y = 10) {
+  return parseInt(x + Math.random() * (y - x))
+}
+
+/**
+ *
+ * 生成圆点
+ *
+ */
+export class Round {
+  constructor({ cxt, url }) {
+    this.cxt = cxt
+    this.url = url
+  }
+
+  draw(x = 20, y = 20) {
+    this.cxt.beginPath()
+    this.cxt.arc(x, y, 5, 0, Math.PI * 2)
+    this.cxt.closePath()
+    this.cxt.fillStyle = 'red'
+    this.cxt.fill()
+  }
+
+  line(x = 50, y = 50) {
+    this.cxt.moveTo(x, y)
+    this.cxt.lineTo(200, 100)
+    this.cxt.lineTo(300, 60)
+    this.cxt.closePath()
+    this.cxt.stroke()
+    this.cxt.fillStyle = 'blue'
+    this.cxt.fill()
+  }
+
+  async drawImg() {
+    const img = new Image()
+    const s = await import(this.url)
+    img.src = s.default
+    this.cxt.width = 1900
+    this.cxt.height = 1000
+    this.cxt.drawImage(img, 0, 0)
+  }
+}
+

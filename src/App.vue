@@ -10,7 +10,7 @@ interface Book {
 }
 
 const title: Ref<string | number> = ref('中文')
-const data: Book = reactive({car: 'berz', feel: 'good'})
+const data: Book = reactive({ car: 'berz', feel: 'good' })
 const handletext = (val) => {
   title.value = val
   let timer = setTimeout(() => {
@@ -21,7 +21,7 @@ const handletext = (val) => {
 </script>
 
 <template>
-  <div>App...</div>
+  <!-- <div>App...</div> -->
   <!-- <Hellow :data='data' :title="title" name="code" @changeTitle="handletext" /> -->
   <Canvas />
 </template>
