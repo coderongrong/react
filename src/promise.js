@@ -107,6 +107,7 @@ import { reject } from 'lodash'
 //     }
 //   }
 // }
+
 class _Promise {
   constructor(options) {
     this.result = null
@@ -114,27 +115,27 @@ class _Promise {
 
     options((res) => {
       this.result = res
-      this.resArr.forEach(fn => fn())
+      this.resArr.forEach((fn) => fn())
     })
   }
 
-  handleData(p, x, res) {
-    if((typeof x == 'object' && x != null) || typeof x == 'function') {
-      if(typeof x.then == 'function' ) {
-        x.then.call(x, y => {
-          this.handleData(p, y, res)
+  handleData(res, r, p) {
+    if ((typeof r == 'object' && r != null) || typeof r == 'function') {
+      if (typeof r.then == 'function') {
+        r.then.call(r, (y) => {
+          this.handleData(res, y, p)
         })
       }
     } else {
-      res(x)
+      res(r)
     }
   }
 
   then(resolve) {
-    let p = new _Promise(res => {
+    let p = new _Promise((res) => {
       this.resArr.push(() => {
-        const x = resolve(this.result)
-        this.handleData(p, x, res)
+        const r = resolve(this.result)
+        this.handleData(res, r, p)
       })
     })
     return p
@@ -156,15 +157,6 @@ new _Promise((res) => {
   })
   .then((res) => {
     console.log('res --> 2', res)
-    return new _Promise((res) => {
-      setTimeout(() => res(300), 1000)
-    })
-  })
-  .then((res) => {
-    console.log('res---> 3', res)
-    return 400
-  }).then(res => {
-    console.log('res ----> 4', res)
   })
 
 export default _Promise
