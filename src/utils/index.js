@@ -159,7 +159,7 @@ export class Round {
 
   draw(x = 20, y = 20) {
     this.cxt.beginPath()
-    this.cxt.arc(x, y, 5, 0, Math.PI * 2)
+    this.cxt.arc(x, y, 10, 0, Math.PI * 2)
     this.cxt.closePath()
     this.cxt.fillStyle = 'red'
     this.cxt.fill()
@@ -173,6 +173,7 @@ export class Round {
     this.cxt.stroke()
     this.cxt.fillStyle = 'blue'
     this.cxt.fill()
+    return this.cxt
   }
 
   async drawImg() {
@@ -185,3 +186,34 @@ export class Round {
   }
 }
 
+export class Box {
+  constructor({ THREE }) {
+    this.THREE = THREE
+
+    this.scene = new THREE.Scene()
+    this.camera = new THREE.PerspectiveCamera(
+      100,
+      window.innerWidth / window.innerHeight,
+      1,
+      10
+    )
+    this.renderer = new THREE.WebGLRenderer()
+    this.renderer.setSize(window.innerWidth, window.innerHeight)
+  }
+
+  create(x = 1, y = 1, z = 1, color = 0x00ff00) {
+    const geometry = new this.THREE.BoxGeometry(x, y, z)
+    const material = new this.THREE.MeshBasicMaterial({ color })
+    this.cube = new this.THREE.Mesh(geometry, material)
+    this.scene.add(this.cube)
+    this.camera.position.z = 8
+    this.renderer.render(this.scene, this.camera)
+    this.renderer.setSize(window.innerWidth, window.innerHeight)
+    document.body.appendChild(this.renderer.domElement)
+    return this.cube
+  }
+
+  animate() {
+    this.renderer.render(this.scene, this.camera)
+  }
+}

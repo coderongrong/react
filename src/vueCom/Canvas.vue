@@ -23,48 +23,19 @@ import { defer } from 'lodash'
 
 const id = ref(0)
 const cxtRef = ref(null)
-const colorA = ref(0)
-const demo = (x, y, cxt) => {
-  cxt.beginPath()
-  cxt.arc(x, y, 20, 6, Math.PI * 2, true)
-  cxt.closePath()
-  cxt.fill()
-}
-
-const handleImgDataColor = (data, x, y) => {
-  console.log(data.width, x, y)
-  const imgData = data.getImageData(
-    0,
-    0,
-    cxtRef.value.width,
-    cxtRef.value.height
-  )
-  const point = (y * data.width + x) * 4
-  console.log(
-    imgData.data[point],
-    imgData.data[point + 1],
-    imgData.data[point + 2],
-    imgData.data[point + 3]
-  )
-  imgData.data[point] = 0
-  imgData.data[point + 1] = 255
-  imgData.data[point + 2] = 0
-  imgData.data[point + 3] = 255
-  data.putImageData(imgData, 0, 0)
-}
 
 const init = async () => {
   var c = document.getElementById('canvas')
-  
-  var cxt = c.getContext('2d', { willReadFrequently: true })
+  var cxt = c.getContext('2d')
+  const cav = new Round({ cxt })
+  cav.draw(randomNum(10, 500), randomNum(10, 500))
 
-  var r = new Round({ cxt, url: '../assets/img/back.jpg' })
-  await r.drawImg()
-  new Array(10).fill().forEach((item) => {
-    r.draw(randomNum(0, 300), randomNum(20, 120))
-  })
-  r.line(400, 600)
-  cxtRef.value = cxt
+
+  
+  function animate() {
+    requestAnimationFrame(animate)
+  }
+  animate()
 }
 
 onMounted(() => {
