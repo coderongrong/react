@@ -12,11 +12,18 @@ const data = reactive({
     { title: 'src/assets/img/imgData/self3.jpg', price: 89 },
     { title: 'src/assets/img/imgData/self4.jpg', price: 30 },
     { title: 'src/assets/img/imgData/self5.jpg', price: 40 },
-    { title: 'src/assets/img/imgData/self5.jpg', price: 40 },
-    { title: 'src/assets/img/imgData/self5.jpg', price: 40 },
-    { title: 'src/assets/img/imgData/self5.jpg', price: 40 },
-    { title: 'src/assets/img/imgData/self5.jpg', price: 40 },
-    { title: 'src/assets/img/imgData/self5.jpg', price: 40 },
+    { title: 'src/assets/img/imgData/self6.jpg', price: 49 },
+    { title: 'src/assets/img/imgData/self7.jpg', price: 49 },
+    { title: 'src/assets/img/imgData/self8.jpg', price: 49 },
+    { title: 'src/assets/img/imgData/self9.jpg', price: 49 },
+    { title: 'src/assets/img/imgData/self10.jpg', price: 198 },
+    { title: 'src/assets/img/imgData/self11.jpg', price: 198 },
+    { title: 'src/assets/img/imgData/self12.jpg', price: 29 },
+    { title: 'src/assets/img/imgData/self13.jpg', price: 39 },
+    { title: 'src/assets/img/imgData/self14.jpg', price: 39 },
+    { title: 'src/assets/img/imgData/self15.jpg', price: 39 },
+    { title: 'src/assets/img/imgData/self16.jpg', price: 29 },
+    { title: 'src/assets/img/imgData/self17.jpg', price: 29 },
   ],
 })
 
@@ -43,7 +50,10 @@ const hanleDetail = (info) => {
       :key="index"
     >
       <img :src="item.title" alt="" />
-      <span>单价：￥{{ item.price }} </span>
+      <span class="price"
+        ><span class="price_color">新款</span>单价：￥{{ item.price }}
+      </span>
+      <div class="title_tip">点击查看详情</div>
     </div>
   </div>
 </template>
@@ -71,12 +81,33 @@ const hanleDetail = (info) => {
       width: 100%;
       height: 180px;
       //   margin: 5px 2px 0px;
+      border-radius: 5%;
     }
-    span {
+    .price_color {
+      background: red;
+      color: #fff;
+      border-radius: 20%;
+      padding: 0 2px;
+      position: relative;
+      left: -5px;
+      top: -2px;
+      font-size: 8px;
+    }
+    .price {
       display: inline-block;
       width: 100%;
       text-align: center;
       color: #2d3a46;
+    }
+    .title_tip {
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      background: #0042ff66;
+      color: #fff;
+      border-radius: 10%;
+      padding: 0 4px;
+      font-size: 8px;
     }
   }
 }
