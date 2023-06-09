@@ -13,8 +13,12 @@
         <el-input v-model="formLabelAlign.password" />
       </el-form-item>
       <el-button @click="handleNo">注册</el-button>
-      <el-button @click="submit">登入</el-button>
-      <div v-if="showVX" class="box_VX">客服微信：88888888</div>
+      <el-button type="primary" @click="submit">登入</el-button>
+      <div v-if="showVX" class="box_VX">
+        客服微信：88888888
+        <br />
+        添加客服微信获取账号密码
+      </div>
     </el-form>
   </div>
 </template>
@@ -35,12 +39,27 @@ const formLabelAlign = reactive({
 
 // methods
 const submit = () => {
-  console.log(toRaw(formLabelAlign))
-  router.push('/main/home')
+  if (
+    toRaw(formLabelAlign).name == 'admin' &&
+    toRaw(formLabelAlign).password == '88888888'
+  ) {
+    ElMessage({
+      message: '登入成功',
+      type: 'success',
+    })
+    setTimeout(() => {
+      router.push('/main/home')
+    }, 1500)
+  } else {
+    ElMessage({
+      message: '密码错误',
+      type: 'error',
+    })
+  }
 }
 const handleNo = () => {
   ElMessage({
-    message: '请联系客服获取账号',
+    message: '请添加客服微信',
     type: 'warning',
   })
   showVX.value = true
@@ -60,6 +79,7 @@ const handleNo = () => {
     transform: translate(150%, 50%);
   }
   .box_VX {
+    color: #1890ff;
     position: relative;
     top: 50px;
     text-align: center;

@@ -5,7 +5,7 @@ import type { Ref } from 'vue'
 
 <template>
   <div>
-   Detail...
+   
   </div>
 </template>
 

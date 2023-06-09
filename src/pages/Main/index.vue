@@ -6,7 +6,7 @@
         :class="['item', data.currentIndex == index ? 'active' : '']"
         v-for="(item, index) in data.tabBar"
         :key="index"
-        @click="handleTabBar(index)"
+        @click="handleTabBar(index, item.path)"
       >
         <div>
           <component
@@ -31,24 +31,18 @@ const router = useRouter()
 const data = reactive({
   currentIndex: 0,
   tabBar: [
-    { title: '首页', icon: 'Goods' },
-    { title: '关于', icon: 'Calendar' },
-    { title: '详情', icon: 'Folder' },
-    { title: '个人', icon: 'Iphone' },
+    { title: '首页', icon: 'Goods', path: '/main/home' },
+    // { title: '关于', icon: 'Calendar' },
+    // { title: '详情', icon: 'Folder' },
+    { title: '个人', icon: 'Iphone', path: '/main/person'},
   ],
 })
 
 // methods
-const handleTabBar = (index) => {
-  if (data.currentIndex == index) return
-  const routerArr = [
-    '/main/home',
-    '/main/about',
-    '/main/detail',
-    '/main/person',
-  ]
+const handleTabBar = (index, path) => {
+  // if (data.currentIndex == index) return
   data.currentIndex = index
-  router.push(routerArr[index])
+  router.push(path)
 }
 </script>
 
@@ -60,8 +54,10 @@ const handleTabBar = (index) => {
   display: flex;
   border-top: 1px solid #d5cdcd;
   padding-top: 6px;
+  opacity: 1;
+  background: #fff;
   .item {
-    width: 25%;
+    width: 50%;
     cursor: pointer;
     z-index: 1;
     line-height: 20px;
