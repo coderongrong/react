@@ -4,26 +4,63 @@ import { _replace } from './utils'
 // import Home from '../components/Home.vue'
 
 const routes = [
-    // 匹配 /o/3549
-    { 
-        path: '/about',
-        component: () => import(/* webpackChunkName: "about" */ '@/components/About.vue'),
-        children: [
-            {
-                path: 'count',
-                component: () => import('@/components/components/Count.vue')
-            }
-        ]
-    },
-    // 匹配 /p/books
-    { path: '/home', component: () => import(/* webpackChunkName: "home" */ '@/components/Home.vue') },
-    { path: '/table', component: () => import(/* webpackChunkName: "table" */ '@/components/Table/index.vue') },
+  // 匹配 /o/3549
+  // {
+  //     path: '/about',
+  //     component: () => import(/* webpackChunkName: "about" */ '@/components/About.vue'),
+  //     children: [
+  //         {
+  //             path: 'count',
+  //             component: () => import('@/components/components/Count.vue')
+  //         }
+  //     ]
+  // },
+  // 匹配 /p/books
+  // { path: '/home', component: () => import(/* webpackChunkName: "home" */ '@/components/Home.vue') },
+  {
+    path: '/table',
+    component: () =>
+      import(/* webpackChunkName: "table" */ '@/components/Table/index.vue'),
+  },
+
+  {
+    path: '/login',
+    component: () =>
+      import(/* webpackChunkName: "table" */ '@/pages/Login/index.vue'),
+  },
+  {
+    path: '/main',
+    component: () =>
+      import(/* webpackChunkName: "table" */ '@/pages/Main/index.vue'),
+    children: [
+      {
+        path: 'home',
+        component: () =>
+          import(/* webpackChunkName: "table" */ '@/pages/Home/index.vue'),
+      },
+      {
+        path: 'about',
+        component: () =>
+          import(/* webpackChunkName: "table" */ '@/pages/About/index.vue'),
+      },
+      {
+        path: 'detail',
+        component: () =>
+          import(/* webpackChunkName: "table" */ '@/pages/Detail/index.vue'),
+      },
+      {
+        path: 'person',
+        component: () =>
+          import(/* webpackChunkName: "table" */ '@/pages/Person/index.vue'),
+      },
+    ],
+  },
 ]
 
 const router = createRouter({
-    // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
-    history: createWebHashHistory(),
-    routes, // `routes: routes` 的缩写
+  // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
+  history: createWebHashHistory(),
+  routes, // `routes: routes` 的缩写
 })
 
 export default router

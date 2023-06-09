@@ -20,7 +20,7 @@
     "pinia": "^2.0.23",
     "three.js": "^0.77.1",
     "vue": "^3.2.41",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.2.2"
   },
   "devDependencies": {
     "@vitejs/plugin-legacy": "^2.3.1",

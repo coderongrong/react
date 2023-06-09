@@ -2,8 +2,9 @@
 import { ref, reactive } from 'vue'
 import type { Ref } from 'vue'
 // import Hellow from './vueCom/Hellow.vue'
-import Canvas from './vueCom/Canvas.vue'
+// import Canvas from './vueCom/Canvas.vue'
 // import WebGl from './vueCom/WebGl.vue'
+import Main from './pages/Main/index.vue'
 
 interface Book {
   car: string
@@ -19,10 +20,12 @@ const handletext = (val) => {
     timer = null
   }, 1500)
 }
+
 </script>
 
 <template>
   <!-- <div>App...</div> -->
   <!-- <Hellow :data='data' :title="title" name="code" @changeTitle="handletext" /> -->
-  <Canvas />
+  <!-- <Canvas /> -->
+  <router-view></router-view>
 </template>
