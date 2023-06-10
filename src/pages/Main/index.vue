@@ -52,10 +52,11 @@ const handleTabBar = (index, path) => {
   bottom: 0;
   height: 50px;
   display: flex;
-  border-top: 1px solid #d5cdcd;
+  // border-top: 1px solid #d5cdcd;
   padding-top: 6px;
   opacity: 1;
   background: #fff;
+  box-shadow: -2px -1px 6px #8d929421;
   .item {
     width: 50%;
     cursor: pointer;

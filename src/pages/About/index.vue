@@ -71,7 +71,7 @@ const hanleDetail = (info) => {
 <template>
   <div class="top">
     <div class="center mb-10">服装分类</div>
-    <div class="d-f">
+    <div class="d-f pl-10 pr-10">
       <div
         class="f-1 center"
         :class="{ active: data.currenIndex == index }"
@@ -110,6 +110,8 @@ const hanleDetail = (info) => {
   z-index: 10;
   width: 100%;
   background: #fff;
+  padding-bottom: 2px;
+  box-shadow: 0px 0px 3px;
 }
 .active {
   background: #1890ff;

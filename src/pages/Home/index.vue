@@ -60,12 +60,20 @@ const hanleDetail = (info) => {
 
 <style lang="less" scoped>
 .title {
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  top: 0px;
   height: 30px;
   line-height: 30px;
   text-align: center;
   z-index: 10;
+  // border-bottom: 1px solid #d5cdcd;
+  box-shadow: 0px 0px 3px;
 }
 .mian_info {
+  position: relative;
+  top: 35px;
   padding: 0px 10px;
   display: flex;
   flex-wrap: wrap;
@@ -112,6 +120,6 @@ const hanleDetail = (info) => {
   }
 }
 .wrapper_height {
-  height: calc(100vh - 85px);
+  height: calc(100vh - 95px);
 }
 </style>
