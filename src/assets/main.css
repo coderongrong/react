@@ -34,7 +34,7 @@ a,
   }
 }
 
-.d-f{
+.d-f {
   display: flex;
 }
 
@@ -68,4 +68,12 @@ a,
 
 .mt-20 {
   margin-top: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.center {
+  text-align: center;
 }

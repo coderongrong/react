@@ -32,7 +32,7 @@ const data = reactive({
   currentIndex: 0,
   tabBar: [
     { title: '首页', icon: 'Goods', path: '/main/home' },
-    // { title: '关于', icon: 'Calendar' },
+    { title: '关于', icon: 'Calendar', path: '/main/about' },
     // { title: '详情', icon: 'Folder' },
     { title: '个人', icon: 'Iphone', path: '/main/person'},
   ],
