@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --config viteconfig.js --host --port 7000 --mode development",
-    "build": "vite build --config my-config.js",
+    "build": "vite build --config vite.config.js",
     "preview": "vite preview --config my-config.js --host --port 3000"
   },
   "dependencies": {

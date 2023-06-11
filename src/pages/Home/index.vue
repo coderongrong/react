@@ -1,47 +1,50 @@
 <script setup lang="ts">
-import { ref, reactive, toRaw } from 'vue'
-import type { Ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-const router = useRouter()
-
+import { ref, reactive, toRaw } from "vue";
+import type { Ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+const router = useRouter();
+const getURL = (name) => {
+  return new URL(`../../assets/img/imgData/self${name}.jpg`, import.meta.url)
+    .href;
+};
 // data
 const data = reactive({
   arrData: [
-    { title: 'src/assets/img/imgData/self1.jpg', price: 90 },
-    { title: 'src/assets/img/imgData/self2.jpg', price: 80 },
-    { title: 'src/assets/img/imgData/self3.jpg', price: 89 },
-    { title: 'src/assets/img/imgData/self4.jpg', price: 30 },
-    { title: 'src/assets/img/imgData/self5.jpg', price: 40 },
-    { title: 'src/assets/img/imgData/self6.jpg', price: 49 },
-    { title: 'src/assets/img/imgData/self7.jpg', price: 49 },
-    { title: 'src/assets/img/imgData/self8.jpg', price: 49 },
-    { title: 'src/assets/img/imgData/self9.jpg', price: 49 },
-    { title: 'src/assets/img/imgData/self10.jpg', price: 18 },
-    { title: 'src/assets/img/imgData/self11.jpg', price: 18 },
-    { title: 'src/assets/img/imgData/self12.jpg', price: 29 },
-    { title: 'src/assets/img/imgData/self13.jpg', price: 29 },
-    { title: 'src/assets/img/imgData/self14.jpg', price: 19 },
-    { title: 'src/assets/img/imgData/self15.jpg', price: 18 },
-    { title: 'src/assets/img/imgData/self16.jpg', price: 19 },
-    { title: 'src/assets/img/imgData/self17.jpg', price: 19 },
+    { title: getURL(1), price: 90 },
+    { title: getURL(2), price: 80 },
+    { title: getURL(3), price: 89 },
+    { title: getURL(4), price: 30 },
+    { title: getURL(5), price: 40 },
+    { title: getURL(6), price: 49 },
+    { title: getURL(7), price: 49 },
+    { title: getURL(8), price: 49 },
+    { title: getURL(9), price: 49 },
+    { title: getURL(10), price: 18 },
+    { title: getURL(11), price: 18 },
+    { title: getURL(12), price: 29 },
+    { title: getURL(13), price: 29 },
+    { title: getURL(14), price: 19 },
+    { title: getURL(15), price: 18 },
+    { title: getURL(16), price: 19 },
+    { title: getURL(17), price: 19 },
   ],
-})
+});
 
 // methods
 const hanleDetail = (info) => {
-  console.log(toRaw(info))
+  console.log(toRaw(info));
   router.push({
-    path: '/main/detail',
+    path: "/main/detail",
     query: toRaw(info),
-  })
-}
+  });
+};
 </script>
 
 <template>
   <div class="title">服装</div>
   <div
     class="mian_info"
-    :class="[data.arrData.length > 6 ? 'wrapper_height' : '']"
+    :class="[data.arrData.length > 4 ? 'wrapper_height' : '']"
   >
     <div
       @click="hanleDetail(item)"
@@ -110,7 +113,7 @@ const hanleDetail = (info) => {
     .title_tip {
       position: absolute;
       top: 2px;
-      left: 3px;
+      right: 3px;
       background: #0042ff66;
       color: #fff;
       border-radius: 10%;
