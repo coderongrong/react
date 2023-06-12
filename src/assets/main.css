@@ -89,7 +89,7 @@ a,
 /* css 3 */
 
 .hoby {
-  animation: move 4s;
+  animation: move 2s;
   animation-iteration-count: infinite;
   position: relative;
 }

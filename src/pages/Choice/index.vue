@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { ref, reactive, toRaw } from 'vue'
-import type { Ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { showTabBar } from '@/stores/counte.js'
-import { storeToRefs } from 'pinia'
+import { ref, reactive, toRaw } from "vue";
+import type { Ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { showTabBar } from "@/stores/counte.js";
+import { storeToRefs } from "pinia";
 // 可以在组件中的任意位置访问 `store` 变量 ✨
-const store = showTabBar()
-const { handleFalse } = store
-const router = useRouter()
+const store = showTabBar();
+const { handleFalse } = store;
+const router = useRouter();
 
 const getURL = (name) => {
   return new URL(`../../assets/img/imgData/self${name}.jpg`, import.meta.url)
-    .href
-}
+    .href;
+};
 
 // console.log(getURL())
 const _data = [
@@ -33,49 +33,36 @@ const _data = [
   { title: getURL(15), price: 18 },
   { title: getURL(16), price: 19 },
   { title: getURL(17), price: 19 },
-]
+];
 const data = reactive({
-  arrBat: ['低端', '中端', '高端'],
+  arrBat: ["低端", "中端", "高端"],
   currenIndex: 0,
   arrData: [
-    { title: getURL(1), price: 90 },
-    { title: getURL(2), price: 80 },
-    { title: getURL(3), price: 89 },
-    { title: getURL(4), price: 30 },
-    { title: getURL(5), price: 40 },
-    { title: getURL(6), price: 49 },
-    { title: getURL(7), price: 49 },
-    { title: getURL(8), price: 49 },
-    { title: getURL(9), price: 49 },
-    { title: getURL(10), price: 18 },
-    { title: getURL(11), price: 18 },
-    { title: getURL(12), price: 29 },
-    { title: getURL(13), price: 29 },
-    { title: getURL(14), price: 19 },
-    { title: getURL(15), price: 18 },
-    { title: getURL(16), price: 19 },
-    { title: getURL(17), price: 19 },
+    { title: getURL(18), price: 20 },
+    { title: getURL(19), price: 115 },
+    { title: getURL(20), price: 115 },
+    { title: getURL(21), price: 115 },
   ],
-})
+});
 
 // methods
 const handleTab = (index) => {
-  data.currenIndex = index
+  data.currenIndex = index;
   if (index == 0) {
-    data.arrData = _data.filter((item) => item.price <= 20)
+    data.arrData = _data.filter((item) => item.price <= 20);
   } else if (index == 1) {
-    data.arrData = _data.filter((item) => item.price > 20 && item.price < 50)
+    data.arrData = _data.filter((item) => item.price > 20 && item.price < 50);
   } else {
-    data.arrData = _data.filter((item) => item.price >= 50)
+    data.arrData = _data.filter((item) => item.price >= 50);
   }
-}
+};
 const hanleDetail = (info) => {
   router.push({
-    path: '/main/detail',
+    path: "/main/detail",
     query: toRaw(info),
-  })
-  handleFalse()
-}
+  });
+  handleFalse();
+};
 </script>
 
 <template>
@@ -108,6 +95,7 @@ const hanleDetail = (info) => {
         ><span class="price_color">新款</span>单价：￥{{ item.price }}
       </span>
       <div class="title_tip">点击查看详情</div>
+      <div class="goods">有货</div>
     </div>
   </div>
 </template>
@@ -133,8 +121,8 @@ const hanleDetail = (info) => {
   display: flex;
   flex-wrap: wrap;
   margin-right: auto;
-    position: relative;
-    top: 38px;
+  position: relative;
+  top: 38px;
   overflow-y: auto;
   .info {
     width: 48%;
@@ -168,6 +156,16 @@ const hanleDetail = (info) => {
       top: 2px;
       right: 3px;
       background: #0042ff66;
+      color: #fff;
+      border-radius: 10%;
+      padding: 0 4px;
+      font-size: 8px;
+    }
+    .goods {
+      position: absolute;
+      bottom: 26px;
+      right: 3px;
+      background: #eb2f2f;
       color: #fff;
       border-radius: 10%;
       padding: 0 4px;
