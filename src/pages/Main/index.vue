@@ -41,7 +41,7 @@ const data = reactive({
   tabBar: [
     { title: '首页', icon: 'Goods', path: '/main/home' },
     { title: '关于', icon: 'Calendar', path: '/main/about' },
-    { title: '精选', icon: 'Iphone', path: '/main/choice', animation: true },
+    { title: '精选', icon: 'Filter', path: '/main/choice', animation: true },
     // { title: '详情', icon: 'Folder' },
     { title: '个人', icon: 'Iphone', path: '/main/person' },
   ],
