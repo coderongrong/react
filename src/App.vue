@@ -1,3 +1,10 @@
+<template>
+  <!-- <div>App...</div> -->
+  <!-- <Hellow :data='data' :title="title" name="code" @changeTitle="handletext" /> -->
+  <!-- <Canvas /> -->
+  <router-view></router-view>
+</template>
+
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import type { Ref } from 'vue'
@@ -20,12 +27,4 @@ const handletext = (val) => {
     timer = null
   }, 1500)
 }
-
 </script>
-
-<template>
-  <!-- <div>App...</div> -->
-  <!-- <Hellow :data='data' :title="title" name="code" @changeTitle="handletext" /> -->
-  <!-- <Canvas /> -->
-  <router-view></router-view>
-</template>

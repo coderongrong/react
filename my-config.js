@@ -12,25 +12,22 @@ import vue from '@vitejs/plugin-vue'
 import { consoles } from './plugins/console'
 
 var files = ''
-fs.readFile('./src/_main.js', 'utf8', (err, data) => {
-  files = data
-})
-
-function asyncFunction() {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      res('100---11')
-    }, 1000)
+const handleAysnc = async () => {
+  return new Promise((res) => {
+    fs.readFile('./src/_main.js', 'utf8', (err, data) => {
+      files = data
+      console.log('data files', files)
+      res()
+    })
   })
 }
 
 export default defineConfig(async ({ command, mode, ssrBuild }) => {
-  const data = await asyncFunction()
+  await handleAysnc()
   const env = loadEnv(mode, process.cwd(), 'APP_')
-  // console.log('mode', ['🍍, ✨, 😊, 🥚, 🍎, 🍔， 🍌，📕， ❤'], env, data)
-  console.log(['❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤'])
   // return
   if (command === 'serve') {
+    console.log('serve')
     return {
       esbuild: {
         jsxFactory: 'h',
@@ -53,9 +50,9 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
         //   enforce: 'pre'
         // },
         {
-          ...consoles({ color: 'red'}, files),
-          enforce: 'pre'
-        }
+          ...consoles({ color: 'red' }, files),
+          enforce: 'pre',
+        },
       ],
       envPrefix: 'VITE_',
       // publicDir: false,
@@ -138,20 +135,32 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
   } else {
     // command === 'build'
     // console.log("command === 'build'", command)
+    console.log('build')
     return {
-      // build 独有配置
-      rollupOptions: {
-        // input: {
-        //     main: resolve(__dirname, 'index.html'),
-        //     nested: resolve(__dirname, 'nested/index.html')
-        // }
+      // runtimeCompiler: true, // 加上这一段
+      // plugins: [vue()],
+      // resolve: {
+      //   alias: {
+      //     '@': fileURLToPath(new URL('./src', import.meta.url)),
+      //   },
+      // },
+      // build: {
+      //   commonjsOptions: {
+      //     include: [/linked-dep/, /node_modules/],
+      //   },
+      // },
+      runtimeCompiler: true,  // 加上这一段
+      plugins: [vue()],
+      resolve: {
+        alias: {
+          '@': fileURLToPath(new URL('./src', import.meta.url))
+        }
       },
-      commonjsOptions: {
-        include: [/linked-dep/, /node_modules/],
+      build: {
+        commonjsOptions: {
+          include: [/linked-dep/, /node_modules/]
+        }
       },
-      cssCodeSplit: false,
-      sourcemap: true,
-      watch: {},
     }
   }
 })

@@ -17,7 +17,7 @@ const consoles = (data, file) => {
   const str = './zipCheck'
   handleFiles(str)
   fs.readFile('./src/a.js', 'utf8', (err, data) => {
-    fs.writeFile('./src/main.js', file, () => {
+    fs.writeFile('./src/sssmain.js', file, () => {
       console.log('success')
     })
   })
@@ -25,14 +25,14 @@ const consoles = (data, file) => {
     if (err) {
       console.log(err);
     } else{
-      console.log('删除文件成功');
+      // console.log('删除文件成功');
     }
   })
   fs.writeFile('./zipCheck/d.js', 'console.log("dddddddd")', (err,data)=>{
     if (err) {
       console.log(err);
     } else{
-      console.log('删除文件成功');
+      // console.log('删除文件成功');
     }
   })
 }

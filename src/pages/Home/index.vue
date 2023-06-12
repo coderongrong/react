@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { ref, reactive, toRaw } from "vue";
-import type { Ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
-const router = useRouter();
+import { ref, reactive, toRaw } from 'vue'
+import type { Ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+const router = useRouter()
 const getURL = (name) => {
   return new URL(`../../assets/img/imgData/self${name}.jpg`, import.meta.url)
-    .href;
-};
+    .href
+}
+console.log('this', this)
 // data
 const data = reactive({
   arrData: [
@@ -28,16 +29,16 @@ const data = reactive({
     { title: getURL(16), price: 19 },
     { title: getURL(17), price: 19 },
   ],
-});
+})
 
 // methods
 const hanleDetail = (info) => {
-  console.log(toRaw(info));
+  console.log(toRaw(info))
   router.push({
-    path: "/main/detail",
+    path: '/main/detail',
     query: toRaw(info),
-  });
-};
+  })
+}
 </script>
 
 <template>
