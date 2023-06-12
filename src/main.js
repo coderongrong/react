@@ -13,8 +13,8 @@ import { _Promise } from 'make-loader'
 import StoreReset from '../plugins/storeReset.js'
 import './assets/main.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-const app = createApp(App)
 
+const app = createApp(App)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)

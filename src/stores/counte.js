@@ -40,3 +40,37 @@ export const useBooks = defineStore('books', () => {
     handleDelete,
   }
 })
+
+export const showTabBar = defineStore('TabBar', () => {
+  const isShowTabBar = ref(true)
+
+  function handleTrue() {
+    isShowTabBar.value = true
+  }
+
+  function handleFalse() {
+    isShowTabBar.value = false
+  }
+
+  return {
+    isShowTabBar,
+    handleTrue,
+    handleFalse,
+  }
+})
+
+export const userInfo = defineStore('userInfo', () => {
+  const user = reactive({
+    person: {},
+  })
+
+  function handleUser(data) {
+    localStorage.setItem('USERINFO', data.name)
+    user.person = data
+  }
+
+  return {
+    user,
+    handleUser,
+  }
+})

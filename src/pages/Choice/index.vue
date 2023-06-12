@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, reactive, toRaw } from "vue";
-import type { Ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { ref, reactive, toRaw } from 'vue'
+import type { Ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { showTabBar } from '@/stores/counte.js'
 import { storeToRefs } from 'pinia'
 // 可以在组件中的任意位置访问 `store` 变量 ✨
@@ -11,8 +11,8 @@ const router = useRouter()
 
 const getURL = (name) => {
   return new URL(`../../assets/img/imgData/self${name}.jpg`, import.meta.url)
-    .href;
-};
+    .href
+}
 
 // console.log(getURL())
 const _data = [
@@ -33,9 +33,9 @@ const _data = [
   { title: getURL(15), price: 18 },
   { title: getURL(16), price: 19 },
   { title: getURL(17), price: 19 },
-];
+]
 const data = reactive({
-  arrBat: ["低端", "中端", "高端"],
+  arrBat: ['低端', '中端', '高端'],
   currenIndex: 0,
   arrData: [
     { title: getURL(1), price: 90 },
@@ -56,32 +56,32 @@ const data = reactive({
     { title: getURL(16), price: 19 },
     { title: getURL(17), price: 19 },
   ],
-});
+})
 
 // methods
 const handleTab = (index) => {
-  data.currenIndex = index;
+  data.currenIndex = index
   if (index == 0) {
-    data.arrData = _data.filter((item) => item.price <= 20);
+    data.arrData = _data.filter((item) => item.price <= 20)
   } else if (index == 1) {
-    data.arrData = _data.filter((item) => item.price > 20 && item.price < 50);
+    data.arrData = _data.filter((item) => item.price > 20 && item.price < 50)
   } else {
-    data.arrData = _data.filter((item) => item.price >= 50);
+    data.arrData = _data.filter((item) => item.price >= 50)
   }
-};
+}
 const hanleDetail = (info) => {
   router.push({
-    path: "/main/detail",
+    path: '/main/detail',
     query: toRaw(info),
-  });
+  })
   handleFalse()
-};
+}
 </script>
 
 <template>
   <div class="top">
-    <div class="center mb-10">服装分类</div>
-    <div class="d-f pl-10 pr-10">
+    <div class="center mb-10 hoby">服装分类</div>
+    <!-- <div class="d-f pl-10 pr-10">
       <div
         class="f-1 center"
         :class="{ active: data.currenIndex == index }"
@@ -91,7 +91,7 @@ const hanleDetail = (info) => {
       >
         {{ item }}
       </div>
-    </div>
+    </div> -->
   </div>
   <div
     class="mian_info"
@@ -133,9 +133,8 @@ const hanleDetail = (info) => {
   display: flex;
   flex-wrap: wrap;
   margin-right: auto;
-  position: relative;
-  top: 58px;
-  //   height: calc(100vh - 85px);
+    position: relative;
+    top: 38px;
   overflow-y: auto;
   .info {
     width: 48%;
@@ -177,6 +176,6 @@ const hanleDetail = (info) => {
   }
 }
 .wrapper_height {
-  height: calc(100vh - 120px);
+  height: calc(100vh - 100px);
 }
 </style>

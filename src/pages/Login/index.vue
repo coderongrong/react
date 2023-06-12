@@ -27,8 +27,12 @@
 import { ref, reactive, toRaw } from 'vue'
 import type { Ref } from 'vue'
 import { ElMessage } from 'element-plus'
+import { storeToRefs } from 'pinia'
+import { userInfo } from '@/stores/counte.js'
 import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
+const store = userInfo()
+const { handleUser } = store
 
 // data
 const showVX: Ref<boolean> = ref(false)
@@ -41,8 +45,9 @@ const formLabelAlign = reactive({
 const submit = () => {
   if (
     toRaw(formLabelAlign).name == 'admin' &&
-    toRaw(formLabelAlign).password == '88888888'
+    toRaw(formLabelAlign).password == '888888'
   ) {
+    handleUser(toRaw(formLabelAlign))
     ElMessage({
       message: '登入成功',
       type: 'success',

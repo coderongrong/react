@@ -1,9 +1,13 @@
 <template>
   <div>
     <router-view></router-view>
-    <div class="tab_bar w-100">
+    <div v-if="isShowTabBar" class="tab_bar w-100">
       <div
-        :class="['item', data.currentIndex == index ? 'active' : '']"
+        :class="[
+          'item',
+          data.currentIndex == index ? 'active' : '',
+          item.animation ? 'hoby' : '',
+        ]"
         v-for="(item, index) in data.tabBar"
         :key="index"
         @click="handleTabBar(index, item.path)"
@@ -24,7 +28,11 @@
 import { ref, reactive, markRaw } from 'vue'
 import type { Ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-
+import { showTabBar } from '@/stores/counte.js'
+import { storeToRefs } from 'pinia'
+// 可以在组件中的任意位置访问 `store` 变量 ✨
+const store = showTabBar()
+const { isShowTabBar } = storeToRefs(store)
 const router = useRouter()
 
 // data
@@ -33,8 +41,9 @@ const data = reactive({
   tabBar: [
     { title: '首页', icon: 'Goods', path: '/main/home' },
     { title: '关于', icon: 'Calendar', path: '/main/about' },
+    { title: '精选', icon: 'Iphone', path: '/main/choice', animation: true },
     // { title: '详情', icon: 'Folder' },
-    { title: '个人', icon: 'Iphone', path: '/main/person'},
+    { title: '个人', icon: 'Iphone', path: '/main/person' },
   ],
 })
 

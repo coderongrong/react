@@ -3,6 +3,11 @@ import { h, ref, reactive } from 'vue'
 import type { Ref } from 'vue'
 import { ElMessageBox, ElSwitch } from 'element-plus'
 import { useRouter, useRoute } from 'vue-router'
+import { showTabBar } from '@/stores/counte.js'
+import { storeToRefs } from 'pinia'
+// 可以在组件中的任意位置访问 `store` 变量 ✨
+const store = showTabBar()
+const { handleTrue } = store
 const router = useRouter()
 
 const data = reactive({
@@ -12,6 +17,7 @@ const data = reactive({
 // methods
 const handleBack = () => {
   router.go(-1)
+  handleTrue()
 }
 const open = () => {
   ElMessageBox({
@@ -32,7 +38,12 @@ const open = () => {
       /></span>
       <span>商品详情</span>
     </div>
-    <img :src="data.img.title" alt="" />
+    <!-- <img :src="data.img.title" alt="" /> -->
+    <el-carousel trigger="click" height="300px">
+      <el-carousel-item v-for="item in 4" :key="item">
+        <img :src="data.img.title" alt="" />
+      </el-carousel-item>
+    </el-carousel>
     <span>型号: <span class="mian_color">19239894893849238498324</span></span>
     <br />
     <span>款式：<span class="mian_color">新款</span></span>
