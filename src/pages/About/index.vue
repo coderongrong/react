@@ -36,7 +36,7 @@ const _data = [
 ];
 const data = reactive({
   arrBat: ["低端", "中端", "高端"],
-  currenIndex: 0,
+  currenIndex: -1,
   arrData: [
     { title: getURL(1), price: 90 },
     { title: getURL(2), price: 80 },
