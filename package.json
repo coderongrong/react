@@ -15,6 +15,7 @@
     "element-plus": "^2.2.21",
     "js-base64": "^3.7.5",
     "less": "^4.1.3",
+    "enquire.js": "^2.1.6",
     "lodash": "^4.17.21",
     "make-loader": "^1.2.30",
     "make-loader-ui": "^1.0.0",
