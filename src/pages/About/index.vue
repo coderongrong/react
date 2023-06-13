@@ -3,7 +3,6 @@ import { ref, reactive, toRaw } from "vue";
 import type { Ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { showTabBar } from '@/stores/counte.js'
-import { storeToRefs } from 'pinia'
 // 可以在组件中的任意位置访问 `store` 变量 ✨
 const store = showTabBar()
 const { handleFalse } = store
@@ -80,7 +79,6 @@ const hanleDetail = (info) => {
 
 <template>
   <div class="top">
-    <div class="center mb-10">服装分类</div>
     <div class="d-f pl-10 pr-10">
       <div
         class="f-1 center"
@@ -134,7 +132,7 @@ const hanleDetail = (info) => {
   flex-wrap: wrap;
   margin-right: auto;
   position: relative;
-  top: 58px;
+  top: 25px;
   //   height: calc(100vh - 85px);
   overflow-y: auto;
   .info {
@@ -177,6 +175,6 @@ const hanleDetail = (info) => {
   }
 }
 .wrapper_height {
-  height: calc(100vh - 120px);
+  height: calc(100vh - 85px);
 }
 </style>

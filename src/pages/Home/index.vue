@@ -48,7 +48,6 @@ const hanleDetail = (info) => {
 </script>
 
 <template>
-  <div class="title">服装</div>
   <div
     class="mian_info"
     :class="[data.arrData.length > 4 ? 'wrapper_height' : '']"
@@ -83,7 +82,7 @@ const hanleDetail = (info) => {
 }
 .mian_info {
   position: relative;
-  top: 35px;
+  // top: 35px;
   padding: 0px 10px;
   display: flex;
   flex-wrap: wrap;
@@ -130,6 +129,6 @@ const hanleDetail = (info) => {
   }
 }
 .wrapper_height {
-  height: calc(100vh - 95px);
+  height: calc(100vh - 60px);
 }
 </style>

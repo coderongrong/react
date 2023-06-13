@@ -14,11 +14,15 @@ import type { Ref } from 'vue'
 import Main from './pages/Main/index.vue'
 import enquireScreen from '@/utils/device'
 
-console.log('enquireScreen', enquireScreen)
-
 onMounted(() => {
   enquireScreen((deviceType) => {
-    console.log(deviceType)
+    if (deviceType == -1) {
+      console.log('pc')
+    } else if (deviceType == 0) {
+      console.log('平板')
+    } else {
+      console.log('手机')
+    }
   })
 })
 

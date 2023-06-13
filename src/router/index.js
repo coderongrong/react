@@ -43,26 +43,41 @@ const routes = [
     children: [
       {
         path: 'home',
+        meta: {
+          name: '首页'
+        },
         component: () =>
           import(/* webpackChunkName: "table" */ '@/pages/Home/index.vue'),
       },
       {
         path: 'about',
+        meta: {
+          name: '分类'
+        },
         component: () =>
           import(/* webpackChunkName: "table" */ '@/pages/About/index.vue'),
       },
       {
         path: 'detail',
+        meta: {
+          name: '详情'
+        },
         component: () =>
           import(/* webpackChunkName: "table" */ '@/pages/Detail/index.vue'),
       },
       {
         path: 'choice',
+        meta: {
+          name: '精选'
+        },
         component: () =>
           import(/* webpackChunkName: "table" */ '@/pages/Choice/index.vue'),
       },
       {
         path: 'person',
+        meta: {
+          name: '个人'
+        },
         component: () =>
           import(/* webpackChunkName: "table" */ '@/pages/Person/index.vue'),
       },
@@ -79,6 +94,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // ...
   if (localStorage.getItem('USERINFO')) {
+    document.title = to.meta.name || '未知'
     next()
   } else {
     localStorage.clear()

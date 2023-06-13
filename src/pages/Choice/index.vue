@@ -67,7 +67,6 @@ const hanleDetail = (info) => {
 
 <template>
   <div class="top">
-    <div class="center mb-10 hoby">服装分类</div>
     <!-- <div class="d-f pl-10 pr-10">
       <div
         class="f-1 center"
@@ -122,7 +121,7 @@ const hanleDetail = (info) => {
   flex-wrap: wrap;
   margin-right: auto;
   position: relative;
-  top: 38px;
+  // top: 38px;
   overflow-y: auto;
   .info {
     width: 48%;
