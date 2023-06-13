@@ -54,7 +54,7 @@ const open = () => {
     <br />
     <span
       >建议售价：<span class="mian_color"
-        >￥{{ data.img.price * 1.5 }}</span
+        >￥{{ (data.img.price * 1.5).toFixed(2) }}</span
       ></span
     >
   </div>

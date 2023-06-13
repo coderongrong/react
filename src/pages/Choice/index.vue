@@ -1,18 +1,26 @@
 <script setup lang="ts">
-import { ref, reactive, toRaw } from "vue";
-import type { Ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { showTabBar } from "@/stores/counte.js";
-import { storeToRefs } from "pinia";
+import { ref, reactive, toRaw } from 'vue'
+import type { Ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { showTabBar } from '@/stores/counte.js'
+import { storeToRefs } from 'pinia'
 // 可以在组件中的任意位置访问 `store` 变量 ✨
-const store = showTabBar();
-const { handleFalse } = store;
-const router = useRouter();
+const store = showTabBar()
+const { handleFalse } = store
+const router = useRouter()
 
 const getURL = (name) => {
   return new URL(`../../assets/img/imgData/self${name}.jpg`, import.meta.url)
-    .href;
-};
+    .href
+}
+
+const getURLOne = (name) => {
+  return new URL(`../../assets/img/imgone/${name}.jpg`, import.meta.url).href
+}
+
+const getURLOneG = (name) => {
+  return new URL(`../../assets/img/imgone/${name}.JPG`, import.meta.url).href
+}
 
 // console.log(getURL())
 const _data = [
@@ -33,36 +41,57 @@ const _data = [
   { title: getURL(15), price: 18 },
   { title: getURL(16), price: 19 },
   { title: getURL(17), price: 19 },
-];
+]
 const data = reactive({
-  arrBat: ["低端", "中端", "高端"],
+  arrBat: ['低端', '中端', '高端'],
   currenIndex: 0,
   arrData: [
     { title: getURL(18), price: 20 },
     { title: getURL(19), price: 115 },
     { title: getURL(20), price: 115 },
     { title: getURL(21), price: 115 },
+    { title: getURLOne(1), price: 11.8 },
+    { title: getURLOne(2), price: 11.8 },
+    { title: getURLOne(3), price: 11.8 },
+    { title: getURLOne(4), price: 11.8 },
+    { title: getURLOne(5), price: 11.8 },
+    { title: getURLOne(6), price: 11.8 },
+    { title: getURLOne(7), price: 11.8 },
+    { title: getURLOneG(8), price: 11.8 },
+    { title: getURLOneG(9), price: 11.8 },
+    { title: getURLOneG(10), price: 11.8 },
+    { title: getURLOneG(11), price: 11.8 },
+    { title: getURLOneG(12), price: 11.8 },
+    { title: getURLOneG(13), price: 11.8 },
+    { title: getURLOneG(14), price: 11.8 },
+    { title: getURLOneG(15), price: 11.8 },
+    { title: getURLOne(16), price: 11.8 },
+    { title: getURLOneG(17), price: 11.8 },
+    { title: getURLOne(18), price: 11.8 },
+    { title: getURLOne(19), price: 11.8 },
+    { title: getURLOne(20), price: 11.8 },
+    { title: getURLOne(21), price: 11.8 },
   ],
-});
+})
 
 // methods
 const handleTab = (index) => {
-  data.currenIndex = index;
+  data.currenIndex = index
   if (index == 0) {
-    data.arrData = _data.filter((item) => item.price <= 20);
+    data.arrData = _data.filter((item) => item.price <= 20)
   } else if (index == 1) {
-    data.arrData = _data.filter((item) => item.price > 20 && item.price < 50);
+    data.arrData = _data.filter((item) => item.price > 20 && item.price < 50)
   } else {
-    data.arrData = _data.filter((item) => item.price >= 50);
+    data.arrData = _data.filter((item) => item.price >= 50)
   }
-};
+}
 const hanleDetail = (info) => {
   router.push({
-    path: "/main/detail",
+    path: '/main/detail',
     query: toRaw(info),
-  });
-  handleFalse();
-};
+  })
+  handleFalse()
+}
 </script>
 
 <template>
@@ -173,6 +202,6 @@ const hanleDetail = (info) => {
   }
 }
 .wrapper_height {
-  height: calc(100vh - 100px);
+  height: calc(100vh - 60px);
 }
 </style>
