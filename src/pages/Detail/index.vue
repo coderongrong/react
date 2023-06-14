@@ -39,7 +39,7 @@ const open = () => {
       <span>商品详情</span>
     </div>
     <!-- <img :src="data.img.title" alt="" /> -->
-    <el-carousel trigger="click" height="450px">
+    <el-carousel trigger="click">
       <el-carousel-item v-for="item in 4" :key="item">
         <img :src="data.img.title" alt="" />
       </el-carousel-item>
