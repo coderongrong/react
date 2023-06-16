@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { h, ref, reactive } from 'vue'
-import type { Ref } from 'vue'
-import { ElMessageBox, ElSwitch } from 'element-plus'
+import { ElMessageBox } from 'element-plus'
 import { useRouter, useRoute } from 'vue-router'
 import { showTabBar } from '@/stores/counte.js'
 import { storeToRefs } from 'pinia'
@@ -10,8 +8,17 @@ const store = showTabBar()
 const { handleTrue } = store
 const router = useRouter()
 
-const data = reactive({
-  img: router.currentRoute.value.query,
+// data
+const num: Ref<number> = ref(1)
+interface DataType {
+  img: string | string[],
+  price: any,
+  totalPrice: number
+}
+const data: DataType = reactive({
+  img: router.currentRoute.value.query.title,
+  price: router.currentRoute.value.query.price,
+  totalPrice: 0,
 })
 
 // methods
@@ -24,9 +31,12 @@ const open = () => {
     title: '提示',
     message: h('p', null, [
       h('span', null, '请联系客服取货'),
-      h('div', { style: 'color: teal' }, '客服VX：88888888'),
+      h('div', { style: 'color: teal' }, '客服VX：854016993'),
     ]),
   })
+}
+const handleChange = (e: number = 1): void => {
+  data.totalPrice = data.price * e
 }
 </script>
 
@@ -38,23 +48,39 @@ const open = () => {
       /></span>
       <span>商品详情</span>
     </div>
-    <!-- <img :src="data.img.title" alt="" /> -->
-    <el-carousel trigger="click">
+    <img :src="data.img" alt="" />
+    <!-- <el-carousel trigger="click">
       <el-carousel-item v-for="item in 4" :key="item">
         <img :src="data.img.title" alt="" />
       </el-carousel-item>
-    </el-carousel>
+    </el-carousel> -->
     <span>型号: <span class="mian_color">19239894893849238498324</span></span>
     <br />
     <span>款式：<span class="mian_color">新款</span></span>
     <br />
     <span
-      >出厂价：<span class="mian_color">￥{{ data.img.price }}</span></span
+      >出厂价：<span class="mian_color">￥{{ data.price }}</span></span
+    >
+    <br />
+    <span>
+      尺码：S
+      <el-input-number
+        size="small"
+        class="ml-20"
+        v-model="num"
+        :min="1"
+        :max="9999"
+        @change="handleChange"
+      />
+    </span>
+    <br />
+    <span
+      >总价格：<span class="mian_color">￥{{ data.totalPrice }}</span></span
     >
     <br />
     <span
       >建议售价：<span class="mian_color"
-        >￥{{ (data.img.price * 1.5).toFixed(2) }}</span
+        >￥{{ (data.price * 1.5).toFixed(2) }}</span
       ></span
     >
   </div>

@@ -21,6 +21,7 @@
     "make-loader-ui": "^1.0.0",
     "pinia": "^2.0.23",
     "three.js": "^0.77.1",
+    "unplugin-auto-import": "^0.16.4",
     "vue": "^3.2.41",
     "vue-router": "^4.2.2"
   },

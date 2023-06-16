@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, toRaw } from 'vue'
-import type { Ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
 import { showTabBar } from '@/stores/counte.js'
-import { storeToRefs } from 'pinia'
 // 可以在组件中的任意位置访问 `store` 变量 ✨
 const store = showTabBar()
 const { handleFalse } = store

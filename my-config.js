@@ -7,6 +7,7 @@ import { resolve } from 'path'
 import fs from 'fs'
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
 // import { consoles, printLoader } from 'make-loader'
 
 import { consoles } from './plugins/console'
@@ -41,6 +42,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
         vue({
           reactivityTransform: true,
         }),
+
         splitVendorChunkPlugin(),
         legacy({
           targets: ['defaults', 'not IE 11'],
@@ -53,6 +55,11 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
           ...consoles({ color: 'red' }, files),
           enforce: 'pre',
         },
+        AutoImport({
+          imports: ['vue', 'vue-router', 'pinia'],
+          // dirs: [`${new URL('./src/stores/counte.js', import.meta.url)}`], // new URL('./src/stores/counte.js', import.meta.url)
+          dts: './src/auto-imports.d.ts',
+        }),
       ],
       envPrefix: 'VITE_',
       // publicDir: false,
@@ -149,17 +156,17 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
       //     include: [/linked-dep/, /node_modules/],
       //   },
       // },
-      runtimeCompiler: true,  // 加上这一段
+      runtimeCompiler: true, // 加上这一段
       plugins: [vue()],
       resolve: {
         alias: {
-          '@': fileURLToPath(new URL('./src', import.meta.url))
-        }
+          '@': fileURLToPath(new URL('./src', import.meta.url)),
+        },
       },
       build: {
         commonjsOptions: {
-          include: [/linked-dep/, /node_modules/]
-        }
+          include: [/linked-dep/, /node_modules/],
+        },
       },
     }
   }
