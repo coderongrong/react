@@ -75,7 +75,7 @@ const handleChange = (e: number = 1): void => {
     </span>
     <br />
     <span
-      >总价格：<span class="mian_color">￥{{ data.totalPrice }}</span></span
+      >总价格：<span class="mian_color">￥{{ data.totalPrice.toFixed(2) }}</span></span
     >
     <br />
     <span
