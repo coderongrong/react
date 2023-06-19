@@ -20,6 +20,7 @@
     "make-loader": "^1.2.30",
     "make-loader-ui": "^1.0.0",
     "pinia": "^2.0.23",
+    "terser": "^5.18.0",
     "three.js": "^0.77.1",
     "unplugin-auto-import": "^0.16.4",
     "vue": "^3.2.41",

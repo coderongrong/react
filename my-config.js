@@ -120,14 +120,15 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
         open: false,
         port: 9000,
         proxy: {
-          '/jeecg-boot': {
+          '/goods': {
             // target: 'http://misaya.wicp.net',  // 石家庄测试环境和朝阳本地
             // target: 'http://39.98.118.21',  // 正式环境
-            target: 'http://192.168.1.222:1008', // 智友本地
+            target: 'http://42.192.39.253:8083', // 智友本地
             changeOrigin: true, //是否跨域
-            pathRewrite: {
-              '^/jeecg-boot': '',
-            },
+            // pathRewrite: {
+            //   '^/goods': '',
+            // },
+            rewrite: (path) => path.replace(/^\/goods/, ''),
           },
           '/sys': {
             // target: 'http://misaya.wicp.net/10ldh199512',  // 石家庄测试环境和朝阳本地
@@ -157,7 +158,29 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
       //   },
       // },
       runtimeCompiler: true, // 加上这一段
-      plugins: [vue()],
+      plugins: [
+        vue({
+          reactivityTransform: true,
+        }),
+
+        splitVendorChunkPlugin(),
+        legacy({
+          targets: ['defaults', 'not IE 11'],
+        }),
+        // {
+        //   ...consoles({ color: 'red'}, files),
+        //   enforce: 'pre'
+        // },
+        {
+          ...consoles({ color: 'red' }, files),
+          enforce: 'pre',
+        },
+        AutoImport({
+          imports: ['vue', 'vue-router', 'pinia'],
+          // dirs: [`${new URL('./src/stores/counte.js', import.meta.url)}`], // new URL('./src/stores/counte.js', import.meta.url)
+          dts: './src/auto-imports.d.ts',
+        }),
+      ],
       resolve: {
         alias: {
           '@': fileURLToPath(new URL('./src', import.meta.url)),

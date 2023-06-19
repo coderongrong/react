@@ -24,12 +24,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, toRaw } from 'vue'
-import type { Ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { storeToRefs } from 'pinia'
+import { service } from '@/config/require.js'
 import { userInfo } from '@/stores/counte.js'
-import { useRouter, useRoute } from 'vue-router'
+import { toRaw } from 'vue'
 const router = useRouter()
 const store = userInfo()
 const { handleUser } = store
@@ -42,22 +41,19 @@ const formLabelAlign = reactive({
 })
 
 // methods
-const submit = () => {
-  if (
-    toRaw(formLabelAlign).name == 'admin' &&
-    toRaw(formLabelAlign).password == '888888'
-  ) {
+const submit = async () => {
+  const res = await service.post('/goods/user/login', toRaw(formLabelAlign))
+  console.log('res', res)
+  if (res == '登录成功') {
     handleUser(toRaw(formLabelAlign))
     ElMessage({
       message: '登入成功',
       type: 'success',
     })
-    setTimeout(() => {
-      router.push('/main/home')
-    }, 1500)
+    router.push('/main/home')
   } else {
     ElMessage({
-      message: '密码错误',
+      message: res || '账户密码错误',
       type: 'error',
     })
   }

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ref, reactive, toRaw } from 'vue'
-import type { Ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { userInfo } from '@/stores/counte.js'
-import { useRouter, useRoute } from 'vue-router'
+import { service } from '@/config/require.js'
 const router = useRouter()
 const store = userInfo()
 const { user } = storeToRefs(store)
 const { person } = toRaw(user.value)
 
 //methods
-const logout = () => {
+const logout = async () => {
   router.push('/login')
+  // const res = await service.post('/goods/user/login', { name: 'zhangsan', password: '1234565' })
+  // console.log('res', res)
 }
 </script>
 

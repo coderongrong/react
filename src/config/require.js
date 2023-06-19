@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 const service = axios.create({
-    baseURL: '/',
+    // baseURL: '/',
     timeout: 5000 // 请求超时时间
 })
 service.interceptors.request.use(config => {
