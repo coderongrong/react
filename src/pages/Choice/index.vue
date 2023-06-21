@@ -22,8 +22,10 @@ const getURLOneG = (name) => {
 }
 
 // 判断时候又特殊code 赋值即可
-if(router.currentRoute.value.query.code) {
-  handleUserProxy(router.currentRoute.value.query.code)
+if (router.currentRoute.value.query.id || _proxy.value.id) {
+  router.currentRoute.value.query.id &&
+    handleUserProxy(router.currentRoute.value.query.id, 'id')
+  console.log('------>', _proxy.value.id)
 }
 
 // console.log(getURL())

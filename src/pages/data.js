@@ -25,7 +25,7 @@ const _getData = () => {
   ]
 }
 
-const userInfoProxy = () => {
+export const userInfoProxyData = () => {
   return {
     JIAOYA: {
       VX: '13326236138',

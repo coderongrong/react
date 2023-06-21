@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import { ElMessageBox } from 'element-plus'
 import { useRouter, useRoute } from 'vue-router'
-import { showTabBar } from '@/stores/counte.js'
+import { showTabBar, userInfoProxy } from '@/stores/counte.js'
+import { userInfoProxyData } from '../data'
 // 可以在组件中的任意位置访问 `store` 变量 ✨
 const store = showTabBar()
+const _store = userInfoProxy()
 const { handleTrue } = store
 const router = useRouter()
 
-console.log('--------->', )
+console.log('--------->', _store._proxy.info)
 
 // data
 const num: Ref<number> = ref(1)
 interface DataType {
-  img: string | string[],
-  price: any,
+  img: string | string[]
+  price: any
   totalPrice: number
 }
 const data: DataType = reactive({
@@ -28,11 +30,12 @@ const handleBack = () => {
   handleTrue()
 }
 const open = () => {
+  const VX = userInfoProxyData()[_store._proxy.id]?.VX || '854016993'
   ElMessageBox({
     title: '提示',
     message: h('p', null, [
       h('span', null, '请联系客服取货'),
-      h('div', { style: 'color: teal' }, `客服VX：${'854016993'}`),
+      h('div', { style: 'color: teal' }, `客服VX：${VX}`),
     ]),
   })
 }
@@ -60,8 +63,7 @@ const handleChange = (e: number = 1): void => {
     <br />
     <span>
       尺码：<span class="mian_color">全都有货</span>
-      <br />
-      数量：
+      <!-- 数量：
       <el-input-number
         size="small"
         class="ml-20"
@@ -69,11 +71,13 @@ const handleChange = (e: number = 1): void => {
         :min="1"
         :max="9999"
         @change="handleChange"
-      />
+      /> -->
     </span>
     <br />
     <span
-      >总价格：<span class="mian_color">￥{{ data.totalPrice.toFixed(2) }}</span></span
+      >总价格：<span class="mian_color"
+        >￥{{ data.totalPrice.toFixed(2) }}</span
+      ></span
     >
     <br />
     <span

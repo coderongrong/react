@@ -78,11 +78,11 @@ export const userInfo = defineStore('userInfo', () => {
 export const userInfoProxy = defineStore('userInfoProxy', () => {
   const _proxy = reactive({
     person: {},
-    info: 100
+    info: 100,
   })
 
-  function handleUserProxy(data) {
-    _proxy.info = data
+  function handleUserProxy(data, type) {
+    _proxy[type] = data
   }
 
   return {
