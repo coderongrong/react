@@ -4,16 +4,21 @@
       :label-position="labelPosition"
       label-width="100px"
       :model="formLabelAlign"
+      :rules="rules"
       style="max-width: 460px"
+      ref="ruleFormRef"
     >
-      <el-form-item label="账号：">
+      <el-form-item label="姓名：" prop="name">
         <el-input v-model="formLabelAlign.name" />
       </el-form-item>
-      <el-form-item label="密码：">
+      <el-form-item label="电话：" prop="password">
         <el-input v-model="formLabelAlign.password" />
       </el-form-item>
-      <el-button @click="handleNo">注册</el-button>
-      <el-button type="primary" @click="submit">登入</el-button>
+      <el-form-item label="身份证：" prop="code">
+        <el-input v-model="formLabelAlign.code" />
+      </el-form-item>
+      <!-- <el-button @click="handleNo">注册</el-button> -->
+      <el-button type="primary" @click="submit">提交</el-button>
       <div v-if="showVX" class="box_VX">
         客服微信：88888888
         <br />
@@ -38,10 +43,40 @@ const showVX: Ref<boolean> = ref(false)
 const formLabelAlign = reactive({
   name: '',
   password: '',
+  code: '',
 })
-
+const ruleFormRef = ref<FormInstance>()
+console.log('ruleFormRef', ruleFormRef)
+const rules = reactive<FormRules>({
+  name: [
+    {
+      required: true,
+      message: 'Please select Activity zone',
+      trigger: 'blur',
+    },
+  ],
+  password: [
+    {
+      required: true,
+      message: 'Please select Activity zone',
+      trigger: 'blur',
+    },
+  ],
+  code: [
+    {
+      required: true,
+      message: '请输入身份证号码',
+      trigger: 'blur',
+    },
+  ],
+})
 // methods
 const submit = async () => {
+  console.log('xxxxxxx')
+  ruleFormRef.value.validate(valud => {
+    console.log(valud)
+  })
+  return
   const res = await service.post('/goods/user/login', toRaw(formLabelAlign))
   console.log('res', res)
   if (res == '登录成功') {

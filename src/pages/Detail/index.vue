@@ -2,11 +2,12 @@
 import { ElMessageBox } from 'element-plus'
 import { useRouter, useRoute } from 'vue-router'
 import { showTabBar } from '@/stores/counte.js'
-import { storeToRefs } from 'pinia'
 // 可以在组件中的任意位置访问 `store` 变量 ✨
 const store = showTabBar()
 const { handleTrue } = store
 const router = useRouter()
+
+console.log('--------->', )
 
 // data
 const num: Ref<number> = ref(1)
@@ -31,7 +32,7 @@ const open = () => {
     title: '提示',
     message: h('p', null, [
       h('span', null, '请联系客服取货'),
-      h('div', { style: 'color: teal' }, '客服VX：854016993'),
+      h('div', { style: 'color: teal' }, `客服VX：${'854016993'}`),
     ]),
   })
 }
@@ -49,11 +50,6 @@ const handleChange = (e: number = 1): void => {
       <span>商品详情</span>
     </div>
     <img :src="data.img" alt="" />
-    <!-- <el-carousel trigger="click">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <img :src="data.img.title" alt="" />
-      </el-carousel-item>
-    </el-carousel> -->
     <span>型号: <span class="mian_color">19239894893849238498324</span></span>
     <br />
     <span>款式：<span class="mian_color">新款</span></span>
@@ -63,7 +59,9 @@ const handleChange = (e: number = 1): void => {
     >
     <br />
     <span>
-      尺码：S
+      尺码：<span class="mian_color">全都有货</span>
+      <br />
+      数量：
       <el-input-number
         size="small"
         class="ml-20"

@@ -17,7 +17,6 @@ const handleAysnc = async () => {
   return new Promise((res) => {
     fs.readFile('./src/_main.js', 'utf8', (err, data) => {
       files = data
-      console.log('data files', files)
       res()
     })
   })
@@ -28,6 +27,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
   const env = loadEnv(mode, process.cwd(), 'APP_')
   // return
   if (command === 'serve') {
+
     console.log('serve')
     return {
       esbuild: {
@@ -121,18 +121,11 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
         port: 9000,
         proxy: {
           '/goods': {
-            // target: 'http://misaya.wicp.net',  // 石家庄测试环境和朝阳本地
-            // target: 'http://39.98.118.21',  // 正式环境
             target: 'http://42.192.39.253:8083', // 智友本地
             changeOrigin: true, //是否跨域
-            // pathRewrite: {
-            //   '^/goods': '',
-            // },
             rewrite: (path) => path.replace(/^\/goods/, ''),
           },
           '/sys': {
-            // target: 'http://misaya.wicp.net/10ldh199512',  // 石家庄测试环境和朝阳本地
-            // target: 'http://39.98.118.21',  // 正式环境
             target: 'http://192.168.1.222:1008/jeecg-boot', // 智友本地
             changeOrigin: true, //是否跨域
             rewrite: (path) => path.replace(/^\/sys/, '/sys'),
@@ -143,7 +136,6 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
   } else {
     // command === 'build'
     // console.log("command === 'build'", command)
-    console.log('build')
     return {
       // runtimeCompiler: true, // 加上这一段
       // plugins: [vue()],

@@ -17,11 +17,11 @@ import enquireScreen from '@/utils/device'
 onMounted(() => {
   enquireScreen((deviceType) => {
     if (deviceType == -1) {
-      console.log('pc')
+      // console.log('pc')
     } else if (deviceType == 0) {
-      console.log('平板')
+      // console.log('平板')
     } else {
-      console.log('手机')
+      // console.log('手机')
     }
   })
 })

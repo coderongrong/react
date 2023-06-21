@@ -75,10 +75,6 @@ _foo.value += 100
 const copy = readonly(original)
 const _refdata = ref(100)
 const readData = readonly({count: 100})
-// console.log('ref--------->', isRef(_refdata), isRef(original))
-// console.log('isReactive-->', isReactive(_refdata), isReactive(original))
-// console.log('isReadonly-->', isReadonly(readData), isReactive(readData))
-// console.log(unref(_refdata), _refdata)
 watchEffect(() => {
   // 用来做响应性追踪
   // console.log('watchEffect', original.count, _foo.value)

@@ -25,7 +25,6 @@ export default defineConfig({
   //     /* '/api': {
   //        target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro/&id=MIA9409', //mock API接口系统
   //        target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro/&id=Mipy-1', //mock API接口系统
-  //        target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro/&id=1038664773', //mock API接口系统
   //        ws: false,
   //        changeOrigin: true,
   //        pathRewrite: {

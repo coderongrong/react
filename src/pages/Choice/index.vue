@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { showTabBar } from '@/stores/counte.js'
+import { showTabBar, userInfoProxy } from '@/stores/counte.js'
 // 可以在组件中的任意位置访问 `store` 变量 ✨
 const store = showTabBar()
+const store1 = userInfoProxy()
+const { _proxy } = storeToRefs(store1)
 const { handleFalse } = store
+const { handleUserProxy } = store1
 const router = useRouter()
 
 const getURL = (name) => {
@@ -16,6 +19,11 @@ const getURLOne = (name) => {
 
 const getURLOneG = (name) => {
   return new URL(`../../assets/img/imgone/${name}.JPG`, import.meta.url).href
+}
+
+// 判断时候又特殊code 赋值即可
+if(router.currentRoute.value.query.code) {
+  handleUserProxy(router.currentRoute.value.query.code)
 }
 
 // console.log(getURL())

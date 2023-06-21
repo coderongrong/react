@@ -1,7 +1,7 @@
 const fs = require('fs')
 function handleFiles(str) {
   fs.readdir(str, (_, data) => {
-    data.forEach((item) => {
+    data?.forEach((item) => {
       fs.readFile(str + '/' + item, 'utf8', (err, data) => {
         if (data) {
           // console.log('读到的文件-------->', data)

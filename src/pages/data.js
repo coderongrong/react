@@ -1,3 +1,8 @@
+const getURL = (name) => {
+  return new URL(`../../assets/img/imgData/self${name}.jpg`, import.meta.url)
+    .href
+}
+
 const _getData = () => {
   return [
     { title: getURL(1), price: 90 },
@@ -18,4 +23,13 @@ const _getData = () => {
     { title: getURL(16), price: 19 },
     { title: getURL(17), price: 19 },
   ]
+}
+
+const userInfoProxy = () => {
+  return {
+    JIAOYA: {
+      VX: '13326236138',
+      arrImg: [],
+    },
+  }
 }
