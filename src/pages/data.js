@@ -28,7 +28,7 @@ const _getData = () => {
 export const userInfoProxyData = () => {
   return {
     JIAOYA: {
-      VX: '13326236138',
+      VX: '854016993',
       arrImg: [],
     },
   }
