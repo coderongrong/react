@@ -1,6 +1,3 @@
-import { defineStore } from 'pinia'
-import { ref, reactive } from 'vue'
-
 export const useCount = defineStore('counte', () => {
   // 其他配置...
   const state = ref(100)
@@ -85,8 +82,13 @@ export const userInfoProxy = defineStore('userInfoProxy', () => {
     _proxy[type] = data
   }
 
+  function handleUserIndo(data) {
+    _proxy['info'] = data
+  }
+
   return {
     _proxy,
     handleUserProxy,
+    handleUserIndo
   }
 })

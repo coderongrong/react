@@ -27,7 +27,6 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
   const env = loadEnv(mode, process.cwd(), 'APP_')
   // return
   if (command === 'serve') {
-
     console.log('serve')
     return {
       esbuild: {
@@ -56,6 +55,11 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
           enforce: 'pre',
         },
         AutoImport({
+          eslintrc: {
+            enabled: false, // 若没此json文件，先开启，生成后在关闭
+            filepath: './.eslintrc-auto-import.json', // 设置eslintrc-auto-import.json生成路径 Default `./.eslintrc-auto-import.json`
+            globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+          },
           imports: ['vue', 'vue-router', 'pinia'],
           // dirs: [`${new URL('./src/stores/counte.js', import.meta.url)}`], // new URL('./src/stores/counte.js', import.meta.url)
           dts: './src/auto-imports.d.ts',
@@ -88,8 +92,8 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
       clearScreen: true,
       resolve: {
         alias: {
-          '@': fileURLToPath(new URL('./src', import.meta.url)),
-          '@com': fileURLToPath(new URL('./src/components', import.meta.url)),
+          '@': fileURLToPath(new URL('src', import.meta.url)),
+          '@com': fileURLToPath(new URL('src/components', import.meta.url)),
         },
         extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
       },
@@ -99,7 +103,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
       build: {
         rollupOptions: {
           // input: {
-          //     main: resolve(__dirname, 'index.html'),
+          //     main: resolve(__dirname, 'index.html'),  // X931019Y
           //     nested: resolve(__dirname, 'nested/index.html')
           // }
         },
@@ -168,6 +172,11 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
           enforce: 'pre',
         },
         AutoImport({
+          eslintrc: {
+            enabled: true, // 若没此json文件，先开启，生成后在关闭
+            filepath: './.eslintrc-auto-import.json', // 设置eslintrc-auto-import.json生成路径 Default `./.eslintrc-auto-import.json`
+            globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+          },
           imports: ['vue', 'vue-router', 'pinia'],
           // dirs: [`${new URL('./src/stores/counte.js', import.meta.url)}`], // new URL('./src/stores/counte.js', import.meta.url)
           dts: './src/auto-imports.d.ts',

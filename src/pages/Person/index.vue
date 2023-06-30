@@ -1,44 +1,48 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { userInfo } from '@/stores/counte.js'
+import Text from '../components/Text/index.vue'
+import { userInfo, userInfoProxy } from '@/stores/counte.js'
+
 import { service } from '@/config/require.js'
 const router = useRouter()
 const store = userInfo()
 const { user } = storeToRefs(store)
-const { person } = toRaw(user.value)
+const { _proxy } = storeToRefs(userInfoProxy())
+const { handleUserProxy } = userInfoProxy()
 
+const { person } = toRaw(user.value)
 //methods
 const logout = async () => {
-  router.push('/login')
+  handleUserProxy(toRaw(_proxy.value).info + 1, 'info')
+  // router.push('/login')
   // const res = await service.post('/goods/user/login', { name: 'zhangsan', password: '1234565' })
   // console.log('res', res)
 }
 </script>
 
 <template>
-  <div>
+  <div class="main_box">
     <span class="person">个人中心</span>
     <br />
-    <span class="user_info">用户名：{{ person.name || '******' }}</span>
+    <span class="user_info">用户名：{{ person?.name || '******' }}</span>
     <br />
-    <span class="user_info">个人信息：******</span>
+    <span class="user_info">个人信息：{{ person?.info || '******' }}</span>
     <br />
     <span class="user_info">兴趣爱好：******</span>
     <br />
     <span class="user_info">其他：******</span>
     <br />
-    <el-button type="primary" @click="logout">退出登入</el-button>
-
-    <!-- <span class="hoby">个人爱好</span> -->
+    <el-button type="primary" class="login" @click="logout">退出登入</el-button>
+    <Text />
   </div>
 </template>
 
 <style lang="less" scoped>
-/deep/ .el-button {
+.login {
   width: 100%;
   position: fixed;
   bottom: 50%;
 }
+
 .person {
   display: inline-block;
   width: 100%;

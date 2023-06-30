@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ElMessageBox } from 'element-plus'
 import { useRouter, useRoute } from 'vue-router'
-import { showTabBar, userInfoProxy } from '@/stores/counte.js'
+import { showTabBar, userInfoProxy } from '../../stores/counte.js'
 import { userInfoProxyData } from '../data'
 // 可以在组件中的任意位置访问 `store` 变量 ✨
 const store = showTabBar()

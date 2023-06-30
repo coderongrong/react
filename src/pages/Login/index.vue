@@ -11,12 +11,12 @@
       <el-form-item label="姓名：" prop="name">
         <el-input v-model="formLabelAlign.name" />
       </el-form-item>
-      <el-form-item label="电话：" prop="password">
+      <el-form-item label="密码：" prop="password">
         <el-input v-model="formLabelAlign.password" />
       </el-form-item>
-      <el-form-item label="身份证：" prop="code">
+      <!-- <el-form-item label="身份证：" prop="code">
         <el-input v-model="formLabelAlign.code" />
-      </el-form-item>
+      </el-form-item> -->
       <!-- <el-button @click="handleNo">注册</el-button> -->
       <el-button type="primary" @click="submit">提交</el-button>
       <div v-if="showVX" class="box_VX">
@@ -30,62 +30,58 @@
 
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
-import { storeToRefs } from 'pinia'
-import { service } from '@/config/require.js'
-import { userInfo } from '@/stores/counte.js'
+import { service } from '../../config/require.js'
+import { userInfo } from '../../stores/counte.js'
 import { toRaw } from 'vue'
 const router = useRouter()
-const store = userInfo()
-const { handleUser } = store
-
+const { user } = storeToRefs(userInfo())
+const { handleUser } = userInfo()
 // data
 const showVX: Ref<boolean> = ref(false)
 const formLabelAlign = reactive({
-  name: '',
-  password: '',
+  name: 'admin',
+  password: '123456',
   code: '',
 })
 const ruleFormRef = ref<FormInstance>()
-console.log('ruleFormRef', ruleFormRef)
+
 const rules = reactive<FormRules>({
   name: [
     {
       required: true,
-      message: 'Please select Activity zone',
+      message: '',
       trigger: 'blur',
     },
   ],
   password: [
     {
       required: true,
-      message: 'Please select Activity zone',
+      message: '',
       trigger: 'blur',
     },
   ],
   code: [
     {
       required: true,
-      message: '请输入身份证号码',
+      message: '请输入',
       trigger: 'blur',
     },
   ],
 })
+
 // methods
 const submit = async () => {
-  console.log('xxxxxxx')
-  ruleFormRef.value.validate(valud => {
+  ruleFormRef.value.validate((valud) => {
     console.log(valud)
   })
-  return
-  const res = await service.post('/goods/user/login', toRaw(formLabelAlign))
-  console.log('res', res)
-  if (res == '登录成功') {
+  // const res = await service.post('/goods/user/login', toRaw(formLabelAlign))
+  if ('登录成功' == '登录成功') {
     handleUser(toRaw(formLabelAlign))
     ElMessage({
       message: '登入成功',
       type: 'success',
     })
-    router.push('/main/home')
+    router.push('/main/person')
   } else {
     ElMessage({
       message: res || '账户密码错误',
