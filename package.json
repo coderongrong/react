@@ -32,5 +32,10 @@
     "less-loader": "^11.1.0",
     "sass": "^1.56.1",
     "vite": "^3.1.8"
+  },
+  "eslintConfig": {
+    "include": [
+      "/**/*.d.ts"
+    ]
   }
 }
