@@ -30,7 +30,11 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "table" */ '@/components/Table/index.vue'),
   },
-
+  {
+    path: '/',
+    component: () =>
+      import(/* webpackChunkName: "table" */ '@/pages/Login/index.vue'),
+  },
   {
     path: '/login',
     component: () =>

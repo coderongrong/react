@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 const service = axios.create({
-    // baseURL: '/',
+    baseURL: 'http://42.192.39.253:8083/',
     timeout: 5000 // 请求超时时间
 })
 service.interceptors.request.use(config => {
@@ -13,7 +13,6 @@ service.interceptors.request.use(config => {
     }
     return config
 })
-
 service.interceptors.response.use(response => {
     return response.data
 }, () => { })

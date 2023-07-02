@@ -121,7 +121,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
         port: 9000,
         proxy: {
           '/goods': {
-            target: 'http://42.192.39.253:8083', // 智友本地
+            target: 'http://42.192.39.253:8083',
             changeOrigin: true, //是否跨域
             rewrite: (path) => path.replace(/^\/goods/, ''),
           },
