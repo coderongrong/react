@@ -22,8 +22,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 
 const pinia = createPinia()
 
-console.log('StoreReset', StoreReset, pinia)
-
 pinia.use(StoreReset)
 
 app.use(ElementPlus)
