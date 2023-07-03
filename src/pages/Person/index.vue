@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import Text from '../components/Text/index.vue'
 import { userInfo, userInfoProxy } from '@/stores/counte.js'
-import { useFeatureX } from '../utils/publish.js'
 import { service } from '@/config/require.js'
-const { foo } = useFeatureX()
-watch(foo, () => {
-  console.log('foo ------->', foo)
-})
 const router = useRouter()
 const store = userInfo()
 const { user } = storeToRefs(store)
@@ -36,7 +31,6 @@ const logout = async () => {
     <span class="user_info">其他：******</span>
     <br />
     <el-button type="primary" class="login" @click="logout">退出登入</el-button>
-    <h1>{{ foo }}</h1>
     <Text />
   </div>
 </template>

@@ -18,8 +18,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 
-
-
 const pinia = createPinia()
 
 pinia.use(StoreReset)
@@ -40,3 +38,22 @@ app.mount('#app')
 
 // https://github.com/coderongrong/react/blob/vite2.0/my-config.js
 // console.log('环境变量', import.meta.env)
+
+const p = new Proxy(
+  {},
+  {
+    get: function (obj, prop) {
+      console.log('get')
+      return obj[prop]
+    },
+    set: function () {
+      console.log('set')
+      return 'abc'
+    }
+  }
+)
+p.a = 100
+
+console.log(' p ---> ', p.c)
+console.log(' p ---> ', p.a)
+console.log(' p ---> ', p.b)
