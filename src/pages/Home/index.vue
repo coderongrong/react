@@ -48,10 +48,7 @@ const hanleDetail = (info) => {
 </script>
 
 <template>
-  <div
-    class="mian_info"
-    :class="[data.arrData.length > 4 ? 'wrapper_height' : '']"
-  >
+  <div class="mian_info" :class="{ wrapper_height: data.arrData.length > 6 }">
     <div
       @click="hanleDetail(item)"
       class="info"

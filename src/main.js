@@ -18,9 +18,14 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 
-const pinia = createPinia()
+function SecretPiniaPlugin() {
+  return { secret: 'the cake is a lie' }
+}
 
+const pinia = createPinia()
+pinia.use(() => ({ hello: 'world' }))
 pinia.use(StoreReset)
+pinia.use(SecretPiniaPlugin)
 
 app.use(ElementPlus)
 app.use(Antd)
@@ -49,11 +54,21 @@ const p = new Proxy(
     set: function () {
       console.log('set')
       return 'abc'
-    }
+    },
   }
 )
-p.a = 100
+// p.a = 100
 
-console.log(' p ---> ', p.c)
-console.log(' p ---> ', p.a)
-console.log(' p ---> ', p.b)
+// console.log(' p ---> ', p.c)
+// console.log(' p ---> ', p.a)
+// console.log(' p ---> ', p.b)
+
+//  Promise
+var m = new Map()
+m.set('abc', 123)
+console.log(m.has('abc'))
+!m.has('ab') && m.set('ab', 999)
+console.log(m)
+// for(let item of m) {
+//   console.log('item', item)
+// }
