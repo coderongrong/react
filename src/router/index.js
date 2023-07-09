@@ -32,8 +32,11 @@ const routes = [
   },
   {
     path: '/',
-    component: () =>
-      import(/* webpackChunkName: "table" */ '@/pages/Login/index.vue'),
+    redirect: '/test',
+  },
+  {
+    path: '/test',
+    component: () => import(/* webpackChunkName: "table" */ '@/test/Foo.vue'),
   },
   {
     path: '/login',
@@ -48,7 +51,7 @@ const routes = [
       {
         path: 'home',
         meta: {
-          name: '首页'
+          name: '首页',
         },
         component: () =>
           import(/* webpackChunkName: "table" */ '@/pages/Home/index.vue'),
@@ -56,7 +59,7 @@ const routes = [
       {
         path: 'about',
         meta: {
-          name: '分类'
+          name: '分类',
         },
         component: () =>
           import(/* webpackChunkName: "table" */ '@/pages/About/index.vue'),
@@ -64,7 +67,7 @@ const routes = [
       {
         path: 'detail',
         meta: {
-          name: '详情'
+          name: '详情',
         },
         component: () =>
           import(/* webpackChunkName: "table" */ '@/pages/Detail/index.vue'),
@@ -72,7 +75,7 @@ const routes = [
       {
         path: 'choice',
         meta: {
-          name: '精选'
+          name: '精选',
         },
         component: () =>
           import(/* webpackChunkName: "table" */ '@/pages/Choice/index.vue'),
@@ -80,7 +83,7 @@ const routes = [
       {
         path: 'person',
         meta: {
-          name: '个人'
+          name: '个人',
         },
         component: () =>
           import(/* webpackChunkName: "table" */ '@/pages/Person/index.vue'),

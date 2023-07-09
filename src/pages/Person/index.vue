@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Text from '../components/Text/index.vue'
 import { userInfo, userInfoProxy } from '@/stores/counte.js'
-
 import { service } from '@/config/require.js'
 const router = useRouter()
 const store = userInfo()

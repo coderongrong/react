@@ -89,6 +89,31 @@ export const userInfoProxy = defineStore('userInfoProxy', () => {
   return {
     _proxy,
     handleUserProxy,
-    handleUserIndo
+    handleUserIndo,
+  }
+})
+
+export const useTest = defineStore('useTest', () => {
+  const infoData = reactive({
+    arr: ['js', 'book', 'html'],
+    num: 100,
+  })
+
+  const infoNum = ref(100)
+
+  function handleTest(data) {
+    infoData.arr = data
+  }
+
+  function handleNum(data) {
+    infoNum.value++
+    infoData.num ++
+  }
+
+  return {
+    infoData,
+    infoNum,
+    handleTest,
+    handleNum,
   }
 })
