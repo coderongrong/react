@@ -5,7 +5,7 @@
     <meta name="baidu-site-verification" content="codeva-1PLZGsBlbw" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> 服装货源厂 </title>
+    <title>服装货源厂</title>
   </head>
   <body>
     <div id="app" style="width: 100%; height: 100vh; background: #4737370d;"></div>
@@ -20,6 +20,12 @@
       <button @click="handleDes">click me</button>
       <button @click="handleName">click name</button>
     </div> -->
+    <!-- <div id="box">
+      abc
+      <div class="name">姓名</div>
+      <div class="age">年龄</div>
+    </div>
+    <button id="btn">click me</button> -->
     <script>
       class Vue {
         constructor(options) {
@@ -93,7 +99,7 @@
           this.checkNodeType(this.el)
         }
         checkNodeType(el) {
-          if(!el) return
+          if (!el) return
           const childNodes = el?.childNodes
           ;[...childNodes].forEach((node) => {
             if (node.nodeType == 1) {
@@ -218,9 +224,9 @@
       // 获取数组原型, 后面修改7个方法
       const originProto = Array.prototype
       // 创建对象做备份，修改响应式都是在备份的上进行，不影响原始数组方法
-      const arrayProto = Object.create(originProto);
+      const arrayProto = Object.create(originProto)
       // 拦截数组方法，在变更时发出通知
-      ['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(
+      ;['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(
         (method) => {
           // 在备份的原型上做修改
           arrayProto[method] = function () {
@@ -250,5 +256,66 @@
       }
     </script>
     <script type="module" src="./src/main.js"></script>
+    <!-- <script>
+
+      function watch(options) {
+        for(const key in options) {
+          let initData = options[key]
+          Object.defineProperty(options, key, {
+
+            get() {
+              console.log('--------get-----------')
+              return initData
+            },
+            set(val) {
+              console.log('--------set-----------')
+              initData = val
+              changeName()
+              changeAge()
+            }
+          })
+        }
+      }
+
+
+      const box = document.getElementById('box')
+      const obj = {
+        name: 'rong',
+        age: 20,
+      }
+      watch(obj)
+      function changeName() {
+        const name = document.getElementsByClassName('name')[0]
+        name.innerText = '姓名:' + obj.name
+      }
+
+      function changeAge() {
+        const age = document.getElementsByClassName('age')[0]
+        age.innerText = '年龄:' + obj.age
+      }
+      changeName()
+      changeAge()
+
+      obj.name = 'code'
+      obj.name = 'codeasds'
+
+
+
+    </script> -->
+    <script>
+      const box = document.getElementById('box')
+      const btn = document.getElementById('btn')
+
+      function delay(time = 3000) {
+        box.innerHTML = 'xxxx'
+        const t = Date.now()
+        while (Date.now() - t < time) {}
+        console.log(' --------> deley  ')
+      }
+
+      // btn.onclick = function () {
+      //   delay()
+      // }
+    </script>
   </body>
 </html>
