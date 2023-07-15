@@ -66,9 +66,9 @@ const p = new Proxy(
 //  Promise
 var m = new Map()
 m.set('abc', 123)
-console.log(m.has('abc'))
+// console.log(m.has('abc'))
 !m.has('ab') && m.set('ab', 999)
-console.log(m)
+// console.log(m)
 // for(let item of m) {
 //   console.log('item', item)
 // }

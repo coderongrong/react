@@ -54,16 +54,16 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
           ...consoles({ color: 'red' }, files),
           enforce: 'pre',
         },
-        AutoImport({
-          eslintrc: {
-            enabled: false, // 若没此json文件，先开启，生成后在关闭
-            filepath: './.eslintrc-auto-import.json', // 设置eslintrc-auto-import.json生成路径 Default `./.eslintrc-auto-import.json`
-            globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
-          },
-          imports: ['vue', 'vue-router', 'pinia'],
-          // dirs: [`${new URL('./src/stores/counte.js', import.meta.url)}`], // new URL('./src/stores/counte.js', import.meta.url)
-          dts: './src/auto-imports.d.ts',
-        }),
+        // AutoImport({
+        //   eslintrc: {
+        //     enabled: false, // 若没此json文件，先开启，生成后在关闭
+        //     filepath: './.eslintrc-auto-import.json', // 设置eslintrc-auto-import.json生成路径 Default `./.eslintrc-auto-import.json`
+        //     globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+        //   },
+        //   imports: ['vue', 'vue-router', 'pinia'],
+        //   // dirs: [`${new URL('./src/stores/counte.js', import.meta.url)}`], // new URL('./src/stores/counte.js', import.meta.url)
+        //   dts: './src/auto-imports.d.ts',
+        // }),
       ],
       envPrefix: 'VITE_',
       // publicDir: false,
