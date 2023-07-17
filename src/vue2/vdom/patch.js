@@ -1,6 +1,7 @@
 function patch(oldVnode, vnode) {
   // 更新还是渲染
-  const isRealElement = oldVnode.nodeType
+  const isRealElement = oldVnode?.nodeType
+  console.log('isRealElement', isRealElement)
   if (isRealElement) {
     const oldElm = oldVnode
     const parentElm = oldElm.parentNode

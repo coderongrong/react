@@ -12,7 +12,7 @@
       <div>hellow {{ name }}</div>
       <div>hellow {{ name }}</div>
       <div>hellow {{ name }}</div>
-      <div>hellow {{ add }}</div>
+      <div>hellow {{ add.a }}</div>
     </div>
     <script src="./src/vue2/initGlobalAPI/index.js"></script>
     <script src="./src/vue2/vdom/create-element.js"></script>
@@ -25,6 +25,7 @@
     <script src="./src/vue2/lifecycle.js"></script>
     <script src="./src/vue2/watcher.js"></script>
     <script src="./src/vue2/vdom/patch.js"></script>
+    <script src="./src/vue2/dep.js"></script>
     <script>
       let vm = new Vue({
         el: '#box',
@@ -32,6 +33,10 @@
           return { name: 'zx', age: 18, add: {a: 100}}
         },
       })
+      setTimeout(() => {
+        vm.age = 111
+        vm._updata(vm._render())
+      }, 1000)
       // vm._data.add = {a: 1}
       // console.log(vm._data)
       /**
