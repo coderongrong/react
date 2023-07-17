@@ -8,22 +8,28 @@
     <title>vuex</title>
   </head>
   <body>
-    <div id="box">asdad
-      <p>{{ name }}</p>
-      <span>{{ age }}</span>
+    <div id="box" style="color: red; background: blue;">
+      <div>hellow {{ name }}</div>
+      <div>hellow {{ name }}</div>
+      <div>hellow {{ name }}</div>
+      <div>hellow {{ add }}</div>
     </div>
+    <script src="./src/vue2/initGlobalAPI/index.js"></script>
+    <script src="./src/vue2/vdom/create-element.js"></script>
     <script src="./src/vue2/observe.js"></script>
     <script src="./src/vue2/index.js"></script>
     <script src="./src/vue2/state.js"></script>
     <script src="./src/vue2/utils/index.js"></script>
     <script src="./src/vue2/array.js"></script>
     <script src="./src/vue2/compileFunction.js"></script>
+    <script src="./src/vue2/lifecycle.js"></script>
+    <script src="./src/vue2/watcher.js"></script>
+    <script src="./src/vue2/vdom/patch.js"></script>
     <script>
-
       let vm = new Vue({
         el: '#box',
         data() {
-          return { name: 'zx', age: 18 }
+          return { name: 'zx', age: 18, add: {a: 100}}
         },
       })
       // vm._data.add = {a: 1}
