@@ -8,7 +8,7 @@
       style="max-width: 460px"
       ref="ruleFormRef"
     >
-      <el-form-item label="姓名：" prop="name">
+      <el-form-item label="用户：" prop="name">
         <el-input v-model="formLabelAlign.name" />
       </el-form-item>
       <el-form-item label="密码：" prop="password">
@@ -37,7 +37,7 @@ const router = useRouter()
 const { user } = storeToRefs(userInfo())
 const { handleUser } = userInfo()
 // data
-const showVX: Ref<boolean> = ref(false)
+const showVX: Ref<boolean> = ref(false);
 const formLabelAlign = reactive({
   name: 'admin',
   password: '123456',

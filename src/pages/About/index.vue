@@ -2,58 +2,29 @@
 import { ref, reactive, toRaw } from "vue";
 import type { Ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { showTabBar } from '@/stores/counte.js'
+import { showTabBar } from "@/stores/counte.js";
 // 可以在组件中的任意位置访问 `store` 变量 ✨
-const store = showTabBar()
-const { handleFalse } = store
-const router = useRouter()
+const store = showTabBar();
+const { handleFalse } = store;
+const router = useRouter();
 
 const getURL = (name) => {
-  return new URL(`../../assets/img/imgData/self${name}.jpg`, import.meta.url)
-    .href;
+  return new URL(`../../assets/img/imgZe/ze${name}.jpg`, import.meta.url).href;
 };
 
 // console.log(getURL())
 const _data = [
-  { title: getURL(1), price: 90 },
-  { title: getURL(2), price: 80 },
-  { title: getURL(3), price: 89 },
-  { title: getURL(4), price: 30 },
-  { title: getURL(5), price: 40 },
-  { title: getURL(6), price: 49 },
-  { title: getURL(7), price: 49 },
-  { title: getURL(8), price: 49 },
-  { title: getURL(9), price: 49 },
-  { title: getURL(10), price: 18 },
-  { title: getURL(11), price: 18 },
-  { title: getURL(12), price: 29 },
-  { title: getURL(13), price: 29 },
-  { title: getURL(14), price: 19 },
-  { title: getURL(15), price: 18 },
-  { title: getURL(16), price: 19 },
-  { title: getURL(17), price: 19 },
+  { title: getURL(1), price: 88 },
+  { title: getURL(2), price: 115 },
+  { title: getURL(3), price: 40 },
 ];
 const data = reactive({
   arrBat: ["低端", "中端", "高端"],
   currenIndex: -1,
   arrData: [
-    { title: getURL(1), price: 90 },
-    { title: getURL(2), price: 80 },
-    { title: getURL(3), price: 89 },
-    { title: getURL(4), price: 30 },
-    { title: getURL(5), price: 40 },
-    { title: getURL(6), price: 49 },
-    { title: getURL(7), price: 49 },
-    { title: getURL(8), price: 49 },
-    { title: getURL(9), price: 49 },
-    { title: getURL(10), price: 18 },
-    { title: getURL(11), price: 18 },
-    { title: getURL(12), price: 29 },
-    { title: getURL(13), price: 29 },
-    { title: getURL(14), price: 19 },
-    { title: getURL(15), price: 18 },
-    { title: getURL(16), price: 19 },
-    { title: getURL(17), price: 19 },
+    { title: getURL(1), price: 88 },
+    { title: getURL(2), price: 115 },
+    { title: getURL(3), price: 40 },
   ],
 });
 
@@ -73,7 +44,7 @@ const hanleDetail = (info) => {
     path: "/main/detail",
     query: toRaw(info),
   });
-  handleFalse()
+  handleFalse();
 };
 </script>
 

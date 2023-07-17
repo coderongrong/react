@@ -1,50 +1,54 @@
 <script setup lang="ts">
-import { ref, reactive, toRaw } from 'vue'
-import type { Ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { showTabBar } from '@/stores/counte.js'
-import { storeToRefs } from 'pinia'
+import { ref, reactive, toRaw } from "vue";
+import type { Ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { showTabBar } from "@/stores/counte.js";
+import { storeToRefs } from "pinia";
 // 可以在组件中的任意位置访问 `store` 变量 ✨
-const store = showTabBar()
-const { handleFalse } = store
-const router = useRouter()
+const store = showTabBar();
+const { handleFalse } = store;
+const router = useRouter();
 
 const getURL = (name) => {
-  return new URL(`../../assets/img/imgData/self${name}.jpg`, import.meta.url)
-    .href
-}
+  return new URL(`../../assets/img/imgZe/ze${name}.jpg`, import.meta.url).href;
+};
 
 // data
 const data = reactive({
   arrData: [
-    { title: getURL(1), price: 90 },
-    { title: getURL(2), price: 80 },
-    { title: getURL(3), price: 89 },
-    { title: getURL(4), price: 30 },
-    { title: getURL(5), price: 40 },
+    { title: getURL(1), price: 88 },
+    { title: getURL(2), price: 115 },
+    { title: getURL(3), price: 135 },
+    { title: getURL(4), price: 135 },
+    { title: getURL(5), price: 88 },
     { title: getURL(6), price: 49 },
     { title: getURL(7), price: 49 },
-    { title: getURL(8), price: 49 },
-    { title: getURL(9), price: 49 },
-    { title: getURL(10), price: 18 },
-    { title: getURL(11), price: 18 },
-    { title: getURL(12), price: 29 },
-    { title: getURL(13), price: 29 },
-    { title: getURL(14), price: 19 },
-    { title: getURL(15), price: 18 },
-    { title: getURL(16), price: 19 },
-    { title: getURL(17), price: 19 },
+    { title: getURL(8), price: 110 },
+    { title: getURL(9), price: 100 },
+    { title: getURL(10), price: 90 },
+    { title: getURL(11), price: 48 },
+    { title: getURL(12), price: 98 },
+    { title: getURL(13), price: 110 },
+    { title: getURL(14), price: 145 },
+    { title: getURL(15), price: 108 },
+    { title: getURL(16), price: 130 },
+    { title: getURL(17), price: 188 },
+    { title: getURL(18), price: 130 },
+    { title: getURL(19), price: 150 },
+    { title: getURL(20), price: 75 },
+    { title: getURL(21), price: 110 },
+    { title: getURL(22), price: 155 },
   ],
-})
+});
 
 // methods
 const hanleDetail = (info) => {
   router.push({
-    path: '/main/detail',
+    path: "/main/detail",
     query: toRaw(info),
-  })
-  handleFalse()
-}
+  });
+  handleFalse();
+};
 </script>
 
 <template>
@@ -56,6 +60,7 @@ const hanleDetail = (info) => {
       :key="index"
     >
       <img :src="item.title" alt="" />
+      <div class="proxy_run">支持一件代发</div>
       <span class="price"
         ><span class="price_color">新款</span>单价：￥{{ item.price }}
       </span>
@@ -127,5 +132,14 @@ const hanleDetail = (info) => {
 }
 .wrapper_height {
   height: calc(100vh - 60px);
+}
+.proxy_run {
+  position: absolute;
+  font-size: 8px;
+  top: 158px;
+  right: 4px;
+  color: #f8f3f3;
+  background: rgb(255 0 0 / 70%);
+  border-radius: 10%;
 }
 </style>
