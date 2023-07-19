@@ -1,14 +1,13 @@
 function patch(oldVnode, vnode) {
   // 更新还是渲染
-  const isRealElement = oldVnode?.nodeType
-  console.log('isRealElement', isRealElement)
+  const isRealElement = oldVnode.nodeType
   if (isRealElement) {
     const oldElm = oldVnode
     const parentElm = oldElm.parentNode
-
     let el = createElm(vnode)
     parentElm.insertBefore(el, oldElm.nextSibling)
     parentElm.removeChild(oldElm)
+    return el
   }
 }
 

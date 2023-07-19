@@ -5,7 +5,7 @@ class Vue {
 
   _init(options) {
     const vm = this
-    vm.$options = options
+    vm.$options = mergeOptions(vm.constructor.options, options)
     initState(vm)
 
     if (vm.$options.el) {
@@ -45,8 +45,10 @@ class Vue {
     return createTextVNode(text)
   }
   _s(val) {
-    return val == null ? '' : typeof val == 'object' ? JSON.stringify(val) : val
+    return val == null ? '' : (typeof val == 'object' ? JSON.stringify(val) : val)
   }
+
+  $nextTick = nextTick
 }
 
 initGlobalAPI(Vue)

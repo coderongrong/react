@@ -33,5 +33,6 @@ function initData(vm) {
         proxy(vm, '_data', key)
     }
     // 响应式原理
+    callHook(vm, 'beforeCreate')
     observe(data)
 }

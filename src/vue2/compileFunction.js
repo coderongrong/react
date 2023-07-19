@@ -50,7 +50,6 @@ function start(tagName, attrs) {
 }
 
 function end(tagName) {
-  // console.log('------>', tagName)
   let element = stact.pop()
   currentParent = stact[stact.length -1]
   if(currentParent) {
