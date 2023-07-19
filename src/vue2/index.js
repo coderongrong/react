@@ -29,12 +29,16 @@ class Vue {
 
   _render() {
     const { render } = this.$options
+    
+    // 返回虚拟dom
     const vnode = render.call(this)
     return vnode
   }
 
   _updata(vnode) {
     const vm = this
+
+    // 虚拟dom 转化为真实dom
     vm.$el = patch(vm.$el, vnode)
   }
 

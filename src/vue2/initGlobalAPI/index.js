@@ -1,11 +1,11 @@
-const LIFECYCLE_HOOKS = ['beforeCreate', 'create', 'beforeMount', 'mounted']
+const LIFECYCLE_HOOKS = ['beforeCreate', 'created', 'beforeMount', 'mounted']
 const ASSETS_type = ['component', 'directive', 'filter']
 
 let strats = {}
 
 function mergeAssets(parentVal, childVal) {
   const res = Object.create(parentVal)
-  console.log('----------->', res)
+  // console.log('----------->', res)
   if (childVal) {
     for (let key in childVal) {
       res[key] = childVal[key]
@@ -17,7 +17,7 @@ function mergeAssets(parentVal, childVal) {
 strats.components = mergeAssets
 
 LIFECYCLE_HOOKS.forEach((item) => {
-  strats[item] = mergeHooks()
+  strats[item] = mergeHooks
 })
 
 function mergeHooks(parentVal, childVal) {
@@ -98,6 +98,9 @@ function mergeOptions(parent, child) {
   }
 
   function mergeField(key) {
+    if(strats[key]) {
+      return options[key] = strats[key](parent[key], child[key])
+    }
     if (typeof parent[key] == 'object' && typeof child[key] == 'object') {
       options[key] = {
         ...parent[key],

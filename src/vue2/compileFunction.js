@@ -174,6 +174,8 @@ function generate(el) {
   `
   return code
 }
+
+
 function compileToFunction(template) {
   let root = parseHTML(template)
   let code = generate(root)

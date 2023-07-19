@@ -13,7 +13,11 @@ function mountComponent(vm, el) {
 }
 
 function callHook(vm, hook) {
-  const hanlders = vm.$options
-  console.log('hanlders', vm.$options, hook)
-  hanlders?.forEach((item) => item.call(vm))
+  const hanlders = vm.$options[hook]
+  if(hanlders) {
+    let i = -1
+    while(++i < hanlders.length) {
+      hanlders[i].call(vm)
+    }
+  }
 }
