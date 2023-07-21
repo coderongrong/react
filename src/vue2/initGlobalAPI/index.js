@@ -1,5 +1,9 @@
 const LIFECYCLE_HOOKS = ['beforeCreate', 'created', 'beforeMount', 'mounted']
-const ASSETS_type = ['component', 'directive', 'filter']
+const ASSETS_type = [
+  'component',
+  // 'directive',
+  // 'filter'
+]
 
 let strats = {}
 
@@ -75,10 +79,12 @@ function initAssetsReg(Vue) {
 }
 
 function initExtend(Vue) {
+  let cid = 0
   Vue.extend = function (extendOptions) {
     const Sub = function VueComponent(options) {
       this._init(options)
     }
+    Sub.cid = cid++
     Sub.prototype = Object.create(this.prototype)
     Sub.prototype.construtor = Sub
     Sub.options = mergeOptions(this.options, extendOptions)
@@ -98,8 +104,8 @@ function mergeOptions(parent, child) {
   }
 
   function mergeField(key) {
-    if(strats[key]) {
-      return options[key] = strats[key](parent[key], child[key])
+    if (strats[key]) {
+      return (options[key] = strats[key](parent[key], child[key]))
     }
     if (typeof parent[key] == 'object' && typeof child[key] == 'object') {
       options[key] = {

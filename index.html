@@ -8,9 +8,8 @@
     <title>vuex</title>
   </head>
   <body>
-    <div id="box" style="color: red; cursor: pointer">
-      <div>hellow {{ arr }}</div>
-      <com></com>
+    <div id="box">
+      <div>{{name}}</div>
     </div>
     <script src="./src/vue2/dep.js"></script>
     <script src="./src/vue2/schedular.js"></script>
@@ -26,29 +25,23 @@
     <script src="./src/vue2/watcher.js"></script>
     <script src="./src/vue2/vdom/patch.js"></script>
     <script>
-
-      Vue.component('com', {
-        template: '<div>aaaaaaaaa</div>'
-      })
+      // Vue.component('my-com', {
+      //   template: '<div>comcomcom</div>'
+      // })
       let vm = new Vue({
         el: '#box',
         data() {
-          return { arr: [1, 2, 3] }
+          return { arr: [1, 2, 3], name: 'zx' }
         },
         components: {
-          'com': {
+          'my-com': {
             template: '<div>123123</div>'
           }
-        },
-        beforeCreate() {
-          // console.log('beforeCreate')
-        },
-        beforeMount() {
-          // console.log('beforeMount')
         }
       })
-      console.log(vm)
-
+      // setTimeout(() => {
+      //   // vm.name = 'xxxxxx'
+      // }, 500)
     </script>
   </body>
 </html>

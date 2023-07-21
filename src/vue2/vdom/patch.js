@@ -1,22 +1,43 @@
 function patch(oldVnode, vnode) {
   // 更新还是渲染
-  const isRealElement = oldVnode.nodeType
-  if (isRealElement) {
-    const oldElm = oldVnode
-    const parentElm = oldElm.parentNode
-    let el = createElm(vnode)
-    parentElm.insertBefore(el, oldElm.nextSibling)
-    parentElm.removeChild(oldElm)
-    return el
+
+  if (!oldVnode) {
+    //组件挂载
+    return createElm(vnode)
+  } else {
+    const isRealElement = oldVnode.nodeType
+    if (isRealElement) {
+      const oldElm = oldVnode
+      const parentElm = oldElm.parentNode
+      let el = createElm(vnode)
+      parentElm.insertBefore(el, oldElm.nextSibling)
+      parentElm.removeChild(oldElm)
+      return el
+    }
+  }
+}
+
+function _createComponent(vnode) {
+  //创建组件的实例
+  let i = vnode.data
+  if ((i = i.hook) && (i = i.init)) {
+    i(vnode)
+  }
+  if(vnode.componentInstance) {
+    return true
   }
 }
 
 function createElm(vnode) {
   let { tag, children, key, data, text } = vnode
   if (typeof tag == 'string') {
+    if (_createComponent(vnode)) {
+      return vnode.componentInstance.$el
+    }
+
     vnode.el = document.createElement(tag)
     updataProps(vnode)
-    children.forEach((item) => {
+    children?.forEach((item) => {
       return vnode.el.appendChild(createElm(item))
     })
   } else {

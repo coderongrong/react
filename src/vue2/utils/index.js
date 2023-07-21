@@ -1,5 +1,5 @@
 function isObj (data) {
-    return typeof data == 'object' && data != null
+    return typeof data === 'object' && data !== null
 }
 
 function def(obj, key, value) {

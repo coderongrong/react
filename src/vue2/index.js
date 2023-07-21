@@ -12,6 +12,7 @@ class Vue {
       vm.$mount(vm.$options.el)
     }
   }
+
   $mount(el) {
     const vm = this
     const options = vm.$options
@@ -21,9 +22,11 @@ class Vue {
       if (!template && el) {
         template = el.outerHTML
       }
+      
       const render = compileToFunction(template)
       options.render = render
     }
+    console.log(vm, el)
     mountComponent(vm, el)
   }
 
@@ -37,16 +40,16 @@ class Vue {
 
   _updata(vnode) {
     const vm = this
-
+    
     // 虚拟dom 转化为真实dom
     vm.$el = patch(vm.$el, vnode)
   }
 
   _c() {
-    return createElement(...arguments)
+    return createElement(this, ...arguments)
   }
   _v(text) {
-    return createTextVNode(text)
+    return createTextVNode(this, text)
   }
   _s(val) {
     return val == null ? '' : (typeof val == 'object' ? JSON.stringify(val) : val)
