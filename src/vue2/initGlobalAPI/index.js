@@ -9,7 +9,6 @@ let strats = {}
 
 function mergeAssets(parentVal, childVal) {
   const res = Object.create(parentVal)
-  // console.log('----------->', res)
   if (childVal) {
     for (let key in childVal) {
       res[key] = childVal[key]
@@ -40,19 +39,6 @@ function initGlobalAPI(Vue) {
   Vue.mixin = function (mixin) {
     this.options = mergeOptions(this.options, mixin)
   }
-  // Vue.mixin({
-  //     a: 1,
-  //     beforeCreate(){
-
-  //     }
-  // })
-  // Vue.mixin({
-  //     b: 2,
-  //     beforeCreate(){
-
-  //     }
-  // })
-  // console.log(Vue.options)
 
   ASSETS_type.forEach((type) => {
     Vue.options[type + 's'] = {}
@@ -86,7 +72,7 @@ function initExtend(Vue) {
     }
     Sub.cid = cid++
     Sub.prototype = Object.create(this.prototype)
-    Sub.prototype.construtor = Sub
+    Sub.prototype.constructor = Sub  // constructor
     Sub.options = mergeOptions(this.options, extendOptions)
     return Sub
   }

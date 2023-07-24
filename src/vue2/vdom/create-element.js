@@ -27,24 +27,17 @@ function createComponent(vm, tag, data, key, children, Ctor) {
   }
   data.hook = {
     init(vnode) {
-      if (Ctor) {
+      if(Ctor) {
         let child = (vnode.componentInstance = new Ctor({ _isComponent: true }))
         child.$mount()
       }
     },
   }
 
-  return vnode(
-    tag,
-    data,
-    key,
-    undefined,
-    undefined,
-    {
-      Ctor,
-      children,
-    }
-  )
+  return vnode(`vue-components-${Ctor.cid}-${tag}`, data, key, undefined, {
+    Ctor,
+    children,
+  })
 }
 
 function createTextVNode(vm, text) {

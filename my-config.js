@@ -103,7 +103,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
       build: {
         rollupOptions: {
           // input: {
-          //     main: resolve(__dirname, 'index.html'),  // X931019Y
+          //     main: resolve(__dirname, 'index.html'),  // 
           //     nested: resolve(__dirname, 'nested/index.html')
           // }
         },

@@ -177,7 +177,7 @@ function generate(el) {
 
 
 function compileToFunction(template) {
-  let root = parseHTML(template)
-  let code = generate(root)
+  let root = parseHTML(template)  
+  let code = generate(root)  // ast 树
   return new Function(`with(this){return ${code}}`)
 }

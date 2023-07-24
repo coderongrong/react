@@ -1,4 +1,5 @@
 function mountComponent(vm, el) {
+  
   const options = vm.$options
   vm.$el = el
 
@@ -9,6 +10,7 @@ function mountComponent(vm, el) {
   }
 
   new Watcher(vm, updataComponent, () => {}, true)
+
   callHook(vm, 'mounted')
 }
 

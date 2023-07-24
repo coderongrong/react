@@ -4,29 +4,36 @@ class Vue {
   }
 
   _init(options) {
+    
     const vm = this
+    
     vm.$options = mergeOptions(vm.constructor.options, options)
-    initState(vm)
 
+    initState(vm)
     if (vm.$options.el) {
       vm.$mount(vm.$options.el)
     }
   }
 
   $mount(el) {
+    // 挂载组件
     const vm = this
     const options = vm.$options
-    el = document.querySelector(el)
+    
+    el = document.querySelector(el)  // 对象 {}
     if (!options.render) {
       let template = options.template
       if (!template && el) {
         template = el.outerHTML
       }
-      
       const render = compileToFunction(template)
-      options.render = render
+
+      options.render = render 
     }
-    console.log(vm, el)
+
+
+    // console.log(vm, el)
+
     mountComponent(vm, el)
   }
 
@@ -34,7 +41,7 @@ class Vue {
     const { render } = this.$options
     
     // 返回虚拟dom
-    const vnode = render.call(this)
+    let vnode = render.call(this)
     return vnode
   }
 
