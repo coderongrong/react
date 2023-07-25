@@ -27,14 +27,14 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
   const env = loadEnv(mode, process.cwd(), 'APP_')
   // return
   if (command === 'serve') {
-    console.log('serve')
+    console.log(' ---------------> serve')
     return {
+      // external: {
+      //   vue: 'Vue',
+      // },
       esbuild: {
         jsxFactory: 'h',
         jsxFragment: 'Fragment',
-      },
-      transform() {
-        // console.log('-------> transform() {},')
       },
       runtimeCompiler: true, // 加上这一段
       plugins: [
@@ -138,35 +138,20 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
       },
     }
   } else {
-    // command === 'build'
-    // console.log("command === 'build'", command)
+    console.log('----------------> build')
     return {
-      // runtimeCompiler: true, // 加上这一段
-      // plugins: [vue()],
-      // resolve: {
-      //   alias: {
-      //     '@': fileURLToPath(new URL('./src', import.meta.url)),
-      //   },
-      // },
-      // build: {
-      //   commonjsOptions: {
-      //     include: [/linked-dep/, /node_modules/],
-      //   },
+      // external: {
+      //   vue: 'Vue',
       // },
       runtimeCompiler: true, // 加上这一段
       plugins: [
         vue({
           reactivityTransform: true,
         }),
-
         splitVendorChunkPlugin(),
         legacy({
           targets: ['defaults', 'not IE 11'],
         }),
-        // {
-        //   ...consoles({ color: 'red'}, files),
-        //   enforce: 'pre'
-        // },
         {
           ...consoles({ color: 'red' }, files),
           enforce: 'pre',

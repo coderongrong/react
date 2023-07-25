@@ -8,7 +8,7 @@ function isReserTag(tagName) {
   return obj[tagName]
 }
 
-function createElement(vm, tag, data = {}, ...children) {
+function _createElement(vm, tag, data = {}, ...children) {
   let key = data.key
   if (key) {
     delete data.key
@@ -27,10 +27,9 @@ function createComponent(vm, tag, data, key, children, Ctor) {
   }
   data.hook = {
     init(vnode) {
-      if(Ctor) {
-        let child = (vnode.componentInstance = new Ctor({ _isComponent: true }))
-        child.$mount()
-      }
+      vnode.componentInstance = new Ctor({ _isComponent: true })
+      let child = vnode.componentInstance
+      child.$mount()
     },
   }
 

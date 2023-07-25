@@ -1,5 +1,5 @@
 <template>
-  <h3>{{ num }}</h3>
+  <h3>{{ num }}sssssss</h3>
   <h3>{{ store.infoData.num }}</h3>
   <el-button @click="handleNum">click me</el-button>
   <el-button @click="handleDemo">click me</el-button>

@@ -1,8 +1,8 @@
 const LIFECYCLE_HOOKS = ['beforeCreate', 'created', 'beforeMount', 'mounted']
 const ASSETS_type = [
   'component',
-  // 'directive',
-  // 'filter'
+  'directive',
+  'filter'
 ]
 
 let strats = {}
@@ -17,11 +17,11 @@ function mergeAssets(parentVal, childVal) {
   return res
 }
 
-strats.components = mergeAssets
-
 LIFECYCLE_HOOKS.forEach((item) => {
   strats[item] = mergeHooks
 })
+
+strats.components = mergeAssets
 
 function mergeHooks(parentVal, childVal) {
   if (childVal) {
@@ -43,23 +43,25 @@ function initGlobalAPI(Vue) {
   ASSETS_type.forEach((type) => {
     Vue.options[type + 's'] = {}
   })
+
   Vue.options._base = Vue
+
   initExtend(Vue)
   initAssetsReg(Vue)
 }
 
 function initAssetsReg(Vue) {
   ASSETS_type.forEach((type) => {
-    Vue[type] = function (id, definaion) {
+    Vue[type] = function (id, definition) {
       if (type == 'component') {
         // extend
-        definaion = this.options._base.extend(definaion)
-      }
-      if (type == 'directive') {
-      }
-      if (type == 'filter') {
-      }
-      this.options[type + 's'][id] = definaion
+        definition = this.options._base.extend(definition)
+      } else if (type == 'directive') {
+
+      } else if (type == 'filter') {
+
+      } 
+      this.options[type + 's'][id] = definition
     }
   })
 }
@@ -67,6 +69,7 @@ function initAssetsReg(Vue) {
 function initExtend(Vue) {
   let cid = 0
   Vue.extend = function (extendOptions) {
+    // console.log(extendOptions)
     const Sub = function VueComponent(options) {
       this._init(options)
     }

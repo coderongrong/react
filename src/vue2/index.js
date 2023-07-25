@@ -53,7 +53,7 @@ class Vue {
   }
 
   _c() {
-    return createElement(this, ...arguments)
+    return _createElement(this, ...arguments)
   }
   _v(text) {
     return createTextVNode(this, text)

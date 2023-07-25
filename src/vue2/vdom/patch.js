@@ -1,12 +1,9 @@
 function patch(oldVnode, vnode) {
   // 更新还是渲染
 
-
   if (!oldVnode) {
     //组件挂载
-    console.log(vnode)
     return createElm(vnode)
-
   } else {
     const isRealElement = oldVnode.nodeType
     if (isRealElement) {
@@ -29,27 +26,27 @@ function _createComponent(vnode) {
   if ((i = i.hook) && (i = i.init)) {
     i(vnode)
   }
-  if(vnode.componentInstance) {
+  if (vnode.componentInstance) {
+    console.log('xxxxxxxxxx')
     return true
   }
 }
 
 function createElm(vnode) {
+  console.log(vnode)
   let { tag, children, key, data, text } = vnode
-
-  if (typeof tag == 'string') { 
-    
-    if (_createComponent(vnode)) {  // 判断是否是组件
-      
+  
+  if (typeof tag == 'string') {
+    if (_createComponent(vnode)) {
+      // 判断是否是组件
       return vnode.componentInstance.$el
+    } else {
+      vnode.el = document.createElement(tag)
+      updataProps(vnode)
+      children.forEach((item) => {
+        return vnode.el.appendChild(createElm(item))
+      })
     }
-
-    vnode.el = document.createElement(tag)
-    updataProps(vnode)
-
-    children.forEach((item) => {
-      return vnode.el.appendChild(createElm(item))
-    })
   } else {
     vnode.el = document.createTextNode(text)
   }
