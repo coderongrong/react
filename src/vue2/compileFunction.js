@@ -51,8 +51,8 @@ function start(tagName, attrs) {
 
 function end(tagName) {
   let element = stact.pop()
-  currentParent = stact[stact.length -1]
-  if(currentParent) {
+  currentParent = stact[stact.length - 1]
+  if (currentParent) {
     element.parent = currentParent
     currentParent.children.push(element)
   }
@@ -75,12 +75,13 @@ function parseHTML(html) {
         continue
       }
     }
-    if (textEnd > 0) {
-      const text = html.substring(0, textEnd)
-      if (text) {
-        advance(text.length)
-        chars(text)
-      }
+    let text
+    if (textEnd >= 0) {
+      text = html.substring(0, textEnd)
+    }
+    if (text) {
+      advance(text.length)
+      chars(text)
     }
   }
   function advance(n) {
@@ -113,16 +114,14 @@ function parseHTML(html) {
   }
   return root
 }
-function genProps (attrs) {
+function genProps(attrs) {
   let str = ''
-  for(let i = 0; i < attrs.length; i++) {
+  for (let i = 0; i < attrs.length; i++) {
     let attr = attrs[i]
-    if(attr.name == 'style') {
-      let obj = {
-
-      }
-      attr.value.split(';').forEach(item => {
-        let [key, value] = item.split(':');
+    if (attr.name == 'style') {
+      let obj = {}
+      attr.value.split(';').forEach((item) => {
+        let [key, value] = item.split(':')
         obj[key] = value
       })
       attr.value = obj
@@ -135,30 +134,30 @@ function genProps (attrs) {
 
 function genChildren(el) {
   const children = el.children
-  if(children?.length > 0) {
-    return `${children.map(c => gen(c)).join(',')}`
+  if (children?.length > 0) {
+    return `${children.map((c) => gen(c)).join(',')}`
   } else {
     return false
   }
 }
 
 function gen(node) {
-  if(node.type ==1) {
+  if (node.type == 1) {
     return generate(node)
   } else {
     let text = node.text
     let tokens = []
-    let match, index;
-    let lastIndex = defaultTagRE.lastIndex = 0
-    while(match = defaultTagRE.exec(text)) {
+    let match, index
+    let lastIndex = (defaultTagRE.lastIndex = 0)
+    while ((match = defaultTagRE.exec(text))) {
       index = match.index
-      if(index > lastIndex) {
+      if (index > lastIndex) {
         tokens.push(JSON.stringify(text.slice(lastIndex, index)))
       }
       tokens.push(`_s(${match[1].trim()})`)
       lastIndex = index + match[0].length
     }
-    if(lastIndex < text.length) {
+    if (lastIndex < text.length) {
       tokens.push(JSON.stringify(text.slice(lastIndex, index)))
     }
     return `_v(${tokens.join('+')})`
@@ -168,16 +167,13 @@ function gen(node) {
 function generate(el) {
   let code = `_c('${el.tag}', ${
     el.attrs.length ? genProps(el.attrs) : 'undefined'
-  },${
-    genChildren(el).length > 0 ? `${genChildren(el)}` : ''
-  })
+  },${genChildren(el).length > 0 ? `${genChildren(el)}` : ''})
   `
   return code
 }
 
-
 function compileToFunction(template) {
-  let root = parseHTML(template)  
-  let code = generate(root)  // ast 树
+  let root = parseHTML(template)
+  let code = generate(root) // ast 树
   return new Function(`with(this){return ${code}}`)
 }
