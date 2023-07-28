@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,39 +8,18 @@
   </head>
   <body>
     <div id="box">
-      <div>{{name}}</div>
+      <div>{{ name }}</div>
     </div>
-    <script src="./src/vue2/dep.js"></script>
-    <script src="./src/vue2/schedular.js"></script>
-    <script src="./src/vue2/initGlobalAPI/index.js"></script>
-    <script src="./src/vue2/vdom/create-element.js"></script>
-    <script src="./src/vue2/observe.js"></script>
-    <script src="./src/vue2/index.js"></script>
-    <script src="./src/vue2/state.js"></script>
-    <script src="./src/vue2/utils/index.js"></script>
-    <script src="./src/vue2/array.js"></script>
-    <script src="./src/vue2/compileFunction.js"></script>
-    <script src="./src/vue2/lifecycle.js"></script>
-    <script src="./src/vue2/watcher.js"></script>
-    <script src="./src/vue2/vdom/patch.js"></script>
+    <script src="./src/vue2-1/index.js"></script>
     <script>
-      Vue.component('my-component', {
-        template: '<div>comcomcom</div>'
-      })
       let vm = new Vue({
         el: '#box',
         data() {
-          return { name: 'zx' }
+          return { name: [{a: 1, b: 2}] }
         },
-        components: {
-          'my-component': {
-            template: '<div>123123</div>'
-          }
-        }
       })
-      console.log(vm)
-      console.log('xxxxxxxxxxx')
-
+      vm._data.name.push({c: 3})
+      // console.log(vm._data)
     </script>
   </body>
 </html>

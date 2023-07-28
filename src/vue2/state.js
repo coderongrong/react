@@ -10,6 +10,10 @@ function initState (vm) {
     if(opts.data) {
         initData(vm)
     }
+
+    if(opts.components) {
+        
+    }
 }
 
 function initProps() {}

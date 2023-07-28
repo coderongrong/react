@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="baidu-site-verification" content="codeva-1PLZGsBlbw" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vuex</title>
+  </head>
+  <body>
+    <div id="box">
+      <my-component></my-component>
+    </div>
+    <script src="./src/vue2/dep.js"></script>
+    <script src="./src/vue2/schedular.js"></script>
+    <script src="./src/vue2/initGlobalAPI/index.js"></script>
+    <script src="./src/vue2/vdom/create-element.js"></script>
+    <script src="./src/vue2/observe.js"></script>
+    <script src="./src/vue2/index.js"></script>
+    <script src="./src/vue2/state.js"></script>
+    <script src="./src/vue2/utils/index.js"></script>
+    <script src="./src/vue2/array.js"></script>
+    <script src="./src/vue2/compileFunction.js"></script>
+    <script src="./src/vue2/lifecycle.js"></script>
+    <script src="./src/vue2/watcher.js"></script>
+    <script src="./src/vue2/vdom/patch.js"></script>
+    <script>
+      Vue.component('my-component', {
+        template: '<div>comcomcom</div>'
+      })
+      let vm = new Vue({
+        el: '#box',
+        data() {
+          return { name: 'zx' }
+        },
+        components: {
+          'my-component': {
+            template: '<div>123123</div>'
+          }
+        }
+      })
+      console.log(vm)
+      
+    </script>
+  </body>
+</html>
