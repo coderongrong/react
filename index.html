@@ -10,15 +10,63 @@
     <div id="box">
       <div>{{ name }}</div>
     </div>
-    <script src="./src/vue2-1/index.js"></script>
+    <!-- <script src="./src/vue2-1/index.js"></script> -->
     <script>
-      let vm = new Vue({
-        el: '#box',
-        data() {
-          return { name: 'code'}
-        },
-      })
+      // let vm = new Vue({
+      //   el: '#box',
+      //   data() {
+      //     return { name: 'code'}
+      //   },
+      // })
       // console.log(vm._data)
+
+      let box = document.getElementById('box')
+
+      function fetch() {
+        return new Promise((res, rej) => {
+          setTimeout(() => {
+            res(123)
+          }, 0);
+        })
+      }
+      function fn() {
+        console.log(111)
+        fetch()
+      }
+
+      function run(fun) {
+        let cache = {
+          status: 'pending',
+          value: null
+        }
+        const oldFetch = window.fetch
+        window.fetch = function (...args) {
+          if(cache.status == 'fulfilled') {
+            console.log(cache.value)
+            return cache.value
+          } else if (cache.status == 'rejected') {
+            throw cache.value
+          }
+          const prom = oldFetch(...args).then(res => {
+            cache.status = 'fulfilled'
+            cache.value = res
+          }, err => {
+            cache.status = 'rejected'
+            cache.value = err
+          })
+          throw prom
+        }
+        try {
+          const res = fun()
+        } catch(err) {
+          if(err instanceof Promise) {
+            err.then(fun, fun).finally(() => {
+              window.fetch = oldFetch
+            })
+          }
+        }
+      }
+      run(fn)
     </script>
   </body>
 </html>
