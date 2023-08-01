@@ -26,50 +26,90 @@
         return new Promise((res, rej) => {
           setTimeout(() => {
             res(123)
-          }, 0);
+          }, 500)
         })
       }
+
       function fn() {
-        console.log(111)
+        console.log('1')
         fetch()
       }
 
-      function run(fun) {
+      function main(func) {
         let cache = {
           status: 'pending',
-          value: null
+          value: null,
         }
-        const oldFetch = window.fetch
-        window.fetch = function (...args) {
-          if(cache.status == 'fulfilled') {
+        const oldFetch = fetch
+
+        fetch = function (...args) {
+          if (cache.status == 'asd') {
             console.log(cache.value)
             return cache.value
-          } else if (cache.status == 'rejected') {
+          } else if (cache.status == 'xxx') {
             throw cache.value
           }
-          const prom = oldFetch(...args).then(res => {
-            cache.status = 'fulfilled'
-            cache.value = res
-          }, err => {
-            cache.status = 'rejected'
-            cache.value = err
-          })
+          const prom = oldFetch(...args).then(
+            (res) => {
+              cache.status = 'asd'
+              cache.value = res
+            },
+            (err) => {
+              cache.status = 'xxx'
+              cache.value = err
+            }
+          )
           throw prom
         }
+
         try {
-          const res = fun()
-        } catch(err) {
-          if(err instanceof Promise) {
-            err.then(fun, fun).finally(() => {
-              window.fetch = oldFetch
+          func()
+        } catch (e) {
+          if (e instanceof Promise) {
+            e.then(func, func).finally(() => {
+              fetch = oldFetch
             })
           }
         }
       }
-      run(fn)
+
+      main(fn)
+
+      // function run(fun) {
+      //   let cache = {
+      //     status: 'pending',
+      //     value: null
+      //   }
+      //   const oldFetch = window.fetch
+      //   window.fetch = function (...args) {
+      //     if(cache.status == 'fulfilled') {
+      //       console.log(cache.value)
+      //       return cache.value
+      //     } else if (cache.status == 'rejected') {
+      //       throw cache.value
+      //     }
+      //     const prom = oldFetch(...args).then(res => {
+      //       cache.status = 'fulfilled'
+      //       cache.value = res
+      //     }, err => {
+      //       cache.status = 'rejected'
+      //       cache.value = err
+      //     })
+      //     throw prom
+      //   }
+      //   try {
+      //     const res = fun()
+      //   } catch(err) {
+      //     if(err instanceof Promise) {
+      //       err.then(fun, fun).finally(() => {
+      //         window.fetch = oldFetch
+      //       })
+      //     }
+      //   }
+      // }
+      // run(fn)
     </script>
   </body>
 </html>
-
 
 <!-- https://www.bilibili.com/video/BV1nW4y147Pd/?p=3&spm_id_from=pageDriver&vd_source=86c8aa40323ceba4ad1b7cbfcbf3cfa2 -->
