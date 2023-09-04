@@ -1,3 +1,4 @@
+
 // TX 
 type Listener = {
   (data: unknown): unknown;
@@ -20,15 +21,20 @@ interface EventSupport {
 
 class MyEvent implements EventSupport {
   // code here
-  on(event: string, callBack: any): any {
+  on(event: string, callBack: any): Listener {
     this[event] = callBack;
     //增加remove方法
-    const that: any = this
-    return {
-      remove() {
-        that[event] = null
-      }
+    const that = this
+    // return {
+    //   remove() {
+    //     that[event] = null
+    //   }
+    // }
+    const fn = (data: unknown): unknown => data
+    fn.remove = () => {
+      that[event] = null
     }
+    return fn
   }
 
   emit(event: string, data: any) {
@@ -54,7 +60,6 @@ myEvent.on("event2", callBack2);
 
 myEvent.emit("event1", "1.1"); //  1.1
 myEvent.emit("event1", "1.2"); //  1.2
-// listener1.remove && listener1.remove();
 listener1.remove();
 myEvent.emit("event1", "1.3"); // no 1.3
 
@@ -63,47 +68,42 @@ myEvent.off("event2", callBack2);
 myEvent.emit("event2", "2.2"); // no
 
 
-// class Person {
-//   protected name: string;
-//   constructor(name: string) { this.name = name; }
-// }
 
-// class Employee extends Person {
-//   private department: string;
+interface ICompany {
+  name: string
+  address: string
+}
+interface MyType {
+  name: string
+  age: string
+  company: ICompany
+}
 
-//   constructor(name: string, department: string) {
-//       super(name)
-//       this.department = department;
-//   }
+type MyPa<T> = {
+  [P in keyof T]?: T[P] extends object ? MyPa<T[P]> : T[P]
+}
 
-//   public getElevatorPitch() {
-//       return `Hello, my name is ${this.name} and I work in ${this.department}.`;
-//   }
-// }
+type Ip = MyPa<MyType>
 
-// let howard = new Employee("Howard", "Sales");
-// console.log(howard.getElevatorPitch());
-// console.log(howard.name); // 错误
+let s: Ip = {
+  company: {
+    name: 'xxx',
+    address: 'xxx'
+  }
+}
 
-// class Greeter {
-//   static standardGreeting = "Hello, there";
-//   greeting: string;
-//   greet() {
-//       if (this.greeting) {
-//           return "Hello, " + this.greeting;
-//       }
-//       else {
-//           return Greeter.standardGreeting;
-//       }
-//   }
-// }
+type _Require<T> = {
+  [R in keyof T]-?: T[R]
+}
 
-// let greeter1: Greeter;
-// greeter1 = new Greeter();
-// console.log(greeter1.greet());
+type MyRequired = _Require<Ip>
 
-// let greeterMaker: typeof Greeter = Greeter;
-// greeterMaker.standardGreeting = "Hey there!";
+type _Readonly<T> = {
+  readonly [R in keyof T]: T[R]
+}
+type MyReadOnly = Readonly<MyType>
 
-// let greeter2: Greeter = new greeterMaker();
-// console.log(greeter2.greet());
+type _Pick<T, K extends keyof T> = {
+  [X in K]: T[X]
+}
+type MyPick = _Pick<MyType, 'name' | 'age'>

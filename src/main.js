@@ -11,7 +11,9 @@ import { _Promise } from 'make-loader'
 import StoreReset from '../plugins/storeReset.js'
 import './assets/main.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import './utils/eventBus'
 const app = createApp(App)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
@@ -44,31 +46,64 @@ app.mount('#app')
 // https://github.com/coderongrong/react/blob/vite2.0/my-config.js
 // console.log('环境变量', import.meta.env)
 
-const p = new Proxy(
-  {},
-  {
-    get: function (obj, prop) {
-      console.log('get')
-      return obj[prop]
-    },
-    set: function () {
-      console.log('set')
-      return 'abc'
-    },
+function resolvePromise (p2, x, resolved) {
+  // console.log('------->', p2, x, resolved)
+}
+class myPromise {
+  state = null
+  resArr = []
+  rejArr = []
+  constructor(excutor) {
+    excutor(
+      (data) => {
+        this.state = data
+        this.resArr.forEach((fn) => fn())
+      },
+      (err) => {
+        this.state = err
+      }
+    )
   }
-)
-// p.a = 100
 
-// console.log(' p ---> ', p.c)
-// console.log(' p ---> ', p.a)
-// console.log(' p ---> ', p.b)
+  then(resolved) {
+    const p2 = new myPromise((res, rej) => {
+      setTimeout(() => {
+        this.resArr.push(() => {
+          let x = resolved(this.state)
+          resolvePromise(p2, x, res)
+          setTimeout(() => {
+            res(x)
+          }, 500)
+        })
+      }, 0)
+    })
 
-//  Promise
-var m = new Map()
-m.set('abc', 123)
-// console.log(m.has('abc'))
-!m.has('ab') && m.set('ab', 999)
-// console.log(m)
-// for(let item of m) {
-//   console.log('item', item)
-// }
+    return p2
+  }
+}
+
+// new myPromise((res, rej) => {
+//   setTimeout(() => {
+//     res(1000)
+//   }, 500)
+// })
+//   .then((res) => {
+//     console.log('1', res)
+//     return 123
+//   })
+//   .then((resa) => {
+//     console.log('2', resa)
+//   })
+
+// new Promise((res, rej) => {
+//   setTimeout(() => {
+//     res(1000)
+//   }, 500)
+// })
+//   .then((res) => {
+//     console.log('1', res)
+//     return res
+//   })
+//   .then((res) => {
+//     console.log('2', res)
+//   })

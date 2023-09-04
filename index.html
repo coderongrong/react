@@ -11,7 +11,8 @@
       <div>{{ name }}</div>
     </div>
     <!-- <script src="./src/vue2-1/index.js"></script> -->
-    <script>
+    <script type="module" src="/src/main.js"></script>
+    <!-- <script>
       // let vm = new Vue({
       //   el: '#box',
       //   data() {
@@ -31,7 +32,7 @@
       }
 
       function fn() {
-        console.log('1')
+        // console.log('1')
         fetch()
       }
 
@@ -44,7 +45,7 @@
 
         fetch = function (...args) {
           if (cache.status == 'asd') {
-            console.log(cache.value)
+            // console.log(cache.value)
             return cache.value
           } else if (cache.status == 'xxx') {
             throw cache.value
@@ -108,7 +109,7 @@
       //   }
       // }
       // run(fn)
-    </script>
+    </script> -->
   </body>
 </html>
 
