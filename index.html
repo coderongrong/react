@@ -7,11 +7,28 @@
     <title>vuex</title>
   </head>
   <body>
-    <div id="box">
-      <div>{{ name }}</div>
+    <div id="app">
+      <div></div>
     </div>
+    <script>
+      // 代理 proxy
+      // var o = { a: 1, b: 2 }
+      // var obj = new Proxy(o, {
+      //   get(t, p) {
+      //     console.log('get', t, p)
+      //     return Reflect.get(t, p)
+      //   },
+      //   set(t, p, value) {
+      //     console.log('set', t, p, value)
+      //     return Reflect.set(t, p, value)
+      //   },
+      // })
+      // obj.d = 100
+      // console.log(obj.b)
+    </script>
     <!-- <script src="./src/vue2-1/index.js"></script> -->
     <script type="module" src="/src/main.js"></script>
+    <script></script>
     <!-- <script>
       // let vm = new Vue({
       //   el: '#box',
