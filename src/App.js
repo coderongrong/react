@@ -44,7 +44,7 @@ function App() {
     return (
         <Layout>
             <Header className="t-c">
-                <span>卓信通信</span>
+                <span>管理平台 管理系统</span>
                 <span className="main-size mian_text">
                     欢迎进入 速规智慧城市通信基础设施规划 平台
                 </span>

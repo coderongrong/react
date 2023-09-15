@@ -22,7 +22,7 @@ module.exports = {
         },
     },
     devServer: {
-        open: false,
+        open: true,
         // proxy: {
         //     "jeecg-boot": {
         //         target: 'http://localhost:3000',

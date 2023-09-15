@@ -1,5 +1,5 @@
 
-import { memo, useState } from 'react'
+import { useState } from 'react'
 
 function App () {
     console.log('child')
