@@ -1,9 +1,9 @@
 <template>
-    <div>456</div>
+    <div id='box'>456</div>
 </template>
 
-<script setup lang="ts">
-import { effect, reactive } from "vue";
+<script setup>
+import { effect, reactive, onMounted, getCurrentInstance} from "vue";
 // import enquireScreen from '@/utils/device'
 
 // onMounted(() => {
@@ -17,12 +17,22 @@ import { effect, reactive } from "vue";
 //     }
 //   })
 // })
-interface Book {
-    car: string;
-    feel: string;
-}
-let state = reactive({name: 'rong', arr: [1,2,3]})
-effect(() => {
-    state.name
+// interface Book {
+//     car: string;
+//     feel: string;
+// }
+
+let state = reactive({name: 'rong', age: 10})
+// effect(() => {
+//     console.log('effect')
+//     state.name
+// })
+
+onMounted(() => {
+    console.log('abc', getCurrentInstance())
 })
+
+// setTimeout(() => {
+//     state.name = 'www'
+// }, 2000)
 </script>
