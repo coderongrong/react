@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="baidu-site-verification" content="codeva-1PLZGsBlbw" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vuex</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    let activeEffect;
+    const depMaps = new WeakMap()
+
+    function track(target, key, c) {
+      // if(!activeEffect) return
+      let deps = depMaps.get(target)
+      if(!deps) {
+        depMaps.set(target, deps || (deps = new Map()))
+      }
+      let dep = deps.get(key)
+      if(!dep) {
+        deps.set(key, dep || (dep = new Set()))
+      }
+      dep.add(activeEffect)
+    }
+    function trigger (target, key, newValue, d) {
+      let deps = depMaps.get(target)
+      if(!deps) {
+        return
+      }
+      const r = deps.get(key);
+      [...r].forEach(fn => fn.run())
+    }
+    function reactive(target) {
+      const res = new Proxy(target, {
+        get(a, b, c) {
+          const res = Reflect.get(a, b, c)
+          track(a, b, c)
+          return res
+        },
+        set(a, b, c, d) {
+          const res = Reflect.set(a, b, c, d)
+          trigger(a, b, c, d)
+          return res
+        }
+      })
+
+      return res
+    }
+    class ReactiveEffect {
+      constructor (fn) {
+        this.fn = fn
+      }
+      run() {
+        activeEffect = this
+        this.fn()
+      }
+    }
+    function effect(fn) {
+      const _effect = new ReactiveEffect(fn)
+      _effect.run()
+
+    }
+
+    const state = reactive({
+      name: 'rong',
+      age: 10,
+    })
+    // state.name
+
+    effect(() => {
+      app.innerHTML = state.age
+    })
+
+    setTimeout(() => {
+      state.age = 'www'
+    }, 1000)
+  </script>
+</body>
+
+</html>
