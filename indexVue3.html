@@ -1,13 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="baidu-site-verification" content="codeva-1PLZGsBlbw" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>vuex</title>
-  </head>
-  <body>
-    <div id="app"></div>
 
     <script>
       let activeEffect
@@ -171,22 +163,6 @@
       console.log(ageValue.value)
       console.log(ageValue.value)
       console.log(ageValue.value)
-      // const state = reactive({ name: 'zzz', age: 11 })
-      // effect(() => {
-      //   app.innerHTML = state.name + state.age
-      // })
-      // setTimeout(() => {
-      //   state.age = 'www'
-      // }, 1000)
-      // const data = reactive({ name: 'www', age: 11 })
-      // const {name, age} = toRefs(data)
-
-      // effect(() => {
-      //   app.innerHTML = name.value + age.value
-      // })
-      // setTimeout(() => {
-      //   data.name = 'zzzs'
-      // }, 1000)
     </script>
 
     <!-- <script>
@@ -220,214 +196,236 @@
           }
         }
       }
-      const finalizeDepMarkers = (effect) => {
-        const { deps } = effect
-        if (deps.length) {
-          let ptr = 0
-          for (let i = 0; i < deps.length; i++) {
-            const dep = deps[i]
-            if (wasTracked(dep) && !newTracked(dep)) {
-              dep.delete(effect)
-            } else {
-              deps[ptr++] = dep
-            }
-            // clear bits
-            dep.w &= ~trackOpBit
-            dep.n &= ~trackOpBit
+    }
+    const finalizeDepMarkers = (effect) => {
+      const { deps } = effect
+      if (deps.length) {
+        let ptr = 0
+        for (let i = 0; i < deps.length; i++) {
+          const dep = deps[i]
+          if (wasTracked(dep) && !newTracked(dep)) {
+            dep.delete(effect)
+          } else {
+            deps[ptr++] = dep
           }
-          deps.length = ptr
+          // clear bits
+          dep.w &= ~trackOpBit
+          dep.n &= ~trackOpBit
         }
+        deps.length = ptr
       }
-      const reactiveMap = new WeakMap()
-      const get$1 = /*#__PURE__*/ createGetter()
-      const set$1 = /*#__PURE__*/ createSetter()
-      class ReactiveEffect {
-        constructor(fn, scheduler = null, scope) {
-          this.fn = fn
-          this.scheduler = scheduler
-          this.active = true
-          this.deps = []
-          this.parent = undefined
+    }
+    const reactiveMap = new WeakMap()
+    const get$1 = /*#__PURE__*/ createGetter()
+    const set$1 = /*#__PURE__*/ createSetter()
+    class ReactiveEffect {
+      constructor(fn, scheduler = null, scope) {
+        this.fn = fn
+        this.scheduler = scheduler
+        this.active = true
+        this.deps = []
+        this.parent = undefined
+      }
+      run() {
+        if (!this.active) {
+          return this.fn()
         }
-        run() {
-          if (!this.active) {
-            return this.fn()
+        let parent = activeEffect
+        let lastShouldTrack = shouldTrack
+        while (parent) {
+          if (parent === this) {
+            return
           }
-          let parent = activeEffect
-          let lastShouldTrack = shouldTrack
-          while (parent) {
-            if (parent === this) {
-              return
-            }
-            parent = parent.parent
-          }
-          try {
-            this.parent = activeEffect
-            activeEffect = this // {}
-            shouldTrack = true
-            trackOpBit = 1 << ++effectTrackDepth
-            if (effectTrackDepth <= maxMarkerBits) {
-              initDepMarkers(this)
-            } else {
-              cleanupEffect(this)
-            }
-            return this.fn()
-          } finally {
-            if (effectTrackDepth <= maxMarkerBits) {
-              finalizeDepMarkers(this)
-            }
-            trackOpBit = 1 << --effectTrackDepth
-            activeEffect = this.parent
-            shouldTrack = lastShouldTrack
-            this.parent = undefined
-            if (this.deferStop) {
-              this.stop()
-            }
-          }
+          parent = parent.parent
         }
-        stop() {
-          if (activeEffect === this) {
-            this.deferStop = true
-          } else if (this.active) {
+        try {
+          this.parent = activeEffect
+          console.log('run');
+          activeEffect = this // {}
+          shouldTrack = true
+          trackOpBit = 1 << ++effectTrackDepth
+          if (effectTrackDepth <= maxMarkerBits) {
+            initDepMarkers(this)
+          } else {
             cleanupEffect(this)
-            if (this.onStop) {
-              this.onStop()
-            }
-            this.active = false
+          }
+          return this.fn()
+        } finally {
+          if (effectTrackDepth <= maxMarkerBits) {
+            finalizeDepMarkers(this)
+          }
+          trackOpBit = 1 << --effectTrackDepth
+          activeEffect = this.parent
+          shouldTrack = lastShouldTrack
+          this.parent = undefined
+          if (this.deferStop) {
+            this.stop()
           }
         }
       }
-      function cleanupEffect(effect) {
-        const { deps } = effect
-        if (deps.length) {
-          for (let i = 0; i < deps.length; i++) {
-            deps[i].delete(effect)
+      stop() {
+        if (activeEffect === this) {
+          this.deferStop = true
+        } else if (this.active) {
+          cleanupEffect(this)
+          if (this.onStop) {
+            this.onStop()
           }
-          deps.length = 0
+          this.active = false
         }
       }
-      function createSetter(shallow = false) {
-        return function set(target, key, value, receiver) {
-          let oldValue = target[key]
-          const hadKey =
-            Array.isArray(target) && isIntegerKey(key)
-              ? Number(key) < target.length
-              : hasOwn(target, key)
-          const result = Reflect.set(target, key, value, receiver)
-          trigger(target, 'set' /* TriggerOpTypes.ADD */, key, value, oldValue)
-          return result
+    }
+    function cleanupEffect(effect) {
+      const { deps } = effect
+      if (deps.length) {
+        for (let i = 0; i < deps.length; i++) {
+          deps[i].delete(effect)
+        }
+        deps.length = 0
+      }
+    }
+    function createSetter(shallow = false) {
+      return function set(target, key, value, receiver) {
+        let oldValue = target[key]
+        const hadKey =
+          Array.isArray(target) && isIntegerKey(key)
+            ? Number(key) < target.length
+            : hasOwn(target, key)
+        const result = Reflect.set(target, key, value, receiver)
+        trigger(target, 'set' /* TriggerOpTypes.ADD */, key, value, oldValue)
+        return result
+      }
+    }
+    function trigger(target, type, key, newValue = null, oldValue = null) {
+      const depsMap = targetMap.get(target)
+      console.log('depsMap', depsMap);
+      if (!depsMap) {
+        return
+      }
+      const effect = []
+      let deps = []
+      deps.push(depsMap.get(key))
+      for (const dep of deps) {
+        if (dep) {
+          effect.push(...dep)
         }
       }
-      function trigger(target, type, key, newValue = null, oldValue = null) {
-        const depsMap = targetMap.get(target)
-        if (!depsMap) {
-          return
+      effect.forEach((f) => f.run())  // 执行effect
+    }
+    function createGetter(isReadonly = false, shallow = false) {
+      return function get(target, key, receiver) {
+        const res = Reflect.get(target, key, receiver)
+        if (!isReadonly) {
+          track(target, 'get', key)
         }
-        const effect = []
-        let deps = []
-        deps.push(depsMap.get(key))
-        for (const dep of deps) {
-          if (dep) {
-            effect.push(...dep)
-          }
-        }
-        effect.forEach((f) => f.run())  // 执行effect
+        return res
       }
-      function createGetter(isReadonly = false, shallow = false) {
-        return function get(target, key, receiver) {
-          const res = Reflect.get(target, key, receiver)
-          if (!isReadonly) {
-            track(target, 'get', key)
-          }
-          return res
-        }
-      }
-      const mutableHandlers = {
-        get: get$1,
-        set: set$1,
-      }
-      function reactive(target) {
-        return createReactiveObject(
-          target,
-          false,
-          mutableHandlers,
-          null,
-          reactiveMap
-        )
-      }
-
-      function createReactiveObject(
+    }
+    const mutableHandlers = {
+      get: get$1,
+      set: set$1,
+    }
+    function reactive(target) {
+      return createReactiveObject(
         target,
-        isReadonly,
-        baseHandlers,
-        collectionHandlers,
-        proxyMap
-      ) {
-        const proxy = new Proxy(target, baseHandlers)
-        proxyMap.set(target, proxy)
-        return proxy
+        false,
+        mutableHandlers,
+        null,
+        reactiveMap
+      )
+    }
+
+    function createReactiveObject(
+      target,
+      isReadonly,
+      baseHandlers,
+      collectionHandlers,
+      proxyMap
+    ) {
+      const proxy = new Proxy(target, baseHandlers)
+      proxyMap.set(target, proxy)
+      return proxy
+    }
+    function effect(fn, options) {
+      if (fn.effect) {
+        fn = fn.effect.fn
       }
-      function effect(fn, options) {
-        if (fn.effect) {
-          fn = fn.effect.fn
-        }
-        const _effect = new ReactiveEffect(fn)
-        if (options) {
-          extend(_effect, options)
-          if (options.scope) recordEffectScope(_effect, options.scope)
-        }
-        if (!options || !options.lazy) {
-          _effect.run()
-        }
-        const runner = _effect.run.bind(_effect)
-        runner.effect = _effect
-        return runner
+      const _effect = new ReactiveEffect(fn)
+      if (options) {
+        extend(_effect, options)
+        if (options.scope) recordEffectScope(_effect, options.scope)
       }
+      if (!options || !options.lazy) {
+        _effect.run()
+      }
+      const runner = _effect.run.bind(_effect)
+      runner.effect = _effect
+      return runner
+    }
 
 
-      function track(target, type, key) {
-        if (shouldTrack && activeEffect) {
-          // activeEffect = {effect}
-          let depsMap = targetMap.get(target) // new WeakMap()
-          if (!depsMap) {
-            targetMap.set(target, (depsMap = new Map())) // target: {name: 'rong'}
-          }
-          let dep = depsMap.get(key)
-          if (!dep) {
-            depsMap.set(key, (dep = new Set()) /* Set{} */)
-          }
-          // targetMap: {{name: 'rong'} : depsMap}
-          //                              depsMap: {name: Set()}
-          const eventInfo = { effect: activeEffect, target, type, key }
-          trackEffects(dep, eventInfo)
+    function track(target, type, key) {
+      console.log('track --  fn');
+      if (shouldTrack && activeEffect) {
+        // activeEffect = {effect}
+        let depsMap = targetMap.get(target) // new WeakMap()
+        if (!depsMap) {
+          targetMap.set(target, (depsMap = new Map())) // target: {name: 'rong'}
         }
+        let dep = depsMap.get(key)
+        if (!dep) {
+          depsMap.set(key, (dep = new Set()) /* Set{} */)
+        }
+        // targetMap: {{name: 'rong'} : depsMap}
+        //                              depsMap: {name: Set()}
+        const eventInfo = { effect: activeEffect, target, type, key }
+        trackEffects(dep, eventInfo)
       }
-      function trackEffects(dep, debuggerEventExtraInfo) {
-        let shouldTrack = false
-        dep.add(activeEffect)
-        // activeEffect.deps.push(dep)
+    }
+    function trackEffects(dep, debuggerEventExtraInfo) {
+      let shouldTrack = false
+      dep.add(activeEffect)
+      // activeEffect.deps.push(dep)
+    }
+
+    function trackRefValue() {
+      console.log('trackRefValue')
+    }
+    class RefImpl {
+      constructor(value) {
+        this._value = value
       }
 
-      function trackRefValue () {
-        console.log('trackRefValue')
+      get value() {
+        trackRefValue()
+        return this._value
       }
-      class RefImpl {
-        constructor (value) {
-          this._value = value
-        }
+      set value(newVal) {
 
-        get value () {
-          trackRefValue()
-          return this._value
-        }
-        set value (newVal) {
+      }
+    }
+    function ref(value) {
+      return new RefImpl(value)
+    }
+    // --------------------------------------------------------------------------------
 
-        }
-      }
-      function ref (value) {
-        return new RefImpl(value)
-      }
-      // --------------------------------------------------------------------------------
+    let data = ref(100)
+    console.log(data)
+
+    const state = reactive({
+      name: 'rong',
+      age: 10,
+    })
+    debugger
+    effect(() => {
+      app.innerHTML = state.age
+    })
+
+    setTimeout(() => {
+      state.age = '22'
+    }, 1000)
+  </script>
+</body>
 
       let data = ref(100)
       console.log(data)
