@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    <div id="app">asd</div>
     <script>
       let activeEffect
       let targetMap = new WeakMap()
@@ -146,23 +146,14 @@
         return new ComputedRefImpl(getter, setter)
       }
       // ===============================================================
-      const data = ref(100)
-      const ageValue = computed(() => {
-        console.log('run')
-        return data.value + 100
-      })
-      console.log(ageValue.value)
-      console.log(ageValue.value)
-      console.log(ageValue.value)
-      data.value = 200
-      console.log(ageValue.value)
-
+      const state = reactive({name: 'rong', age: 100})
       effect(() => {
-        data.value = 500
+        app.innerHTML = state.name + '---' + state.age
       })
-      console.log(ageValue.value)
-      console.log(ageValue.value)
-      console.log(ageValue.value)
+
+      setTimeout(() => {
+        state.age = 200
+      }, 1000)
     </script>
 
     <!-- <script>
