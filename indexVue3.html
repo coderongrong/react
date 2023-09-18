@@ -10,6 +10,186 @@
     <div id="app"></div>
 
     <script>
+      let activeEffect
+      let targetMap = new WeakMap()
+      function track(target, key, receiver) {
+        if (activeEffect) {
+          let depsMap = targetMap.get(target)
+          if (!depsMap) {
+            targetMap.set(target, (depsMap = new Map()))
+          }
+          let deps = depsMap.get(key)
+          if (!deps) {
+            depsMap.set(key, (deps = new Set()))
+          }
+          deps.add(activeEffect)
+        }
+      }
+      function trigger(target, key, newValue, receiver) {
+        let deps = targetMap.get(target)?.get('get')
+        let arr = []
+        if (deps) {
+          deps.forEach((element) => {
+            arr.push(element)
+          })
+          arr.forEach((fn) => {
+            if(fn.options?.scheduler) {
+              fn.options.scheduler(fn)
+            } else {
+              fn.run()
+            }
+          })
+        }
+      }
+      function reactive(target) {
+        return new Proxy(target, {
+          get(target, key, receiver) {
+            const res = Reflect.get(target, key, receiver)
+            track(target, 'get', receiver)
+            return res
+          },
+          set(target, key, newValue, receiver) {
+            const res = Reflect.set(target, key, newValue, receiver)
+            trigger(target, 'set', newValue, receiver)
+          },
+        })
+      }
+      class ReactiveEffect {
+        constructor(fn, options) {
+          this.fn = fn
+        }
+
+        run() {
+          activeEffect = this
+          return this.fn()
+        }
+      }
+      function effect(fn, options) {
+        let _effect = new ReactiveEffect(fn)
+        if(options) {
+          _effect = Object.assign(_effect, {options})
+        }
+        if (!options || !options.lazy) {
+          return _effect.run()
+        }
+        const runner = _effect.run.bind(_effect)
+        runner.effect = _effect
+        return runner
+      }
+      class RefImpl {
+        constructor(value) {
+          this._value = value
+          this._v_isRef = true
+        }
+        get value() {
+          track(this, 'get', this._value)
+          return this._value
+        }
+
+        set value(newvalue) {
+          this._value = newvalue
+          trigger(this, 'set', newvalue)
+        }
+      }
+      function ref(value) {
+        return new RefImpl(value)
+      }
+      class ObjectRefImpl {
+        constructor(target, _key) {
+          this.target = target
+          this._key = _key
+          this._v_isRef = true
+        }
+        get value() {
+          return this.target[this._key]
+        }
+
+        set value(newvalue) {
+          this.target[this._key] = newvalue
+        }
+      }
+      function toRef(target, key) {
+        return new ObjectRefImpl(target, key)
+      }
+      function toRefs(target) {
+        const res = Array.isArray(target) ? new Array(target.length) : {}
+        for (let key in target) {
+          res[key] = toRef(target, key)
+        }
+        return res
+      }
+      class ComputedRefImpl {
+        constructor(getter, setter) {
+          this.getter = getter
+          this.setter = setter
+          this._dirty = true
+          this._value = null
+          this.effect = effect(getter, {
+            lazy: true,
+            scheduler: () => {
+              if(!this._dirty) {
+                this._dirty = true
+                trigger(this, 'get')
+              }
+            }
+          })
+        }
+        get value() {
+          if (this._dirty) {
+            this._value = this.effect()
+            this._dirty = false
+          }
+          track(this, 'get')
+          return this._value
+        }
+        set value(newValue) {
+          this.setter(newValue)
+        }
+      }
+      function computed(fn) {
+        let getter
+        let setter
+        getter = fn
+
+        return new ComputedRefImpl(getter, setter)
+      }
+      // ===============================================================
+      const data = ref(100)
+      const ageValue = computed(() => {
+        console.log('run')
+        return data.value + 100
+      })
+      console.log(ageValue.value)
+      console.log(ageValue.value)
+      console.log(ageValue.value)
+      data.value = 200
+      console.log(ageValue.value)
+
+      effect(() => {
+        data.value = 500
+      })
+      console.log(ageValue.value)
+      console.log(ageValue.value)
+      console.log(ageValue.value)
+      // const state = reactive({ name: 'zzz', age: 11 })
+      // effect(() => {
+      //   app.innerHTML = state.name + state.age
+      // })
+      // setTimeout(() => {
+      //   state.age = 'www'
+      // }, 1000)
+      // const data = reactive({ name: 'www', age: 11 })
+      // const {name, age} = toRefs(data)
+
+      // effect(() => {
+      //   app.innerHTML = name.value + age.value
+      // })
+      // setTimeout(() => {
+      //   data.name = 'zzzs'
+      // }, 1000)
+    </script>
+
+    <!-- <script>
       const isObject = (state) =>
         Object.prototype.toString.call(state) == '[object Object]'
       const targetMap = new WeakMap()
@@ -263,6 +443,6 @@
       setTimeout(() => {
         state.age = '22'
       }, 1000)
-    </script>
+    </script> -->
   </body>
 </html>

@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { effect, reactive, onMounted, getCurrentInstance} from "vue";
+import { effect, reactive, onMounted, getCurrentInstance, computed} from "vue";
 // import enquireScreen from '@/utils/device'
 
 // onMounted(() => {
@@ -27,6 +27,11 @@ let state = reactive({name: 'rong', age: 10})
 //     console.log('effect')
 //     state.name
 // })
+let data = ref(100)
+const res = computed(() => {
+    return data.value + 100
+})
+console.log(res)
 
 onMounted(() => {
     console.log('abc', getCurrentInstance())
