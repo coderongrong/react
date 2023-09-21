@@ -144,6 +144,7 @@ export default defineConfig(async ({ command, mode, ssrBuild }) => {
       //   vue: 'Vue',
       // },
       runtimeCompiler: true, // 加上这一段
+      productionSourceMap: false,
       plugins: [
         vue({
           reactivityTransform: true,
