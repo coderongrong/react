@@ -107,3 +107,14 @@ a,
     /* transform: scale(1); */
   }
 }
+
+.drag_box {
+  position: absolute;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  top: 100px;
+  left: 100px;
+  cursor: move;
+  background: rgb(143, 126, 126);
+}
