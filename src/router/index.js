@@ -37,6 +37,9 @@ const routes = [
   {
     path: '/test',
     component: () => import(/* webpackChunkName: "table" */ '@/test/Foo.vue'),
+    meta: {
+      name: 'vue3',
+    },
   },
   {
     path: '/login',
