@@ -170,3 +170,39 @@
   - 具名插槽    构建一个映射表
   - 普通插槽     是在父组件中渲染vnode的  （ 只能用父组件的数据， 渲染后传递给子组件）
   - 作用域插槽   在子组件中渲染vnode的（可以使用子组件的数据来继续渲染） 表格组件， 自定义列中的内容 slot-scoped = { raw } （如果更新的话，插槽也会被更新，前后插槽不一致会强制重新渲染）
+
+# vue.use 是做什么的，原理是啥
+  - 使用vue的插件，都会通过 vue.use(plugin), 用户在使用这个插件的时候将vueRouter传入，从而解决版本依赖的问题
+  - VueRouter 依赖 vue ， 我的vue版本是2.6， 分离插件和vue的强依赖
+
+# 组件中写name选项有哪些好处及作用
+  - 好处1 就是可以在自己的组件中，循环使用自己
+  - 好处2 有了名字之后就可以定位到具体的组件，不停的向上找到某个组件，给这个组件派发事件
+
+# vue 事件修饰符有哪些，其实现原理是什么
+  stop prevent self once passive capture
+  - 组件在编译的时候会对修饰符进行处理，不同的修饰符生成不同的代码
+  - 真正运行的时候也需要去处理修饰符
+  - once passive capture 在绑定的时候经行特殊的处理， 在创建的时候会依次调用对应的属性钩子来实现创建对应的功能
+
+# vue 中 .sync 修饰符的作用和原理
+  - .sync 在vue3中被移除了， 类似于v-model 的语法糖  可以解析出对应的结果
+  - :xxx.sync='abc' :xxx='abc' :updata:xxx='v=>abc=v' 可以实现 .sync
+  - v-model 默认传递的值叫value 和 input 除非用户改写 如果传递多个数据
+
+# 如何理解自定义指令
+  - 1. 在生成ast语法树的时候，遇到指令会当元素添加到directives属性中 '{directives: 'v-for', name: 'for'}'
+  - 2. 通过gendirectives生成指令代码
+  directives：[{
+    name: 'model',
+    rawName: 'v-model',
+    value: (xxx),
+    expression: 'xxx'
+  }]
+  - 3. 在patch前将指令的钩子提取到cbs中， 在patch过程中调用对应的钩子
+  - 4. 当执行cbs对应的钩子时， 调用对应的指令的方法（create/update/destroy），调用用户自定义指令的钩子函数（inserted，bind， unbind，componentUpdate）
+
+# keep-alive 平时在哪里使用，原理是什么
+  - 缓存是什么， 缓存组件的实例，组件实例上的vm.$el（缓存了实例就是缓存了DOM元素），组件在切换的时候如果有缓存，直接可以复用上次渲染出的 vm.$el 结果
+  - keep-alive 不用做任何渲染操作，内部使用了一个 LRU 算法来管理缓存（抽象组件）
+  - keep-alive 中组件切换的时候插槽会触发更新，如果插槽内容变了，会重新渲染强制更新 $forceupdate 重新进行渲染
