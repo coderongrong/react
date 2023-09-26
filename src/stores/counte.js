@@ -117,3 +117,19 @@ export const useTest = defineStore('useTest', () => {
     handleNum,
   }
 })
+
+export const useCounterStore = defineStore('counter', () => {
+  const count = ref(100)
+
+  function handleAdd () {
+    count.value ++
+  }
+  function handleDec () {
+    count.value --
+  }
+  return {
+    count,
+    handleAdd,
+    handleDec
+  }
+})

@@ -1,21 +1,18 @@
 <template>
-  <h3>{{ num }}sssssss</h3>
-  <h3>{{ store.infoData.num }}</h3>
-  <el-button @click="handleNum">click me</el-button>
-  <el-button @click="handleDemo">click me</el-button>
+    <div>foo</div>
+    <h2>count: {{ count }}</h2>
+    <button @click='handleAdd'>click count</button>
 </template>
 
 <script setup>
-import { useTest } from '@/stores/counte.js'
-import { defer } from 'lodash'
-const num = ref(100)
-// const { infoData } = storeToRefs(useTest())
-const store = useTest()
-const { handleNum } = store
+import Foo from "./Foo.vue";
+import { useCounterStore } from "../stores/counte";
+import {storeToRefs} from 'pinia' 
 
-// console.log(store)
+const { count } = storeToRefs(useCounterStore());
+const { handleAdd } = useCounterStore()
 
-const handleDemo = () => {
-  defer(() => {})
-}
+// 注入不含默认值的静态值
+// 注入响应式的值
+
 </script>
