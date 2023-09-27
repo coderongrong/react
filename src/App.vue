@@ -3,6 +3,7 @@
     <h2>count: {{ count }}</h2>
     <button @click='handleDec'>click des</button>
     <Provide />
+    <!-- <router-view></router-view> -->
 </template>
 
 <script setup>
@@ -19,7 +20,7 @@ import {
     shallowRef,
     provide,
 } from "vue";
-import Provide from "./test/Provide.vue";
+import Provide from "./test/pinia/Provide.vue";
 import { useDebouncedRef } from "./Hooks/debouncedRef";
 import { useCounterStore } from './stores/counte'
 import {storeToRefs} from 'pinia' 

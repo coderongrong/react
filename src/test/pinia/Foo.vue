@@ -6,7 +6,7 @@
 
 <script setup>
 import Foo from "./Foo.vue";
-import { useCounterStore } from "../stores/counte";
+import { useCounterStore } from "../../stores/counte";
 import {storeToRefs} from 'pinia' 
 
 const { count } = storeToRefs(useCounterStore());
