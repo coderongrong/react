@@ -2,7 +2,8 @@
     <!-- <div id='box' class='drag_box' ref='dragBox'>drag</div> -->
     <h2>count: {{ count }}</h2>
     <button @click='handleDec'>click des</button>
-    <Provide />
+    <button @click='handlebook'>click handlebook</button>
+    <Provide :book='book' @handleBooks='handleBooks' />
     <!-- <router-view></router-view> -->
 </template>
 
@@ -22,17 +23,25 @@ import {
 } from "vue";
 import Provide from "./test/pinia/Provide.vue";
 import { useDebouncedRef } from "./Hooks/debouncedRef";
-import { useCounterStore } from './stores/counte'
-import {storeToRefs} from 'pinia' 
+import { useCounterStore } from "./stores/counte";
+// import {storeToRefs} from 'pinia'
 // import { drag } from './Hooks/drag'
 // const dragBox = ref(null)
 // drag(dragBox)
+const { count } = storeToRefs(useCounterStore());
+const { handleDec } = useCounterStore();
 
-const {count} = storeToRefs(useCounterStore())
-const { handleDec } = useCounterStore()
 
+const book = reactive({
+    name: 'rong',
+    age: '10'
+})
+const handlebook = () => {
+    book.name = 'www'
+    console.log(book.name)
+}
+const handleBooks = (a) => {
+    book.name = a
+}
 const text = useDebouncedRef("hello");
-
-
-
 </script>
