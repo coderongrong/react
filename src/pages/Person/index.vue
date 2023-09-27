@@ -12,7 +12,7 @@ const { person } = toRaw(user.value)
 //methods
 const logout = async () => {
   handleUserProxy(toRaw(_proxy.value).info + 1, 'info')
-  // router.push('/login')
+  router.push('/login')
   // const res = await service.post('/goods/user/login', { name: 'zhangsan', password: '1234565' })
   // console.log('res', res)
 }
@@ -31,7 +31,6 @@ const logout = async () => {
     <span class="user_info">其他：******</span>
     <br />
     <el-button type="primary" class="login" @click="logout">退出登入</el-button>
-    <Text />
   </div>
 </template>
 

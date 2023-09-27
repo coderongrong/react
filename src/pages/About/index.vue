@@ -52,7 +52,7 @@ const hanleDetail = (info) => {
   <div class="top">
     <div class="d-f pl-10 pr-10">
       <div
-        class="f-1 center"
+        class="f-1 center cur_box"
         :class="{ active: data.currenIndex == index }"
         v-for="(item, index) in data.arrBat"
         :key="index"
@@ -147,5 +147,9 @@ const hanleDetail = (info) => {
 }
 .wrapper_height {
   height: calc(100vh - 85px);
+}
+.cur_box {
+  height: 30px;
+  line-height: 30px;
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
     <!-- <div id='box' class='drag_box' ref='dragBox'>drag</div> -->
-    <h2>count: {{ count }}</h2>
+    <!-- <h2>count: {{ count }}</h2>
     <button @click='handleDec'>click des</button>
     <button @click='handlebook'>click handlebook</button>
-    <Provide :book='book' @handleBooks='handleBooks' />
-    <!-- <router-view></router-view> -->
+    <Provide :book='book' @handleBooks='handleBooks' /> -->
+    <router-view></router-view>
 </template>
 
 <script setup>
