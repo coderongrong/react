@@ -16,6 +16,8 @@ import LayoutSider from './Loyout/Sider'
 import Demo from './infomation/Manage/children/Demo'
 import Hellow from './infomation/Manage/children/hellow'
 
+import Count from './WebHooks/Count.js'
+
 const files = require.context('./view', true, /\.js$/)
 const _arr = files.keys().reduce((pre, item) => {
     const obj = {}
@@ -23,6 +25,8 @@ const _arr = files.keys().reduce((pre, item) => {
     obj.default = files(item).default
     return pre.concat(obj)
 }, [])
+
+
 
 const OtherFree = lazy(() => import('@/infomation/OtherFree'))
 const Role = lazy(() => import('@/infomation/Role'))
@@ -111,7 +115,17 @@ function App() {
     )
 }
 
-export default App
+function DemoApp () {
+
+    return (
+        <>
+            <div>DemoApp...</div>
+            <Count />
+        </>
+    )
+}
+
+export default DemoApp
 
 // import { unstable_HistoryRouter as HistoryRouter, Routes, Route } from 'react-router-dom'
 // import { history } from './utils'
