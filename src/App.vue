@@ -1,10 +1,10 @@
 <template>
-    <!-- <div id='box' class='drag_box' ref='dragBox'>drag</div> -->
-    <!-- <h2>count: {{ count }}</h2>
+    <div id='box' class='drag_box' ref='dragBox'>drag</div>
+    <h2>count: {{ count }}</h2>
     <button @click='handleDec'>click des</button>
     <button @click='handlebook'>click handlebook</button>
-    <Provide :book='book' @handleBooks='handleBooks' /> -->
-    <router-view></router-view>
+    <Provide :book='book' @handleBooks='handleBooks' />
+    <!-- <router-view></router-view> -->
 </template>
 
 <script setup>
@@ -25,12 +25,11 @@ import Provide from "./test/pinia/Provide.vue";
 import { useDebouncedRef } from "./Hooks/debouncedRef";
 import { useCounterStore } from "./stores/counte";
 // import {storeToRefs} from 'pinia'
-// import { drag } from './Hooks/drag'
-// const dragBox = ref(null)
-// drag(dragBox)
+import { drag } from './Hooks/drag'
+const dragBox = ref(null)
+drag(dragBox)
 const { count } = storeToRefs(useCounterStore());
 const { handleDec } = useCounterStore();
-
 
 const book = reactive({
     name: 'rong',
