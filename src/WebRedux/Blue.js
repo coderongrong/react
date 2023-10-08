@@ -1,15 +1,21 @@
 import { connect } from 'react-redux'
 function Blue(props) {
-
+  const { add, count } = props
   const handleBtn = () => {
-    props.add()
+    add()
   }
   return (
     <div>
-      blue -- {props.count}
+      blue -- {count}
       <button onClick={handleBtn}>click me +</button>
     </div>
   )
+}
+
+function deley() {
+  return new Promise((res) => {
+    setTimeout(res, 1000)
+  })
 }
 
 export default connect(
@@ -18,8 +24,8 @@ export default connect(
   },
   (dispatch) => {
     return {
-      add() {
-        dispatch({type: 'counter/add'})
+      async add() {
+        dispatch({ type: 'counter/add' })
       },
     }
   }
