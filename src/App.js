@@ -18,6 +18,8 @@ import Hellow from './infomation/Manage/children/hellow'
 
 import Count from './WebHooks/Count.js'
 import Redux from './WebRedux'
+import WebMobx from './WebMobx'
+
 const files = require.context('./view', true, /\.js$/)
 const _arr = files.keys().reduce((pre, item) => {
     const obj = {}
@@ -121,7 +123,8 @@ function DemoApp () {
         <>
             <div>DemoApp...</div>
             {/* <Count /> */}
-            <Redux />
+            {/* <Redux /> */}
+            <WebMobx />
         </>
     )
 }
