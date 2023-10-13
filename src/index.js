@@ -18,7 +18,7 @@ import store from './store';
 // import _ from 'lodash'
 // console.log('store', store.getState())
 // import reportWebVitals from './reportWebVitals';
-document.oncontextmenu = () => false;
+document.oncontextmenu = () => true;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // const element = React.createElement(
