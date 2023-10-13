@@ -26,7 +26,7 @@ module.exports = {
         port: 3000,
         // proxy: {
         //     "jeecg-boot": {
-        //         target: 'http://localhost:3000',
+        //         target: 'http://localhostRoue0707:3000',
         //         changeOrigin: true,
         //         pathRewrite: {
         //             "^jeecg-boot": "jeecg-boot"
