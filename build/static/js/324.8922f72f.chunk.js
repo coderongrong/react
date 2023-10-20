@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmy_app=self.webpackChunkmy_app||[]).push([[324],{5324:function(e,u,f){f.r(u);var t=f(2791),c=f(184);u.default=function(){return(0,t.useLayoutEffect)((function(){console.log("useLayoutEffect")})),(0,t.useEffect)((function(){console.log("useEffect")})),(0,c.jsx)("div",{children:"useLayoutEffect"})}}}]);
+//# sourceMappingURL=324.8922f72f.chunk.js.map
