@@ -27,9 +27,9 @@ function createComponent(vm, tag, data, key, children, Ctor) {
   }
   data.hook = {
     init(vnode) {
-      vnode.componentInstance = new Ctor({ _isComponent: true })
-      let child = vnode.componentInstance
-      child.$mount()
+      // vnode.componentInstance = new Ctor({ _isComponent: true })
+      // let child = vnode.componentInstance
+      // child.$mount()
     },
   }
 

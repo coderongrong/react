@@ -177,3 +177,8 @@ function compileToFunction(template) {
   let code = generate(root) // ast 树
   return new Function(`with(this){return ${code}}`)
 }
+
+
+// const render1 = compileToFunction('<div>abc</div>')
+
+// console.log('render1', render1)

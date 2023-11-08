@@ -41,7 +41,7 @@ function createElm(vnode) {
     }
     vnode.el = document.createElement(tag)
     updataProps(vnode)
-    children.forEach((item) => {
+    children?.forEach((item) => {
       console.log('children', item)
       return vnode.el.appendChild(createElm(item))
     })
