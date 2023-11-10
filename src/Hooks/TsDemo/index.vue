@@ -5,21 +5,19 @@
 </template>
 
 <script setup lang='ts'>
-const enum books {
-    ANCD,
-    CSS,
-    C,
+class Animal {
+    constructor(private name: string, public age: number) {
+        // console.log(this.name)
+    }
 }
 
-console.log("abc", books);
+class Cat extends Animal {
+    constructor(name: string, age: number) {
+        super(name, age);
+        // console.log(this.name)
+    }
+}
 
-setTimeout(() => {
-    const ele: HTMLElement | null = document.getElementById("sss");
-    ele!.innerHTML = "abc";
-    console.log(ele);
-}, 1000);
-
-let a: string | number | undefined
-a = 10
-a.toString()
+let cat = new Cat("tom", 10);
+// console.log(cat.name);
 </script>

@@ -107,3 +107,5 @@ type _Pick<T, K extends keyof T> = {
   [X in K]: T[X]
 }
 type MyPick = _Pick<MyType, 'name' | 'age'>
+
+

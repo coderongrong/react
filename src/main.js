@@ -14,7 +14,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 // import './utils/eventBus'
-
+import './Hooks/TsDemo/Demo.ts'
 // import Drag from './hooks/Drag.vue'
 const app = createApp(App)
 // const app = createApp(Drag)
