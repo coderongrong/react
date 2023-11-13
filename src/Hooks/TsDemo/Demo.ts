@@ -118,9 +118,11 @@ interface Sky {
 
 type MyType<T> = T extends Bird ? Sky : Swimming // 三元表达式功能
 
+// type Exclude<T, K> = T extends K ? never : T;
 type MyS = Exclude<string | number | boolean, boolean>
 
-type Extract<T, K> = T extends K ? T : never;
+
+// type Extract<T, K> = T extends K ? T : never;
 type sMySt = Extract<string | number | boolean, boolean>
 type MySt = Extract<string | number | boolean, boolean>
 
@@ -182,7 +184,7 @@ type Pick<T, K extends keyof T> = {
 type Mypick = Pick<IPerson, 'age' | 'company'>
 
 // omit 忽略属性
-type Omit<T, K extends any> = { [P in Exclude<keyof T, K>]: T[P]; }
+type Omit<T, K extends any> = { [P in Exclude<keyof T, K>]: T[P] }
 type MyOmit = Omit<IPerson, 'name'> & { name: number }
 
 interface O {
@@ -190,12 +192,7 @@ interface O {
     age: number
     height: number
 }
-type MO = Exclude<O, 'age'>
-let OO: MO = {
-    name: '18',
-    age: 10,
-    height: 12
-}
+type MO = Exclude<keyof O, 'name'>
 
 // Record 类型
 // let obj: Record<string | number, any> = { a: 1, 2: 2 }
