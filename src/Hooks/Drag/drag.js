@@ -13,7 +13,7 @@ export function drag(dragBox) {
 
         // dragBox.value.removeEventListener('mousedown', handleClick)
     }
-    dragBox.value.addEventListener('mousedown', handleClick, false)
+    dragBox.value?.addEventListener('mousedown', handleClick, false)
     document.addEventListener(
       'mouseup',
       function () {

@@ -1,23 +1,21 @@
 <template>
     <div id='sss'>
         tesHooks
+        <h2>{{ data }}</h2>
+        <button @click='handleAdd'>+</button>
+        <Child :data='data' @handleNum='handleP' />
     </div>
 </template>
 
 <script setup lang='ts'>
-class Animal {
-    constructor(private name: string, public age: number) {
-        // console.log(this.name)
-    }
-}
+import Child from './components/Child.vue'
+import {ref} from 'vue'
 
-class Cat extends Animal {
-    constructor(name: string, age: number) {
-        super(name, age);
-        // console.log(this.name)
-    }
+const data = ref(100)
+const handleAdd = () => {
+    data.value ++ 
 }
-
-let cat = new Cat("tom", 10);
-// console.log(cat.name);
+const handleP = (value) => {
+    data.value = value
+}
 </script>
