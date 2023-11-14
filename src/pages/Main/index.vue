@@ -30,9 +30,12 @@ import { showTabBar } from '@/stores/counte.js'
 const store = showTabBar()
 const { isShowTabBar } = storeToRefs(store)
 const router = useRouter()
-
+interface IData {
+  currentIndex: number
+  tabBar: object[]
+}
 // data
-const data = reactive({
+const data: IData = reactive({
   currentIndex: 0,
   tabBar: [
     { title: '首页', icon: 'Goods', path: '/main/home' },

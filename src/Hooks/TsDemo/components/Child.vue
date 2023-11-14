@@ -5,17 +5,45 @@
 </template>
 
 <script setup lang='ts'>
-import { defineProps, withDefaults, defineEmits } from "vue";
+import { defineProps, withDefaults, defineEmits } from 'vue'
+interface IBook {
+    title: string
+    type: string
+}
 interface IProp {
-    data: number;
+    data: number
+    reactiveData: IBook
 }
 interface IEmit {
-    (e: "handleNum"): void;
+    (e: 'handleNum'): void
 }
-const props = withDefaults(defineProps<IProp>(), {});
+const props = withDefaults(defineProps<IProp>(), {})
 
-const emit = defineEmits<IEmit>();
-const onchange = () => {
-    emit("handleNum", 0);
-};
+const emit: IEmit = defineEmits<IEmit>()
+const onchange = (): viod => {
+    emit<IEmit>('handleNum', 0)
+}
+interface IO {
+    title: string
+    icon: string
+    path: string
+}
+interface IData {
+    currentIndex: number
+    tabBar: Array<Partial<IO>>
+}
+const datas = reactive({
+    currentIndex: 0,
+    tabBar: [
+        { title: '首页', icon: 'Goods', path: '/main/home' },
+        { title: '关于', icon: 'Calendar', path: '/main/about' },
+        {
+            title: '精选',
+            icon: 'Filter',
+            path: '/main/choice',
+            animation: true
+        },
+        { title: '个人', icon: 'Iphone', path: '/main/person' }
+    ]
+})
 </script>

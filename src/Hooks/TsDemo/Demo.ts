@@ -24,7 +24,12 @@ interface ISpeaker {
 interface IEat {
     eat(): number
 }
-
+let mycool: ISpeaker = {
+    name: "",
+    speak: function (): void {
+        throw new Error("Function not implemented.")
+    }
+}
 class Speak implements ISpeaker, IEat {
     name: 'www'
     speak(): string {
