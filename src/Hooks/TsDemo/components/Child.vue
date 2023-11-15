@@ -2,10 +2,15 @@
     child
     <h1>{{ props.data }}</h1>
     <button @click='onchange'>init</button>
+    <div>{{ store.state.age }}</div>
+    <button @click='store.commit("add", 10)'>+10</button>
 </template>
 
 <script setup lang='ts'>
 import { defineProps, withDefaults, defineEmits } from 'vue'
+// import { useStore } from 'vuex'
+import { useStore } from '../../../myStore/index.js'
+const store: object = useStore()
 interface IBook {
     title: string
     type: string

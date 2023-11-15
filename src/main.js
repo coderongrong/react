@@ -13,6 +13,7 @@ import './assets/main.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import store from './store/index.js'
 // import './utils/eventBus'
 import './Hooks/TsDemo/Demo.ts'
 // import Drag from './hooks/Drag.vue'
@@ -44,6 +45,7 @@ app.use(myPlugin, {
 })
 
 app.use(router)
+app.use(store)
 app.mount('#app')
 
 // https://github.com/coderongrong/react/blob/vite2.0/my-config.js
