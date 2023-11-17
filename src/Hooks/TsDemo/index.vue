@@ -5,7 +5,7 @@
         <h2>{{ double }}</h2>
         <button @click='handleAdd'>+</button>
         <div>parent: {{ store.state.age }}</div>
-        <div>getters: {{ store.getters.myAge }}</div>
+        <div>doublegetters: {{ store.getters.doubleAge }}</div>
         <Child
             :data='data'
             :reactiveData='reactiveData'
